@@ -449,7 +449,11 @@ var genOf={};
 (function computeGen(id,g){var p=PEOPLE[id];if(!p)return;genOf[id]=g;if(p.father&&PEOPLE[p.father])computeGen(p.father,g+1);if(p.mother&&PEOPLE[p.mother])computeGen(p.mother,g+1);})("spencer",0);
 var maxGen=0;Object.keys(genOf).forEach(function(id){if(genOf[id]>maxGen)maxGen=genOf[id];});
 var unitX={},leaf=0;
-(function layout(id){var p=PEOPLE[id];if(!p)return;var f=p.father&&PEOPLE[p.father]?p.father:null,m=p.mother&&PEOPLE[p.mother]?p.mother:null;if(!f&&!m){unitX[id]=leaf++;return;}if(f)layout(f);if(m)layout(m);if(f&&m)unitX[id]=(unitX[f]+unitX[m])/2;else unitX[id]=unitX[f||m];})("spencer");
+/* Side gap: Adele's ancestors are the Danish side; the US side (John Jr.'s lines)
+   is laid out first and ends just before them. Starting the Danish block
+   SIDE_GAP columns later keeps the two halves of the chart visibly distinct. */
+var SIDE_GAP=2;
+(function layout(id){var p=PEOPLE[id];if(!p)return;if(id==="adele")leaf+=SIDE_GAP;var f=p.father&&PEOPLE[p.father]?p.father:null,m=p.mother&&PEOPLE[p.mother]?p.mother:null;if(!f&&!m){unitX[id]=leaf++;return;}if(f)layout(f);if(m)layout(m);if(f&&m)unitX[id]=(unitX[f]+unitX[m])/2;else unitX[id]=unitX[f||m];})("spencer");
 var pos={};
 Object.keys(genOf).forEach(function(id){pos[id]={x:unitX[id]*UNIT,y:(maxGen-genOf[id])*ROW};});
 var treeW=leaf*UNIT-(UNIT-CARD_W)+40,treeH=(maxGen+1)*ROW;
