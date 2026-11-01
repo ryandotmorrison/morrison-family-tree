@@ -29,7 +29,7 @@ p{margin:0}.lede{margin-top:10px;max-width:70ch;color:var(--ink-soft);font-size:
 .viewtoggle button.active{background:var(--accent);color:#fff8ea}
 @media (prefers-color-scheme:dark){.viewtoggle button.active{color:#1d1808}}
 .view-note{font-size:13.5px;color:var(--ink-faint);margin-top:8px;max-width:70ch}
-body[data-view="direct"] .full-only{display:none!important}
+
 .chart-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:18px}
 .controls{display:flex;flex-wrap:wrap;gap:6px}
 .btn{font:inherit;font-size:13.5px;font-weight:600;padding:7px 13px;border-radius:999px;cursor:pointer;background:var(--card);color:var(--ink);border:1px solid var(--line-strong)}
@@ -198,7 +198,7 @@ footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);color:v
 <button type="button" id="view-direct" class="active">Direct lineage</button>
 <button type="button" id="view-full">Full tree</button>
 </div>
-<p class="view-note" id="view-note"><strong>Direct lineage</strong> shows only the direct ancestors — branch cards (siblings, cousins, in-laws) are hidden. Switch to <strong>Full tree</strong> to see everyone documented.</p>
+<p class="view-note" id="view-note"><strong>Direct lineage</strong> shows only the direct ancestors — branch relatives (siblings, cousins, in-laws) join the tree in <strong>Full tree</strong>. Every documented person’s profile is in the directory below, in both views.</p>
 </header>
 
 <div class="chart-head">
@@ -403,8 +403,6 @@ function renderDir(q){
   else{sideNote.style.display="none";sideNote.innerHTML="";}
  }
  dirCards.forEach(function(p){
-  var isFull=document.body.getAttribute("data-view")==="full";
-  if(!isFull&&!p.direct)return;
   if(sideFilter!=="all"){var cardSide=p.s||p.side||"center";if(cardSide!=="center"&&cardSide!==sideFilter)return;}
   if(q&&p.n.toLowerCase().indexOf(q)<0&&p.r.toLowerCase().indexOf(q)<0)return;
   var isP=!!p.id;
@@ -434,7 +432,7 @@ var vd=document.getElementById("view-direct"),vf=document.getElementById("view-f
 function setView(v){
  document.body.setAttribute("data-view",v);
  vd.classList.toggle("active",v==="direct");vf.classList.toggle("active",v==="full");
- vn.innerHTML=v==="direct"?"<strong>Direct lineage</strong> shows only the direct ancestors — branch cards (siblings, cousins, in-laws) are hidden. Switch to <strong>Full tree</strong> to see everyone documented.":"<strong>Full tree</strong> shows everyone in the tree — direct ancestors plus siblings, cousins, and branch families, each labeled with how well they are documented. Switch to <strong>Direct lineage</strong> to see only the direct ancestor lines.";
+ vn.innerHTML=v==="direct"?"<strong>Direct lineage</strong> shows only the direct ancestors — branch relatives (siblings, cousins, in-laws) join the tree in <strong>Full tree</strong>. Every documented person’s profile is in the directory below, in both views.":"<strong>Full tree</strong> shows everyone in the tree — direct ancestors plus siblings, cousins, and branch families, each labeled with how well they are documented. Switch to <strong>Direct lineage</strong> to see only the direct ancestor lines.";
  renderDir(searchEl.value.trim().toLowerCase());
  if(window.__chartSetView)window.__chartSetView(v);
 }
