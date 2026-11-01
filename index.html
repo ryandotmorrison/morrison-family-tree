@@ -178,7 +178,7 @@ footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);color:v
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
-<body data-view="full">
+<body data-view="direct">
 <div class="wrap">
 <header>
 <h1>The Morrison Family Tree</h1>
@@ -195,10 +195,10 @@ footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);color:v
 <span>A record or authoritative source; a compiled tree only; something the family itself reports; a single weak source; two sources that disagree (both shown); a claim carried on a stated basis, with no record against it; or not yet found.</span>
 </div>
 <div class="viewtoggle" role="group" aria-label="Tree views">
-<button type="button" id="view-direct">Direct lineage</button>
-<button type="button" id="view-full" class="active">Full tree</button>
+<button type="button" id="view-direct" class="active">Direct lineage</button>
+<button type="button" id="view-full">Full tree</button>
 </div>
-<p class="view-note" id="view-note"><strong>Full tree</strong> shows everyone in the tree — direct ancestors plus siblings, cousins, and branch families, each labeled with how well they are documented. Switch to <strong>Direct lineage</strong> to see only the direct ancestor lines.</p>
+<p class="view-note" id="view-note"><strong>Direct lineage</strong> shows only the direct ancestors — branch cards (siblings, cousins, in-laws) are hidden. Switch to <strong>Full tree</strong> to see everyone documented.</p>
 </header>
 
 <div class="chart-head">
@@ -593,7 +593,7 @@ function visibleInMode(id){
  if(s==="center")return true;
  return s===sideMode;
 }
-var viewMode="full";
+var viewMode="direct";
 function chartVisible(id){
  if(!visibleInMode(id))return false;
  if(viewMode!=="full"&&BRANCHMAP[id])return false;
