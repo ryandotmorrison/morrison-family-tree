@@ -176,6 +176,14 @@ footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);color:v
 .ask-more{margin-top:14px}
 @media (max-width:560px){.wrap{padding:20px 12px 48px}.viewport{height:68vh;min-height:380px}.detail{padding:15px 15px}.viewtoggle button{padding:9px 13px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+/* Sibling buttons (Direct lineage only, 2026-11-01): a direct ancestor's charted
+   siblings — hidden in Direct lineage — collapse into a "+N siblings" pill under
+   their card; clicking unfolds that family as a compact cluster below the card. */
+.sib-btn{position:absolute;transform:translateX(-50%);height:34px;padding:0 13px;border-radius:999px;font:inherit;font-size:12.5px;font-weight:700;background:var(--card);color:var(--accent);border:1.5px solid var(--accent);cursor:pointer;z-index:7;white-space:nowrap;box-shadow:var(--shadow)}
+.sib-btn:hover{background:var(--accent);color:#fff8ea}
+.sib-btn.open{background:var(--accent);color:#fff8ea}
+@media (prefers-color-scheme:dark){.sib-btn:hover,.sib-btn.open{color:#1d1808}}
+.node.sib-node{z-index:6}
 /* GP-BEGIN — graph prototype views: B1 Tidy tree, the one variant kept (Spencer, 2026-11-01); additive, safe to remove as one block */
 .gp-switch{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:20px}
 .gp-switch .gp-sw-title{font-weight:700;margin-right:2px}
@@ -814,6 +822,183 @@ if(mfBtn)mfBtn.addEventListener("click",function(){
 });
 clearSelection();
 fitAll();
+/* ---- Sibling buttons — Direct lineage view only (Spencer, 2026-11-01) ----
+   In Direct lineage, a direct ancestor's charted siblings are hidden. Each
+   direct person with charted siblings gets a "+N siblings" pill under their
+   card; clicking unfolds just that family as a compact cluster below the
+   card (the siblings as normal cards, their charted spouses beside them),
+   and clicking again folds it away. Full tree and the Tidy view untouched. */
+var SIB_COL_GAP=28,SIB_ROW_H=176;
+var sibPar={};
+Object.keys(PEOPLE).forEach(function(id){var p=PEOPLE[id],s=[];if(p.father)s.push(p.father);if(p.mother)s.push(p.mother);sibPar[id]=s;});
+BRANCH.forEach(function(b){var s=[];if(b.link&&b.link.t==="c"){if(b.link.f)s.push(b.link.f);if(b.link.m)s.push(b.link.m);}sibPar[b.id]=s;});
+var sibKids={};
+Object.keys(sibPar).forEach(function(id){sibPar[id].forEach(function(par){(sibKids[par]=sibKids[par]||[]).push(id);});});
+function sibSiblingsOf(id){
+ var seen={},out=[];
+ (sibPar[id]||[]).forEach(function(par){(sibKids[par]||[]).forEach(function(k){if(k!==id&&!seen[k]){seen[k]=1;out.push(k);}});});
+ return out;
+}
+function sibBorn(id){
+ if(typeof BORN_BY_ID!=="undefined"&&BORN_BY_ID[id]!=null)return BORN_BY_ID[id];
+ var o=PEOPLE[id]||BRANCHMAP[id];var m=o?/(\d{4})/.exec(o.dates||""):null;
+ return m?parseInt(m[1],10):9999;
+}
+var sibDirect={};
+Object.keys(genOf).forEach(function(id){sibDirect[id]=1;});
+["fiona","ryan","chase"].forEach(function(id){if(pos[id])sibDirect[id]=1;});
+var sibFams=[],sibFamByAnchor={},sibFamOfCard={},sibBtnEls={},sibExpanded={};
+Object.keys(genOf).forEach(function(anchor){
+ var hidden=sibSiblingsOf(anchor).filter(function(s){return !sibDirect[s];});
+ if(!hidden.length)return;
+ hidden.sort(function(a,b){var d=sibBorn(a)-sibBorn(b);return d!==0?d:(a<b?-1:1);});
+ var spouseOf={};
+ hidden.forEach(function(h){BRANCH.forEach(function(b){if(b.link&&b.link.t==="s"&&b.link.a===h&&pos[b.id])spouseOf[h]=b.id;});});
+ var cards=[];
+ hidden.forEach(function(h){cards.push({id:h,main:true});if(spouseOf[h])cards.push({id:spouseOf[h],main:false,of:h});});
+ var fam={anchor:anchor,sibs:hidden,spouseOf:spouseOf,cards:cards};
+ sibFams.push(fam);sibFamByAnchor[anchor]=fam;
+ cards.forEach(function(c){sibFamOfCard[c.id]=fam;});
+});
+var sibBlockers=[];
+Object.keys(sibDirect).forEach(function(id){if(pos[id])sibBlockers.push({x0:pos[id].x,y0:pos[id].y,x1:pos[id].x+CARD_W,y1:pos[id].y+CARD_H});});
+sibFams.forEach(function(fam){var a=pos[fam.anchor];sibBlockers.push({x0:a.x+CARD_W/2-78,y0:a.y+CARD_H+14,x1:a.x+CARD_W/2+78,y1:a.y+CARD_H+48});});
+function sibHit(R,B){return R.x0<B.x1&&R.x1>B.x0&&R.y0<B.y1&&R.y1>B.y0;}
+function sibPlace(fam){
+ var a=pos[fam.anchor],aCx=a.x+CARD_W/2,cards=fam.cards;
+ var top0=a.y+CARD_H+60;
+ var xOffs=[0,-196,196,-392,392,-588,588,-784,784];
+ var perRows=[Math.min(4,cards.length),3,5,2,6];
+ for(var pi=0;pi<perRows.length;pi++){
+  var perRow=perRows[pi];if(perRow<1)continue;
+  var rows=Math.ceil(cards.length/perRow);
+  var blockH=rows*SIB_ROW_H-(SIB_ROW_H-CARD_H);
+  for(var dy=0;dy<=1056;dy+=88){
+   for(var xi=0;xi<xOffs.length;xi++){
+    var cxm=aCx+xOffs[xi],rects=[];
+    for(var i=0;i<cards.length;i++){
+     var r=Math.floor(i/perRow),c=i%perRow;
+     var nInRow=(r===rows-1)?(cards.length-r*perRow):perRow;
+     var bw=nInRow*CARD_W+(nInRow-1)*SIB_COL_GAP;
+     rects.push({id:cards[i].id,main:cards[i].main,of:cards[i].of,x:cxm-bw/2+c*(CARD_W+SIB_COL_GAP),y:top0+dy+r*SIB_ROW_H});
+    }
+    var R={x0:1e9,y0:top0+dy-6,x1:-1e9,y1:top0+dy+blockH+6};
+    rects.forEach(function(rc){R.x0=Math.min(R.x0,rc.x);R.x1=Math.max(R.x1,rc.x+CARD_W);});
+    R.x0-=6;R.x1+=6;
+    if(R.x0<4)continue;
+    var hit=false;
+    for(var bi=0;bi<sibBlockers.length&&!hit;bi++)if(sibHit(R,sibBlockers[bi]))hit=true;
+    if(!hit)for(var k in sibExpanded){if(sibExpanded[k]&&k!==fam.anchor){var of=sibFamByAnchor[k];if(of._rect&&sibHit(R,of._rect)){hit=true;break;}}}
+    if(!hit)return {rects:rects,rect:R,topY:top0+dy,perRow:perRow};
+   }
+  }
+ }
+ return null;
+}
+function sibPath(d){var p=document.createElementNS(NS,"path");p.setAttribute("d",d);p.setAttribute("class","fam-link sib-link");svg.appendChild(p);return p;}
+function sibRenderFam(fam){
+ var lay=sibPlace(fam);
+ fam._els=[];fam.cardEls={};fam._rectById={};
+ if(!lay){fam._lay=null;fam._rect=null;return;}
+ fam._lay=lay;fam._rect=lay.rect;
+ lay.rects.forEach(function(rc){fam._rectById[rc.id]=rc;});
+ var a=pos[fam.anchor],aCx=a.x+CARD_W/2,busY=lay.topY-26;
+ var pars=(sibPar[fam.anchor]||[]).filter(function(par){return !!pos[par];});
+ var mainCx=lay.rects.filter(function(rc){return rc.main;}).map(function(rc){return rc.x+CARD_W/2;});
+ var startY=pars.length?(a.y-(ROW-CARD_H)/2):(a.y+CARD_H);
+ fam._els.push(sibPath("M "+aCx+" "+startY+" V "+busY));
+ fam._els.push(sibPath("M "+Math.min.apply(null,mainCx)+" "+busY+" H "+Math.max.apply(null,mainCx)));
+ lay.rects.forEach(function(rc){
+  if(rc.main){
+   fam._els.push(sibPath("M "+(rc.x+CARD_W/2)+" "+busY+" V "+rc.y));
+   var dot=document.createElementNS(NS,"circle");dot.setAttribute("cx",rc.x+CARD_W/2);dot.setAttribute("cy",busY);dot.setAttribute("r",3.2);dot.setAttribute("class","busdot");svg.appendChild(dot);fam._els.push(dot);
+  }else{
+   var sibR=fam._rectById[rc.of];
+   if(sibR)fam._els.push(sibPath("M "+(sibR.x+CARD_W)+" "+(rc.y+CARD_H/2)+" H "+rc.x));
+  }
+ });
+ lay.rects.forEach(function(rc){
+  var src=PEOPLE[rc.id]||BRANCHMAP[rc.id];
+  var b=document.createElement("button");
+  b.type="button";b.className="node side-"+src.side+" branch-node sib-node"+((darOn||mfOn)?" dim":"");
+  b.style.left=rc.x+"px";b.style.top=rc.y+"px";
+  b.setAttribute("aria-label",src.name+" — "+src.rel);
+  b.innerHTML='<span class="nm">'+src.short+'</span><span class="dt">'+src.dates+'</span><span class="cf '+CONF[src.conf].cls+'"><span class="dot"></span>'+CONF[src.conf].label+"</span>";
+  b.addEventListener("click",function(){select(rc.id,true);});
+  canvas.appendChild(b);fam.cardEls[rc.id]=b;fam._els.push(b);
+ });
+}
+function sibClearFam(fam){
+ (fam._els||[]).forEach(function(e){if(e.parentNode)e.remove();});
+ fam._els=[];fam.cardEls={};fam._rect=null;fam._lay=null;fam._rectById={};
+}
+function sibSyncBtn(fam){
+ var b=sibBtnEls[fam.anchor];if(!b)return;
+ var open=!!sibExpanded[fam.anchor],n=fam.sibs.length;
+ b.textContent=open?"− Hide siblings":"+ "+n+(n===1?" sibling":" siblings");
+ b.classList.toggle("open",open);
+ b.setAttribute("aria-expanded",open?"true":"false");
+}
+function sibToggle(anchor){
+ var fam=sibFamByAnchor[anchor];if(!fam)return;
+ if(sibExpanded[anchor]){sibExpanded[anchor]=false;sibClearFam(fam);}
+ else{sibExpanded[anchor]=true;sibRenderFam(fam);}
+ sibSyncBtn(fam);
+}
+sibFams.forEach(function(fam){
+ var a=pos[fam.anchor];
+ var b=document.createElement("button");
+ b.type="button";b.className="sib-btn";b.setAttribute("data-sib-btn",fam.anchor);
+ b.style.left=(a.x+CARD_W/2)+"px";b.style.top=(a.y+CARD_H+14)+"px";
+ b.setAttribute("aria-expanded","false");
+ b.addEventListener("click",function(ev){if(ev&&ev.stopPropagation)ev.stopPropagation();sibToggle(fam.anchor);});
+ canvas.appendChild(b);sibBtnEls[fam.anchor]=b;sibSyncBtn(fam);
+});
+function sibSyncVis(){
+ var direct=viewMode!=="full";
+ sibFams.forEach(function(fam){
+  var b=sibBtnEls[fam.anchor];
+  if(b)b.style.display=(direct&&chartVisible(fam.anchor))?"":"none";
+  if(!direct&&sibExpanded[fam.anchor]){sibExpanded[fam.anchor]=false;sibClearFam(fam);sibSyncBtn(fam);}
+ });
+}
+var sibApplySideOrig=applySide;
+applySide=function(){sibApplySideOrig();sibSyncVis();};
+var sibTraceOrig=traceApply;
+traceApply=function(){
+ sibTraceOrig();
+ sibFams.forEach(function(fam){
+  if(!fam.cardEls)return;
+  Object.keys(fam.cardEls).forEach(function(id){fam.cardEls[id].classList.toggle("dim",!!(darOn||mfOn));});
+ });
+};
+var sibFocusOrig=window.__chartFocusPerson;
+window.__chartFocusPerson=function(id){
+ var fam=sibFamOfCard[id];
+ if(fam&&viewMode!=="full"&&BRANCHMAP[id]){
+  var p=BRANCHMAP[id];
+  if(p.side&&p.side!=="center"&&sideMode!=="all"&&sideMode!==p.side)setSide(p.side);
+  if(!sibExpanded[fam.anchor])sibToggle(fam.anchor);
+  select(id,false);
+  var rc=fam._rectById&&fam._rectById[id];
+  if(rc){
+   var vw=viewport.clientWidth||300,vh=viewport.clientHeight||300;
+   var k=Math.max(view.k,0.9);if(k>1.15)k=1.15;view.k=k;
+   view.x=vw/2-(rc.x+CARD_W/2)*k;
+   view.y=vh*0.4-(rc.y+CARD_H/2)*k;
+   apply();
+   viewport.scrollIntoView({behavior:"smooth",block:"center"});
+  }
+  return;
+ }
+ sibFocusOrig(id);
+};
+window.__sibTest={fams:sibFams,famByAnchor:sibFamByAnchor,expanded:sibExpanded,btnEls:sibBtnEls,toggle:sibToggle,famOfCard:sibFamOfCard,siblingsOf:sibSiblingsOf};
+/* The pre-existing code never called applySide() on first load, so the
+   documented Direct lineage state (branch relatives hidden) only took
+   effect after a toggle. Apply it now so Direct starts collapsed. */
+applySide();
+fitVisible();
 </script>
 <script>
 (function(){
@@ -1462,6 +1647,7 @@ function gpJump(id,keepZoom){
   GP_FOCUS=id;
   var nm=document.getElementById("gp-focus-name");
   if(nm)nm.textContent=ALL[id].name;
+  if(GP_CUR==="full"&&window.__chartFocusPerson){ window.__chartFocusPerson(id); return; }
   var pm=GP_POSMAP[GP_CUR];
   if(GP_CUR==="b1"&&pm&&pm[id]){
     var st=GP_STAGE[GP_CUR];
