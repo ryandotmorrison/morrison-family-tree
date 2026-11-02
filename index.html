@@ -176,6 +176,74 @@ footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);color:v
 .ask-more{margin-top:14px}
 @media (max-width:560px){.wrap{padding:20px 12px 48px}.viewport{height:68vh;min-height:380px}.detail{padding:15px 15px}.viewtoggle button{padding:9px 13px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* GP-BEGIN — graph prototype views (additive; safe to remove as one block) */
+.gp-switch{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:16px}
+.gp-switch-label{font-size:13.5px;font-weight:700;color:var(--ink-soft);margin-right:2px}
+.gp-note{font-size:13.5px;color:var(--ink-faint);margin-top:8px;max-width:74ch}
+.gp-searchrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.gp-searchrow label{font-size:13.5px;font-weight:700;color:var(--ink-soft)}
+.gp-combo{position:relative;flex:1 1 240px;min-width:0;max-width:430px}
+.gp-combo input{font:inherit;font-size:15px;padding:9px 14px;border-radius:999px;border:1px solid var(--line-strong);background:var(--card);color:var(--ink);width:100%;min-height:38px}
+.gp-results{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:40;background:var(--card);border:1px solid var(--line-strong);border-radius:12px;box-shadow:var(--shadow);max-height:320px;overflow:auto;padding:4px}
+.gp-results[hidden]{display:none}
+.gp-result{display:flex;justify-content:space-between;gap:10px;align-items:baseline;width:100%;text-align:left;font:inherit;padding:9px 10px;border:0;border-radius:8px;background:transparent;color:var(--ink);cursor:pointer;min-height:36px}
+.gp-result:hover,.gp-result:focus{background:var(--bg-soft)}
+.gp-rname{font-weight:600;font-size:14.5px}
+.gp-rdates{font-size:12px;color:var(--ink-faint);flex:none}
+.gp-focusname{font-size:13.5px;color:var(--ink-soft)}
+.gp-focusname strong{color:var(--ink)}
+.gp-panel{margin-top:14px;border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:var(--shadow);padding:14px 14px 16px}
+.gp-panel[hidden]{display:none}
+.gp-phead{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;margin-bottom:6px}
+.gp-ptitle{font-family:"Spectral",Georgia,serif;font-size:19px;font-weight:700}
+.gp-ptag{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+.gp-pcontrols{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.gp-pnote{font-size:13px;color:var(--ink-faint);margin:2px 0 10px;max-width:76ch}
+.gp-stagewrap{overflow:auto;max-height:72vh;border:1px solid var(--line);border-radius:10px;background:var(--viewport-bg);position:relative;-webkit-overflow-scrolling:touch}
+.gp-stage{position:relative}
+.gp-stage svg{position:absolute;left:0;top:0;display:block}
+.gp-stage svg path{fill:none;stroke:var(--connector);stroke-width:1.6}
+.gp-stage .node{position:absolute}
+.gp-fanwrap{display:flex;justify-content:center;background:var(--viewport-bg);border:1px solid var(--line);border-radius:10px;padding:8px}
+.gp-fanwrap svg{width:min(94vw,660px);height:auto;display:block}
+.gp-fanseg{cursor:pointer;stroke:var(--line-strong);stroke-width:.7}
+.gp-fanseg:hover{stroke:var(--accent);stroke-width:1.8}
+.gp-fantext{font-family:"Source Sans 3",-apple-system,"Segoe UI",sans-serif;fill:var(--ink);pointer-events:none;text-anchor:middle}
+.gp-fancenter{cursor:pointer}
+.gp-orow{display:flex;align-items:center;gap:4px;padding:2px 4px;border-radius:6px}
+.gp-orow:hover{background:var(--bg-soft)}
+.gp-otoggle{flex:none;width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);font-size:13px;cursor:pointer;line-height:1}
+.gp-otoggle:disabled{opacity:.35;cursor:default}
+.gp-ospacer{flex:none;width:32px}
+.gp-oname{font:inherit;font-size:15px;font-weight:600;background:none;border:0;color:var(--ink);cursor:pointer;text-align:left;padding:5px 2px;min-height:32px}
+.gp-oname:hover{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+.gp-ometa{font-size:12px;color:var(--ink-faint);white-space:nowrap}
+.gp-navwrap{position:relative}
+.gp-navwrap .viewport{margin-top:0}
+.gp-minimap{position:absolute;right:10px;bottom:10px;width:196px;height:132px;background:var(--card);border:1px solid var(--line-strong);border-radius:8px;z-index:6;overflow:hidden;box-shadow:var(--shadow);touch-action:none;cursor:pointer}
+.gp-mmdot{position:absolute;width:3px;height:3px;border-radius:50%;margin:-1px 0 0 -1px}
+.gp-mmrect{position:absolute;border:1.5px solid var(--accent);background:rgba(122,92,30,.10);border-radius:2px;pointer-events:none}
+@media (prefers-color-scheme:dark){.gp-mmrect{background:rgba(217,179,106,.12)}}
+.gp-tlwrap{overflow:auto;max-height:72vh;border:1px solid var(--line);border-radius:10px;background:var(--viewport-bg);-webkit-overflow-scrolling:touch}
+.gp-tlinner{position:relative}
+.gp-tlrow{display:flex;border-top:1px solid var(--line)}
+.gp-tlrow:first-child{border-top:0}
+.gp-tllab{position:sticky;left:0;flex:none;width:118px;z-index:3;background:var(--bg-soft);border-right:1px solid var(--line);font-size:11.5px;font-weight:700;color:var(--ink-soft);padding:6px 8px;line-height:1.3}
+.gp-tllab .cnt{display:block;font-weight:400;color:var(--ink-faint);font-size:11px}
+.gp-tltrack{position:relative;flex:none}
+.gp-tlaxis{position:relative;flex:none;height:26px}
+.gp-tltick{position:absolute;top:5px;font-size:10.5px;color:var(--ink-faint);transform:translateX(3px);white-space:nowrap}
+.gp-tlgrid{position:absolute;top:0;bottom:0;width:1px;background:var(--line);opacity:.55}
+.gp-tlitem{position:absolute;display:flex;align-items:center;gap:4px;white-space:nowrap;height:18px}
+.gp-tldot{width:9px;height:9px;border-radius:50%;flex:none;position:relative;z-index:1}
+.gp-tlbar{position:absolute;left:5px;top:50%;height:3px;transform:translateY(-50%);border-radius:2px;opacity:.45;z-index:0}
+.gp-tlname{font:inherit;font-size:11.5px;font-weight:600;background:none;border:0;color:var(--ink);cursor:pointer;padding:2px 1px;position:relative;z-index:1}
+.gp-tlname:hover{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+.gp-tlconf{position:relative;z-index:1;display:inline-flex}
+.gp-tlconf .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+@media (max-width:560px){.gp-minimap{width:136px;height:94px}.gp-panel{padding:11px 10px 13px}.gp-tllab{width:92px}}
+/* GP-END */
 </style>
 </head>
 <body data-view="direct">
@@ -200,6 +268,27 @@ footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);color:v
 </div>
 <p class="view-note" id="view-note"><strong>Direct lineage</strong> shows only the direct ancestors — branch relatives (siblings, cousins, in-laws) join the tree in <strong>Full tree</strong>. Every documented person’s profile is in the directory below, in both views.</p>
 </header>
+<!-- GP-BEGIN graph prototype switcher -->
+<div class="gp-switch" role="group" aria-label="Graph view prototypes">
+<span class="gp-switch-label">Graph views:</span>
+<button type="button" class="btn gp-vbtn active" data-gpview="fulltree">Full tree</button>
+<button type="button" class="btn gp-vbtn" data-gpview="focus">1 · Focus</button>
+<button type="button" class="btn gp-vbtn" data-gpview="fan">2 · Fan chart</button>
+<button type="button" class="btn gp-vbtn" data-gpview="outline">3 · Outline</button>
+<button type="button" class="btn gp-vbtn" data-gpview="navigator">4 · Navigator</button>
+<button type="button" class="btn gp-vbtn" data-gpview="timeline">5 · Timeline</button>
+</div>
+<p class="gp-note" id="gp-note">The tree as it has always been — use the Direct lineage / Full tree toggle above; drag to pan, scroll or pinch to zoom, tap a person for their story. The five numbered views are new prototypes: pick one to try it, then choose a winner.</p>
+<div class="gp-searchrow" id="gp-searchrow" hidden>
+<label for="gp-search">Person:</label>
+<div class="gp-combo">
+<input id="gp-search" type="search" placeholder="Type a name — e.g. Jeppesen, Lola, Peder Hansen…" aria-label="Choose the focus person" autocomplete="off" />
+<div class="gp-results" id="gp-results" hidden></div>
+</div>
+<span class="gp-focusname" id="gp-focusname"></span>
+</div>
+<!-- GP-END switcher -->
+
 
 <div class="chart-head">
 <div class="controls" role="group" aria-label="Chart views">
@@ -212,6 +301,67 @@ footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);color:v
 </div>
 <div class="viewport" id="viewport"><div class="canvas" id="canvas"><svg id="wires" aria-hidden="true"></svg></div></div>
 <div class="detail" id="detail" aria-live="polite" hidden></div>
+<!-- GP-BEGIN graph prototype panels -->
+<div id="gp-panels">
+<section class="gp-panel" id="gp-panel-focus" hidden aria-label="Prototype 1 — Focus hourglass view">
+<div class="gp-phead"><div><span class="gp-ptag">Prototype 1</span><span class="gp-ptitle">Focus — the hourglass</span></div>
+<div class="gp-pcontrols"><button type="button" class="btn" id="gp-focus-profile">Open profile</button></div></div>
+<p class="gp-pnote">One person in the middle, ancestors fanning up (to 4 generations), descendants below (children and grandchildren). Tap any card to re-center the view on that person; tap the center card to open its profile.</p>
+<div class="gp-stagewrap" id="gp-focus-wrap"><div class="gp-stage" id="gp-focus-stage"></div></div>
+</section>
+<section class="gp-panel" id="gp-panel-fan" hidden aria-label="Prototype 2 — Fan chart">
+<div class="gp-phead"><div><span class="gp-ptag">Prototype 2</span><span class="gp-ptitle">Fan chart</span></div>
+<div class="gp-pcontrols" role="group" aria-label="Fan depth">
+<button type="button" class="btn gp-fandepth" data-fandepth="4">4 generations</button>
+<button type="button" class="btn gp-fandepth active" data-fandepth="5">5</button>
+<button type="button" class="btn gp-fandepth" data-fandepth="6">6</button>
+<button type="button" class="btn" id="gp-fan-profile">Open profile</button>
+</div></div>
+<p class="gp-pnote">Ancestors as a radial fan — father's side in blue-grey, mother's in rust. Tap any segment to re-center the fan on that person; tap the middle to open the center person's profile. Hover or long-press a segment for the full name and dates.</p>
+<div class="gp-fanwrap" id="gp-fan-wrap"></div>
+</section>
+<section class="gp-panel" id="gp-panel-outline" hidden aria-label="Prototype 3 — Outline">
+<div class="gp-phead"><div><span class="gp-ptag">Prototype 3</span><span class="gp-ptitle">Outline</span></div>
+<div class="gp-pcontrols" role="group" aria-label="Outline direction">
+<button type="button" class="btn gp-outdir active" data-outdir="anc">Ancestors</button>
+<button type="button" class="btn gp-outdir" data-outdir="desc">Descendants</button>
+<button type="button" class="btn" id="gp-out-expand">Expand all</button>
+<button type="button" class="btn" id="gp-out-collapse">Collapse all</button>
+</div></div>
+<p class="gp-pnote" id="gp-outline-note">The tree as an indented list, starting from the focus person. Use + / − to walk the father-line and mother-line one step at a time; tap a name for the full profile.</p>
+<div id="gp-outline-rows"></div>
+</section>
+<section class="gp-panel" id="gp-panel-navigator" hidden aria-label="Prototype 4 — Navigator">
+<div class="gp-phead"><div><span class="gp-ptag">Prototype 4</span><span class="gp-ptitle">Navigator</span></div>
+<div class="gp-pcontrols">
+<button type="button" class="btn" id="gp-nav-fit">Fit</button>
+<button type="button" class="btn zoom" id="gp-nav-out" aria-label="Zoom out">−</button>
+<button type="button" class="btn zoom" id="gp-nav-in" aria-label="Zoom in">+</button>
+<button type="button" class="btn" id="gp-nav-reset">Reset</button>
+</div></div>
+<p class="gp-pnote">The same full tree and layout as the standard view — with a minimap (bottom right; tap or drag on it to jump around), zoom buttons, and search-and-jump. Drag to pan and pinch or scroll to zoom, as usual.</p>
+<div class="gp-searchrow" style="margin:0 0 10px">
+<label for="gp-nav-search">Jump to:</label>
+<div class="gp-combo">
+<input id="gp-nav-search" type="search" placeholder="Type a name to jump to them…" aria-label="Search and jump to a person" autocomplete="off" />
+<div class="gp-results" id="gp-nav-results" hidden></div>
+</div>
+</div>
+<div class="gp-navwrap" id="gp-navwrap"><div class="gp-minimap" id="gp-minimap" aria-label="Minimap of the whole tree"><div id="gp-mm-dots"></div><div class="gp-mmrect" id="gp-mm-rect"></div></div></div>
+</section>
+<section class="gp-panel" id="gp-panel-timeline" hidden aria-label="Prototype 5 — Timeline">
+<div class="gp-phead"><div><span class="gp-ptag">Prototype 5</span><span class="gp-ptitle">Timeline</span></div>
+<div class="gp-pcontrols">
+<button type="button" class="btn" id="gp-tl-fit">Fit all years</button>
+<button type="button" class="btn zoom" id="gp-tl-out" aria-label="Zoom timeline out">−</button>
+<button type="button" class="btn zoom" id="gp-tl-in" aria-label="Zoom timeline in">+</button>
+</div></div>
+<p class="gp-pnote">Everyone in the chart on a time axis, placed at their birth year and grouped by generation. A bar runs from birth to death where both are known. Tap a name for the full profile; scroll sideways to travel through the centuries.</p>
+<div class="gp-tlwrap" id="gp-tl-wrap"><div class="gp-tlinner" id="gp-tl-inner"></div></div>
+</section>
+</div>
+<!-- GP-END panels -->
+
 
 <section aria-labelledby="mig-h">
 <h2 id="mig-h">Migration — the bloodlines across America</h2>
@@ -1089,5 +1239,596 @@ var ASK=[
  render();
 })();
 </script>
+<script>
+/* GP-BEGIN — graph prototype views: switcher + Focus / Fan / Outline / Navigator / Timeline.
+   Purely additive: reads the existing globals (PEOPLE, BRANCH, BRANCHMAP, BORN_BY_ID,
+   genOf, pos, canvasW/H, view) and calls the existing select()/fitAll()/zoomBy()/apply().
+   It never writes to any existing data var or DOM node of the original page, except
+   relocating #viewport into the Navigator panel while that prototype is active
+   (and restoring it, untouched, afterwards). Remove this block + the GP HTML/CSS
+   blocks to remove the prototypes completely. */
+(function(){
+"use strict";
+/*__PURE__*/
+function P(id){return PEOPLE[id]||(typeof BRANCHMAP!=="undefined"&&BRANCHMAP[id])||null;}
+function parentsOf(id){
+  if(id==="ryan"||id==="chase"){
+    var sp=[];
+    if(P("spencer"))sp.push({id:"spencer",role:"Father"});
+    if(P("fiona"))sp.push({id:"fiona",role:"Mother"});
+    return sp;
+  }
+  var out=[],p=PEOPLE[id];
+  if(p){
+    if(p.father&&P(p.father))out.push({id:p.father,role:"Father"});
+    if(p.mother&&P(p.mother))out.push({id:p.mother,role:"Mother"});
+    return out;
+  }
+  var b=(typeof BRANCHMAP!=="undefined")?BRANCHMAP[id]:null;
+  if(b&&b.link&&b.link.t==="c"){
+    if(b.link.f&&P(b.link.f))out.push({id:b.link.f,role:"Father"});
+    if(b.link.m&&P(b.link.m))out.push({id:b.link.m,role:"Mother"});
+  }
+  return out;
+}
+function fatherOf(id){var ps=parentsOf(id);for(var i=0;i<ps.length;i++)if(ps[i].role==="Father")return ps[i].id;return null;}
+function motherOf(id){var ps=parentsOf(id);for(var i=0;i<ps.length;i++)if(ps[i].role==="Mother")return ps[i].id;return null;}
+function childrenOf(id){
+  var out=[],seen={};
+  function add(c){if(c&&P(c)&&!seen[c]){seen[c]=1;out.push(c);}}
+  Object.keys(PEOPLE).forEach(function(cid){var p=PEOPLE[cid];if(p.father===id||p.mother===id)add(cid);});
+  BRANCH.forEach(function(b){if(b.link&&b.link.t==="c"&&(b.link.f===id||b.link.m===id))add(b.id);});
+  if(id==="spencer"||id==="fiona"){add("ryan");add("chase");}
+  return out;
+}
+function yearOf(id){
+  if(typeof BORN_BY_ID!=="undefined"&&BORN_BY_ID[id]!=null)return Math.floor(BORN_BY_ID[id]);
+  var p=P(id);if(!p)return null;
+  var m=/(\d{4})/.exec(p.dates||"");return m?parseInt(m[1],10):null;
+}
+function deathYearOf(id){
+  var p=P(id);if(!p)return null;
+  var ms=(p.dates||"").match(/\d{4}/g);
+  if(!ms||ms.length<2)return null;
+  var b=yearOf(id),d=parseInt(ms[ms.length-1],10);
+  return (b!=null&&d>b)?d:null;
+}
+function yearsLabel(id){
+  var p=P(id);if(!p)return "";
+  var ms=(p.dates||"").match(/\d{4}/g);
+  if(!ms)return "";
+  return ms.length>1?ms[0]+"–"+ms[ms.length-1]:ms[0];
+}
+var depthMemo={};
+function depthOf(id){
+  if(depthMemo[id]!=null)return depthMemo[id];
+  depthMemo[id]=0;
+  var d;
+  if(id==="spencer")d=0;
+  else if(id==="ryan"||id==="chase")d=-1;
+  else if(id==="fiona")d=0;
+  else if(typeof genOf!=="undefined"&&genOf[id]!=null)d=genOf[id];
+  else{
+    var b=(typeof BRANCHMAP!=="undefined")?BRANCHMAP[id]:null;
+    if(b&&b.link&&b.link.t==="c"){
+      var par=(b.link.f&&P(b.link.f))?b.link.f:b.link.m;
+      d=par?depthOf(par)-1:0;
+    }else if(b&&b.link&&b.link.t==="s"){
+      d=depthOf(b.link.a);
+    }else{
+      var ps=parentsOf(id);
+      if(ps.length)d=Math.max.apply(null,ps.map(function(r){return depthOf(r.id); }))+1;
+      else d=0;
+    }
+  }
+  depthMemo[id]=d;return d;
+}
+var GP_ANC_MAX=4,GP_DESC_MAX=2;
+function ancWidth(id,depth){
+  if(depth>=GP_ANC_MAX)return 1;
+  var f=fatherOf(id),m=motherOf(id);
+  if(!f&&!m)return 1;
+  var w=0;
+  if(f)w+=ancWidth(f,depth+1);
+  if(m)w+=ancWidth(m,depth+1);
+  return Math.max(w,1);
+}
+function descWidth(id,depth){
+  if(depth>=GP_DESC_MAX)return 1;
+  var kids=childrenOf(id);
+  if(!kids.length)return 1;
+  var w=0;
+  kids.forEach(function(k){w+=descWidth(k,depth+1);});
+  return Math.max(w,1);
+}
+function buildFanSlots(center,depth){
+  var slots={};
+  (function rec(id,g,s){
+    if(!id||g>depth)return;
+    slots[g+":"+s]=id;
+    if(g>=depth)return;
+    rec(fatherOf(id),g+1,s*2);
+    rec(motherOf(id),g+1,s*2+1);
+  })(center,0,0);
+  return slots;
+}
+/*__/PURE__*/
+function esc(t){return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+var GP={view:"fulltree",focus:"spencer",fanDepth:5,outlineDir:"anc",outExpanded:{"":true},tlScale:0,tlEffScale:1};
+var ALLIDS=Object.keys(PEOPLE).concat(BRANCH.map(function(b){return b.id;}));
+var viewportEl=document.getElementById("viewport");
+var vpHome={parent:viewportEl.parentNode,next:viewportEl.nextSibling};
+var chartHeadEl=document.querySelector(".chart-head");
+var searchRow=document.getElementById("gp-searchrow");
+var noteEl=document.getElementById("gp-note");
+var PANEL_IDS={focus:"gp-panel-focus",fan:"gp-panel-fan",outline:"gp-panel-outline",navigator:"gp-panel-navigator",timeline:"gp-panel-timeline"};
+var NOTES={
+  fulltree:"The tree as it has always been — use the Direct lineage / Full tree toggle above; drag to pan, scroll or pinch to zoom, tap a person for their story. The five numbered views are new prototypes: pick one to try it, then choose a winner.",
+  focus:"Prototype 1 — Focus (hourglass). One person centered, ancestors above, descendants below. Best for: reading one person's immediate family at a glance and hopping person to person.",
+  fan:"Prototype 2 — Fan chart. Ancestors only, as a radial fan around the focus person. Best for: seeing the whole ancestry's shape — and which lines run dry — at once.",
+  outline:"Prototype 3 — Outline. The pedigree as an expandable list. Best for: stepping through one line carefully, name by name, with no map to get lost in.",
+  navigator:"Prototype 4 — Navigator. The existing full tree and layout, given a minimap, zoom buttons and search-and-jump. Best for: keeping the familiar tree, just making it navigable.",
+  timeline:"Prototype 5 — Timeline. Everyone placed at their birth year, by generation. Best for: seeing who was alive when, and how the generations stack across the centuries."
+};
+function scrollDetail(){
+  var d=document.getElementById("detail");
+  if(d&&!d.hidden)d.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function restoreViewport(){
+  if(viewportEl.parentNode!==vpHome.parent)vpHome.parent.insertBefore(viewportEl,vpHome.next);
+}
+function hideAllPanels(){
+  Object.keys(PANEL_IDS).forEach(function(k){document.getElementById(PANEL_IDS[k]).hidden=true;});
+}
+function setFocus(id){
+  if(!P(id))return;
+  GP.focus=id;
+  GP.outExpanded={"":true};
+  updateFocusUI();
+  renderActive();
+}
+function updateFocusUI(){
+  var p=P(GP.focus);
+  document.getElementById("gp-focusname").innerHTML="Now showing: <strong>"+esc(p.name)+"</strong> · "+esc(p.dates);
+}
+function renderActive(){
+  if(GP.view==="focus")renderFocus();
+  else if(GP.view==="fan")renderFan();
+  else if(GP.view==="outline")renderOutline();
+  else if(GP.view==="timeline")renderTimeline();
+}
+function gpSetView(name){
+  GP.view=name;
+  document.querySelectorAll(".gp-vbtn").forEach(function(b){b.classList.toggle("active",b.getAttribute("data-gpview")===name);});
+  noteEl.textContent=NOTES[name]||"";
+  stopMinimap();
+  restoreViewport();
+  if(name==="fulltree"){
+    chartHeadEl.style.display="";
+    viewportEl.style.display="";
+    hideAllPanels();
+    searchRow.hidden=true;
+    return;
+  }
+  if((name==="focus"||name==="fan"||name==="outline")&&typeof selectedId!=="undefined"&&selectedId&&P(selectedId)&&selectedId!==GP.focus){
+    GP.focus=selectedId;
+    GP.outExpanded={"":true};
+  }
+  updateFocusUI();
+  if(name==="navigator"){
+    chartHeadEl.style.display="none";
+    viewportEl.style.display="";
+    hideAllPanels();
+    document.getElementById(PANEL_IDS.navigator).hidden=false;
+    searchRow.hidden=true;
+    document.getElementById("gp-navwrap").appendChild(viewportEl);
+    buildMinimap();
+    startMinimap();
+    return;
+  }
+  chartHeadEl.style.display="none";
+  viewportEl.style.display="none";
+  hideAllPanels();
+  document.getElementById(PANEL_IDS[name]).hidden=false;
+  searchRow.hidden=!(name==="focus"||name==="fan"||name==="outline");
+  renderActive();
+}
+function makeCombo(inputEl,listEl,onPick){
+  var items=ALLIDS.map(function(id){var p=P(id);return {id:id,name:p.name,dates:p.dates,short:p.short};});
+  function close(){listEl.hidden=true;listEl.innerHTML="";}
+  function open(){
+    var q=inputEl.value.trim().toLowerCase();
+    var hits=items.filter(function(it){
+      return !q||it.name.toLowerCase().indexOf(q)>=0||it.short.toLowerCase().indexOf(q)>=0;
+    }).slice(0,14);
+    if(!hits.length){close();return;}
+    listEl.innerHTML="";
+    hits.forEach(function(it){
+      var b=document.createElement("button");
+      b.type="button";b.className="gp-result";
+      var n=document.createElement("span");n.className="gp-rname";n.textContent=it.name;
+      var d=document.createElement("span");d.className="gp-rdates";d.textContent=it.dates;
+      b.appendChild(n);b.appendChild(d);
+      b.addEventListener("click",function(){inputEl.value="";close();onPick(it.id);});
+      listEl.appendChild(b);
+    });
+    listEl.hidden=false;
+  }
+  inputEl.addEventListener("input",open);
+  inputEl.addEventListener("focus",open);
+  inputEl.addEventListener("keydown",function(e){
+    if(e.key==="Escape")close();
+    if(e.key==="Enter"){var f=listEl.querySelector(".gp-result");if(f){e.preventDefault();f.click();}}
+  });
+  document.addEventListener("click",function(e){
+    if(e.target!==inputEl&&!listEl.contains(e.target))close();
+  });
+}
+
+/* ---------- Prototype 1: Focus (hourglass) ---------- */
+var FCW=168,FCH=110,FX=204,FR=152;
+function nodeHTML(p){
+  var c=(typeof CONF!=="undefined"&&CONF[p.conf])?CONF[p.conf]:{cls:"conf-unk",label:"Unknown"};
+  return '<span class="nm">'+esc(p.short)+'</span><span class="dt">'+esc(p.dates)+'</span><span class="cf '+c.cls+'"><span class="dot"></span>'+esc(c.label)+"</span>";
+}
+function renderFocus(){
+  var stage=document.getElementById("gp-focus-stage");
+  var wrap=document.getElementById("gp-focus-wrap");
+  var center=GP.focus,entries={},wires=[];
+  function placeAnc(id,depth,left){
+    var f=null,m=null,cx;
+    if(depth<GP_ANC_MAX){f=fatherOf(id);m=motherOf(id);}
+    if(!f&&!m){cx=left+0.5;}
+    else{
+      var fx=null,mx=null,wf=0;
+      if(f){wf=ancWidth(f,depth+1);fx=placeAnc(f,depth+1,left);}
+      if(m){mx=placeAnc(m,depth+1,left+wf);}
+      cx=(fx!=null&&mx!=null)?(fx+mx)/2:(fx!=null?fx:mx);
+      if(f)wires.push([id,f]);
+      if(m)wires.push([id,m]);
+    }
+    entries["a"+depth+"|"+id]={id:id,cx:cx,row:-depth};
+    return cx;
+  }
+  function placeDesc(id,depth,left){
+    var kids=depth<GP_DESC_MAX?childrenOf(id):[],cx;
+    if(!kids.length){cx=left+0.5;}
+    else{
+      var cur=left,centers=[];
+      kids.forEach(function(k){centers.push(placeDesc(k,depth+1,cur));wires.push([k,id]);cur+=descWidth(k,depth+1);});
+      cx=(centers[0]+centers[centers.length-1])/2;
+    }
+    if(depth>0)entries["d"+depth+"|"+id]={id:id,cx:cx,row:depth};
+    return cx;
+  }
+  var cAnc=placeAnc(center,0,0);
+  var cDesc=placeDesc(center,0,0);
+  var shift=cAnc-cDesc;
+  Object.keys(entries).forEach(function(k){if(k.charAt(0)==="d")entries[k].cx+=shift;});
+  var minCx=1e9,maxCx=-1e9;
+  Object.keys(entries).forEach(function(k){minCx=Math.min(minCx,entries[k].cx);maxCx=Math.max(maxCx,entries[k].cx);});
+  var off=-minCx+0.62;
+  var idPos={};
+  Object.keys(entries).forEach(function(k){
+    var e=entries[k];
+    e.px=(e.cx+off)*FX-FCW/2;
+    e.py=(e.row+GP_ANC_MAX)*FR+14;
+    if(!idPos[e.id])idPos[e.id]=e;
+  });
+  var stageW=(maxCx-minCx+1.24)*FX;
+  var stageH=(GP_ANC_MAX+GP_DESC_MAX+1)*FR+28;
+  var paths="";
+  wires.forEach(function(w){
+    var ch=idPos[w[0]],pa=idPos[w[1]];
+    if(!ch||!pa)return;
+    var pcx=pa.px+FCW/2,pBot=pa.py+FCH,ccx=ch.px+FCW/2,cTop=ch.py,midY=(pBot+cTop)/2;
+    paths+='<path d="M '+pcx+" "+pBot+" V "+midY+" H "+ccx+" V "+cTop+'"/>';
+  });
+  var html='<svg width="'+stageW+'" height="'+stageH+'" viewBox="0 0 '+stageW+" "+stageH+'" aria-hidden="true">'+paths+"</svg>";
+  Object.keys(entries).forEach(function(k){
+    var e=entries[k],p=P(e.id);
+    html+='<button type="button" class="node side-'+esc(p.side||"center")+(e.id===center?" selected":"")+'" style="left:'+e.px.toFixed(1)+"px;top:"+e.py.toFixed(1)+'px" data-gpid="'+esc(e.id)+'" aria-label="'+esc(p.name+" — "+p.rel)+'">'+nodeHTML(p)+"</button>";
+  });
+  stage.style.width=stageW+"px";
+  stage.style.height=stageH+"px";
+  stage.innerHTML=html;
+  var ce=idPos[center];
+  if(ce){
+    wrap.scrollLeft=Math.max(0,ce.px+FCW/2-wrap.clientWidth/2);
+    wrap.scrollTop=Math.max(0,ce.py+FCH/2-wrap.clientHeight/2);
+  }
+}
+/* ---------- Prototype 2: Fan chart ---------- */
+function pol(cx,cy,r,angDeg){
+  var a=angDeg*Math.PI/180;
+  return [cx+r*Math.sin(a),cy-r*Math.cos(a)];
+}
+function sectorPath(cx,cy,rIn,rOut,a0,a1){
+  var os=pol(cx,cy,rOut,a0),oe=pol(cx,cy,rOut,a1),ie=pol(cx,cy,rIn,a1),is=pol(cx,cy,rIn,a0);
+  var laf=(a1-a0)>180?1:0;
+  function f(pt){return pt[0].toFixed(1)+" "+pt[1].toFixed(1);}
+  return "M "+f(os)+" A "+rOut+" "+rOut+" 0 "+laf+" 1 "+f(oe)+" L "+f(ie)+" A "+rIn+" "+rIn+" 0 "+laf+" 0 "+f(is)+" Z";
+}
+function renderFan(){
+  var wrap=document.getElementById("gp-fan-wrap");
+  var depth=GP.fanDepth,center=GP.focus;
+  var slots=buildFanSlots(center,depth);
+  var size=640,C=size/2,R0=54,rOutMax=size/2-8,ringT=(rOutMax-R0)/depth;
+  var parts=['<svg viewBox="0 0 '+size+' '+size+'" role="img" aria-label="Fan chart of the ancestors of '+esc(P(center).name)+'">'];
+  for(var g=depth;g>=1;g--){
+    var n=Math.pow(2,g),span=360/n,rIn=R0+(g-1)*ringT,rOut=rIn+ringT;
+    for(var s2=0;s2<n;s2++){
+      var id=slots[g+":"+s2];
+      var a0=s2*span,a1=a0+span;
+      var fatherSide=Math.floor(s2/Math.pow(2,g-1))===0;
+      var fill,op;
+      if(id){fill=fatherSide?"var(--dad)":"var(--mom)";op=(0.85-0.09*(g-1)).toFixed(2);}
+      else{fill="var(--card-dim)";op="1";}
+      parts.push('<path class="gp-fanseg" d="'+sectorPath(C,C,rIn,rOut,a0,a1)+'" style="fill:'+fill+'" fill-opacity="'+op+'"'+(id?' data-fanid="'+esc(id)+'"':"")+'><title>'+(id?esc(P(id).name+" · "+P(id).dates):"Not known")+"</title></path>");
+      if(id){
+        var am=(a0+a1)/2,rm=(rIn+rOut)/2,pt=pol(C,C,rm,am);
+        var fs=g<=1?12.5:g===2?11:g===3?9.5:g===4?8.5:g===5?7.5:7;
+        var arc=2*Math.PI*rm*span/360;
+        var label=P(id).short;
+        if(g<=3){var yl=yearsLabel(id);if(yl)label=label+" · "+yl;}
+        var maxCh=Math.floor(arc/(fs*0.5));
+        if(maxCh>=4){
+          var txt=label.length>maxCh?label.slice(0,Math.max(1,maxCh-1))+"…":label;
+          var rot=(am>90&&am<270)?am+180:am;
+          parts.push('<text class="gp-fantext" x="'+pt[0].toFixed(1)+'" y="'+pt[1].toFixed(1)+'" font-size="'+fs+'" transform="rotate('+rot.toFixed(1)+" "+pt[0].toFixed(1)+" "+pt[1].toFixed(1)+')" dy="0.35em">'+esc(txt)+"</text>");
+        }
+      }
+    }
+  }
+  parts.push('<circle class="gp-fancenter" cx="'+C+'" cy="'+C+'" r="'+(R0-4)+'" style="fill:var(--center)"><title>'+esc(P(center).name+" · "+P(center).dates)+"</title></circle>");
+  parts.push('<text class="gp-fantext" x="'+C+'" y="'+(C-5)+'" font-size="12.5" font-weight="700" style="fill:var(--bg)">'+esc(P(center).short)+"</text>");
+  parts.push('<text class="gp-fantext" x="'+C+'" y="'+(C+13)+'" font-size="10" style="fill:var(--bg)">'+esc(P(center).dates)+"</text>");
+  parts.push("</svg>");
+  wrap.innerHTML=parts.join("");
+  wrap.querySelectorAll("[data-fanid]").forEach(function(el){
+    el.addEventListener("click",function(){setFocus(el.getAttribute("data-fanid"));});
+  });
+  var cc=wrap.querySelector(".gp-fancenter");
+  if(cc)cc.addEventListener("click",function(){if(typeof select==="function")select(center,true);scrollDetail();});
+}
+/* ---------- Prototype 3: Outline ---------- */
+function outlineRow(id,path,depth,role){
+  var frag=document.createDocumentFragment();
+  var p=P(id);
+  var kids=GP.outlineDir==="anc"?parentsOf(id):childrenOf(id);
+  var hasKids=kids.length>0&&depth<18;
+  var expanded=!!GP.outExpanded[path];
+  var row=document.createElement("div");
+  row.className="gp-orow";
+  row.style.paddingLeft=(depth*22)+"px";
+  var tog=document.createElement("button");
+  tog.type="button";tog.className="gp-otoggle";
+  if(hasKids){
+    tog.textContent=expanded?"−":"+";
+    tog.setAttribute("aria-label",(expanded?"Collapse ":"Expand ")+p.name);
+    tog.addEventListener("click",function(){
+      if(GP.outExpanded[path])delete GP.outExpanded[path];else GP.outExpanded[path]=true;
+      renderOutline();
+    });
+  }else{
+    tog.disabled=true;tog.textContent="·";
+  }
+  row.appendChild(tog);
+  var nm=document.createElement("button");
+  nm.type="button";nm.className="gp-oname";nm.textContent=p.name;
+  nm.addEventListener("click",function(){if(typeof select==="function")select(id,true);scrollDetail();});
+  row.appendChild(nm);
+  var meta=document.createElement("span");
+  meta.className="gp-ometa";
+  var c=(typeof CONF!=="undefined"&&CONF[p.conf])?CONF[p.conf]:{cls:"conf-unk",label:"Unknown"};
+  meta.innerHTML=(role?esc(role)+" · ":"")+esc(p.dates)+' &nbsp;<span class="conf '+c.cls+'"><span class="dot"></span>'+esc(c.label)+"</span>";
+  row.appendChild(meta);
+  frag.appendChild(row);
+  if(expanded&&hasKids){
+    if(GP.outlineDir==="anc"){
+      kids.forEach(function(r){frag.appendChild(outlineRow(r.id,path+"/"+(r.role==="Father"?"f":"m"),depth+1,r.role));});
+    }else{
+      kids.forEach(function(cid){frag.appendChild(outlineRow(cid,path+"/k"+cid,depth+1,"Child"));});
+    }
+  }
+  return frag;
+}
+function renderOutline(){
+  var box=document.getElementById("gp-outline-rows");
+  box.innerHTML="";
+  box.appendChild(outlineRow(GP.focus,"",0,P(GP.focus).rel||""));
+}
+function outlineExpandAll(){
+  var limit=GP.outlineDir==="anc"?16:6,count=0;
+  GP.outExpanded={"":true};
+  (function walk(id,path,depth){
+    if(depth>=limit||count>600)return;
+    GP.outExpanded[path]=true;
+    if(GP.outlineDir==="anc"){
+      parentsOf(id).forEach(function(r){count++;walk(r.id,path+"/"+(r.role==="Father"?"f":"m"),depth+1);});
+    }else{
+      childrenOf(id).forEach(function(cid){count++;walk(cid,path+"/k"+cid,depth+1);});
+    }
+  })(GP.focus,"",0);
+  renderOutline();
+}
+/* ---------- Prototype 4: Navigator (minimap) ---------- */
+var mmRAF=null,mmBuilt=false,mmDrag=false;
+function sideColor(id,p){
+  if(id==="spencer"||id==="fiona"||id==="ryan"||id==="chase")return "var(--center)";
+  if(p&&p.side==="mom")return "var(--mom)";
+  if(p&&p.side==="dad")return "var(--dad)";
+  return "var(--center)";
+}
+function buildMinimap(){
+  if(mmBuilt)return;
+  var html="";
+  Object.keys(pos).forEach(function(id){
+    var p=P(id);if(!p)return;
+    html+='<span class="gp-mmdot" style="left:'+(((pos[id].x+84)/canvasW)*100).toFixed(2)+'%;top:'+(((pos[id].y+55)/canvasH)*100).toFixed(2)+'%;background:'+sideColor(id,p)+'"></span>';
+  });
+  document.getElementById("gp-mm-dots").innerHTML=html;
+  mmBuilt=true;
+}
+function drawMinimap(){
+  var rect=document.getElementById("gp-mm-rect");
+  if(!rect||typeof view==="undefined")return;
+  var k=view.k;
+  if(!k)return;
+  var x0=(-view.x)/k,y0=(-view.y)/k,w=viewportEl.clientWidth/k,h=viewportEl.clientHeight/k;
+  rect.style.left=(x0/canvasW*100)+"%";
+  rect.style.top=(y0/canvasH*100)+"%";
+  rect.style.width=(w/canvasW*100)+"%";
+  rect.style.height=(h/canvasH*100)+"%";
+}
+function startMinimap(){
+  if(mmRAF)return;
+  var loop=function(){
+    if(GP.view!=="navigator"){mmRAF=null;return;}
+    drawMinimap();
+    mmRAF=requestAnimationFrame(loop);
+  };
+  mmRAF=requestAnimationFrame(loop);
+}
+function stopMinimap(){
+  if(mmRAF)cancelAnimationFrame(mmRAF);
+  mmRAF=null;
+}
+/* ---------- Prototype 5: Timeline ---------- */
+var TL_Y0=1540,TL_Y1=2028,TL_LABW=118;
+function renderTimeline(){
+  var wrap=document.getElementById("gp-tl-wrap");
+  var inner=document.getElementById("gp-tl-inner");
+  var prevScroll=wrap.scrollLeft,prevW=inner.offsetWidth||0;
+  var rows={};
+  Object.keys(pos).forEach(function(id){
+    var d=depthOf(id);
+    (rows[d]=rows[d]||[]).push(id);
+  });
+  var depths=Object.keys(rows).map(Number).sort(function(a,b){return b-a;});
+  var cw=wrap.clientWidth||320;
+  var scale=GP.tlScale>0?GP.tlScale:Math.max(0.9,(cw-TL_LABW-16)/(TL_Y1-TL_Y0));
+  GP.tlEffScale=scale;
+  var trackW=Math.ceil((TL_Y1-TL_Y0)*scale)+30;
+  function X(year){return (year-TL_Y0)*scale;}
+  var step=scale<1.8?50:scale<3.4?25:scale<7?10:5;
+  var firstTick=Math.ceil(TL_Y0/step)*step;
+  var html='<div class="gp-tlrow"><div class="gp-tllab">Year</div><div class="gp-tlaxis" style="width:'+trackW+'px">';
+  for(var y=firstTick;y<=TL_Y1;y+=step)html+='<span class="gp-tltick" style="left:'+X(y).toFixed(1)+'px">'+y+"</span>";
+  html+="</div></div>";
+  var undated=[];
+  depths.forEach(function(d){
+    var dated=[],list=rows[d];
+    list.forEach(function(id){
+      var yy=yearOf(id);
+      if(yy==null)undated.push(id);else dated.push({id:id,y:yy});
+    });
+    dated.sort(function(a,b){return a.y-b.y;});
+    var lanes=[];
+    var placed=dated.map(function(o){
+      var p=P(o.id),dy=deathYearOf(o.id);
+      var startX=X(o.y),barEnd=dy?X(dy):startX;
+      var labelW=16+p.short.length*5.9+16;
+      var end=Math.max(barEnd,startX+10)+4+labelW;
+      var lane=0;
+      while(lane<lanes.length&&lanes[lane]>startX-3)lane++;
+      lanes[lane]=end;
+      return {id:o.id,startX:startX,barW:Math.max(0,barEnd-startX),lane:lane};
+    });
+    var rowH=Math.max(1,lanes.length)*20+8;
+    var lab=d===0?"Spencer's generation":d===-1?"Children":d<0?("Generation "+d):("Generation +"+d);
+    html+='<div class="gp-tlrow"><div class="gp-tllab">'+lab+'<span class="cnt">'+dated.length+" people</span></div>"
+      +'<div class="gp-tltrack" style="width:'+trackW+'px;height:'+rowH+'px">';
+    for(var gy=firstTick;gy<=TL_Y1;gy+=step)html+='<span class="gp-tlgrid" style="left:'+X(gy).toFixed(1)+'px"></span>';
+    placed.forEach(function(o){
+      var p=P(o.id),col=sideColor(o.id,p);
+      var c=(typeof CONF!=="undefined"&&CONF[p.conf])?CONF[p.conf]:{cls:"conf-unk"};
+      html+='<div class="gp-tlitem" style="left:'+o.startX.toFixed(1)+'px;top:'+(4+o.lane*20)+'px">'
+        +(o.barW>2?'<span class="gp-tlbar" style="width:'+o.barW.toFixed(1)+'px;background:'+col+'"></span>':"")
+        +'<span class="gp-tldot" style="background:'+col+'"></span>'
+        +'<button type="button" class="gp-tlname" data-tlid="'+esc(o.id)+'">'+esc(p.short)+"</button>"
+        +'<span class="gp-tlconf '+c.cls+'"><span class="dot"></span></span>'
+        +"</div>";
+    });
+    html+="</div></div>";
+  });
+  if(undated.length){
+    html+='<div class="gp-tlrow"><div class="gp-tllab">Undated<span class="cnt">'+undated.length+' people</span></div><div class="gp-tltrack" style="width:'+trackW+'px;min-height:30px;padding:5px 0 5px 8px">';
+    undated.forEach(function(id){
+      var p=P(id);
+      html+='<span class="gp-tlitem" style="position:static;display:inline-flex;margin:2px 10px 2px 0"><span class="gp-tldot" style="background:'+sideColor(id,p)+'"></span><button type="button" class="gp-tlname" data-tlid="'+esc(id)+'">'+esc(p.short)+"</button></span>";
+    });
+    html+="</div></div>";
+  }
+  inner.style.width=(TL_LABW+trackW)+"px";
+  inner.innerHTML=html;
+  inner.querySelectorAll("[data-tlid]").forEach(function(b){
+    b.addEventListener("click",function(){if(typeof select==="function")select(b.getAttribute("data-tlid"),true);scrollDetail();});
+  });
+  if(prevW>0&&GP.tlScale>0)wrap.scrollLeft=prevScroll*(inner.offsetWidth/prevW);
+}
+/* ---------- wiring ---------- */
+document.querySelectorAll(".gp-vbtn").forEach(function(b){
+  b.addEventListener("click",function(){gpSetView(b.getAttribute("data-gpview"));});
+});
+makeCombo(document.getElementById("gp-search"),document.getElementById("gp-results"),function(id){setFocus(id);});
+makeCombo(document.getElementById("gp-nav-search"),document.getElementById("gp-nav-results"),function(id){
+  if(window.__chartFocusPerson)window.__chartFocusPerson(id);
+});
+document.querySelectorAll(".gp-fandepth").forEach(function(b){
+  b.addEventListener("click",function(){
+    GP.fanDepth=parseInt(b.getAttribute("data-fandepth"),10);
+    document.querySelectorAll(".gp-fandepth").forEach(function(x){x.classList.toggle("active",x===b);});
+    if(GP.view==="fan")renderFan();
+  });
+});
+document.querySelectorAll(".gp-outdir").forEach(function(b){
+  b.addEventListener("click",function(){
+    GP.outlineDir=b.getAttribute("data-outdir");
+    GP.outExpanded={"":true};
+    document.querySelectorAll(".gp-outdir").forEach(function(x){x.classList.toggle("active",x===b);});
+    if(GP.view==="outline")renderOutline();
+  });
+});
+document.getElementById("gp-out-expand").addEventListener("click",outlineExpandAll);
+document.getElementById("gp-out-collapse").addEventListener("click",function(){GP.outExpanded={"":true};renderOutline();});
+document.getElementById("gp-focus-profile").addEventListener("click",function(){if(typeof select==="function")select(GP.focus,true);scrollDetail();});
+document.getElementById("gp-fan-profile").addEventListener("click",function(){if(typeof select==="function")select(GP.focus,true);scrollDetail();});
+var stageEl=document.getElementById("gp-focus-stage");
+stageEl.addEventListener("click",function(e){
+  var t=e.target.closest?e.target.closest("[data-gpid]"):null;
+  if(!t)return;
+  var id=t.getAttribute("data-gpid");
+  if(id===GP.focus){if(typeof select==="function")select(id,true);scrollDetail();}
+  else setFocus(id);
+});
+document.getElementById("gp-nav-fit").addEventListener("click",function(){if(typeof fitAll==="function")fitAll();});
+document.getElementById("gp-nav-in").addEventListener("click",function(){if(typeof zoomBy==="function")zoomBy(1.3);});
+document.getElementById("gp-nav-out").addEventListener("click",function(){if(typeof zoomBy==="function")zoomBy(1/1.3);});
+document.getElementById("gp-nav-reset").addEventListener("click",function(){
+  if(typeof fitAll==="function")fitAll();
+  if(typeof clearSelection==="function")clearSelection();
+});
+var mmEl=document.getElementById("gp-minimap");
+function mmJump(e){
+  var r=mmEl.getBoundingClientRect();
+  if(!r.width||!r.height)return;
+  var fx=(e.clientX-r.left)/r.width,fy=(e.clientY-r.top)/r.height;
+  fx=Math.max(0,Math.min(1,fx));fy=Math.max(0,Math.min(1,fy));
+  view.x=viewportEl.clientWidth/2-(fx*canvasW)*view.k;
+  view.y=viewportEl.clientHeight/2-(fy*canvasH)*view.k;
+  apply();
+}
+mmEl.addEventListener("pointerdown",function(e){mmDrag=true;try{mmEl.setPointerCapture(e.pointerId);}catch(err){}mmJump(e);e.preventDefault();});
+mmEl.addEventListener("pointermove",function(e){if(mmDrag)mmJump(e);});
+mmEl.addEventListener("pointerup",function(){mmDrag=false;});
+mmEl.addEventListener("pointercancel",function(){mmDrag=false;});
+document.getElementById("gp-tl-fit").addEventListener("click",function(){GP.tlScale=0;renderTimeline();});
+document.getElementById("gp-tl-in").addEventListener("click",function(){GP.tlScale=Math.min(14,GP.tlEffScale*1.35);renderTimeline();});
+document.getElementById("gp-tl-out").addEventListener("click",function(){GP.tlScale=Math.max(0.6,GP.tlEffScale/1.35);renderTimeline();});
+updateFocusUI();
+})();
+</script>
+
 </body>
 </html>
