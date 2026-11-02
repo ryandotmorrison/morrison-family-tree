@@ -176,68 +176,66 @@ footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);color:v
 .ask-more{margin-top:14px}
 @media (max-width:560px){.wrap{padding:20px 12px 48px}.viewport{height:68vh;min-height:380px}.detail{padding:15px 15px}.viewtoggle button{padding:9px 13px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-
-/* GP-BEGIN — graph prototype views, ROUND 2 (additive; safe to remove as one block) */
+/* GP-BEGIN — graph prototype views, ROUND 3: "full tree but better" (additive; safe to remove as one block) */
 .gp-switch{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:20px}
 .gp-switch .gp-sw-title{font-weight:700;margin-right:2px}
 .gp-switch button{font:inherit;font-size:13.5px;font-weight:600;padding:7px 13px;border-radius:999px;cursor:pointer;background:var(--card);color:var(--ink);border:1px solid var(--line-strong)}
 .gp-switch button:hover{border-color:var(--accent);color:var(--accent)}
 .gp-switch button.active{background:var(--accent);border-color:var(--accent);color:#fff8ea}
-@media (prefers-color-scheme:dark){.gp-switch button.active{color:#1d1808}}
-.gp-focusbar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:10px;padding:10px 12px;background:var(--bg-soft);border:1px solid var(--line);border-radius:10px}
-.gp-focusbar[hidden]{display:none}
-.gp-searchwrap{position:relative;display:inline-block}
-.gp-searchwrap input{font:inherit;font-size:14.5px;padding:8px 11px;border-radius:8px;border:1px solid var(--line-strong);background:var(--card);color:var(--ink);min-width:min(240px,62vw)}
-.gp-suggest{position:absolute;top:calc(100% + 4px);left:0;z-index:60;background:var(--card);border:1px solid var(--line-strong);border-radius:10px;box-shadow:var(--shadow);min-width:270px;max-width:88vw;padding:4px}
-.gp-sug{display:block;width:100%;text-align:left;background:none;border:0;padding:9px 10px;font:inherit;font-size:14px;color:var(--ink);cursor:pointer;border-radius:6px}
-.gp-sug:hover{background:var(--bg-soft)}
+.gp-focusbar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-top:12px}
+.gp-focusbar .gp-searchwrap{position:relative;flex:1;min-width:200px;max-width:420px}
+.gp-focusbar input{width:100%;font:inherit;font-size:14px;padding:8px 12px;border-radius:10px;border:1px solid var(--line-strong);background:var(--card);color:var(--ink)}
+.gp-suggest{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:40;background:var(--card);border:1px solid var(--line-strong);border-radius:10px;box-shadow:var(--shadow);overflow:hidden}
+.gp-suggest button{display:block;width:100%;text-align:left;font:inherit;font-size:13.5px;padding:8px 12px;background:none;border:none;border-bottom:1px solid var(--line);color:var(--ink);cursor:pointer}
+.gp-suggest button:last-child{border-bottom:none}
+.gp-suggest button:hover{background:var(--bg-soft)}
 .gp-focusname{font-weight:700}
-.gp-depth{font-weight:700;color:var(--accent)}
-.gp-panel{margin-top:14px}
-.gp-controls{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-bottom:8px}
-.gp-ptitle{font-family:"Spectral",Georgia,serif;font-weight:700;font-size:17px;margin-right:2px}
-.gp-ctl{display:inline-flex;gap:6px;align-items:center;font-size:13.5px;color:var(--ink-soft)}
-.gp-ctl select,.gp-ctl input[type=range]{font:inherit;accent-color:var(--accent)}
-.gp-ctl input[type=range]{width:110px}
-.gp-stagewrap{display:flex;gap:8px;align-items:stretch}
-.gp-ruler{width:26px;flex:none;display:flex;flex-direction:column;align-items:stretch;padding:2px 0}
-.gp-ruler .gp-rlab{font-size:9.5px;font-weight:700;color:var(--accent);text-align:center;line-height:1.15}
-.gp-rseg{flex:1;min-height:2px;background:var(--line);opacity:.35;margin:1px 2px;border-radius:2px}
-.gp-rseg.in{background:var(--accent);opacity:1}
-.gp-rseg.zero{box-shadow:inset 0 0 0 2px var(--highlight)}
-.gp-stage{position:relative;flex:1;height:min(70vh,600px);min-height:340px;background:var(--viewport-bg);border:1px solid var(--line);border-radius:14px;overflow:hidden;touch-action:none;cursor:grab}
+.gp-panel{margin-top:16px}
+.gp-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.gp-ptitle{font-family:"Spectral",Georgia,serif;font-size:19px;font-weight:700;margin-right:6px}
+.gp-readout{font-size:13px;color:var(--ink-soft)}
+.gp-caption{font-size:14px;color:var(--ink);background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:10px}
+.gp-stage{position:relative;height:min(72vh,680px);min-height:360px;background:var(--viewport-bg);border:1px solid var(--line);border-radius:14px;overflow:hidden;touch-action:none;cursor:grab}
 .gp-stage:active{cursor:grabbing}
 .gp-world{position:absolute;left:0;top:0;transform-origin:0 0}
-.gp-world.gp-anim{transition:transform .45s ease}
-.gp-wires{position:absolute;left:0;top:0;display:block}
-.gp-wires path{fill:none;stroke:var(--connector);stroke-width:1.6}
-.gp-node{position:absolute;width:168px;height:110px;padding:8px 10px 8px 13px;text-align:left;background:var(--card);border:1px solid var(--line-strong);border-radius:10px;box-shadow:var(--shadow);cursor:pointer;font:inherit;color:var(--ink);display:flex;flex-direction:column;overflow:visible}
-.gp-node::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--line-strong);border-radius:10px 0 0 10px}
-.gp-node.side-dad::before{background:var(--dad)}.gp-node.side-mom::before{background:var(--mom)}.gp-node.side-center::before{background:var(--center)}
-.gp-node .nm{font-family:"Spectral",Georgia,serif;font-weight:600;font-size:13.5px;line-height:1.18;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:none}
-.gp-node .dt{font-size:11px;color:var(--ink-soft);line-height:1.3;margin-top:2px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:none}
-.gp-node .cf{margin-top:auto;padding-top:4px;font-size:10px;font-weight:700;line-height:1.25;display:inline-flex;align-items:center;gap:4px;align-self:flex-start;flex:none}
-.gp-node .cf .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
-.gp-node.gp-focus-card{outline:2.5px solid var(--highlight);outline-offset:1px;z-index:4}
-.gp-node.gp-dim{opacity:.13;box-shadow:none}
-.gp-world.lod-med .gp-node .cf{display:none}
-.gp-world.lod-compact .gp-node .cf,.gp-world.lod-compact .gp-node .dt{display:none}
-.gp-world.lod-compact .gp-node .nm{font-size:16.5px;-webkit-line-clamp:4;line-height:1.22}
-.gp-badge{position:absolute;left:8px;z-index:6;background:var(--accent);color:#fff8ea;font-size:10.5px;font-weight:700;line-height:1;padding:3px 8px;border-radius:999px;white-space:nowrap;box-shadow:var(--shadow);pointer-events:none}
-@media (prefers-color-scheme:dark){.gp-badge{color:#1d1808}}
-.gp-badge-up{top:-9px}
-.gp-badge-down{bottom:-9px}
-.gp-expand{position:absolute;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff8ea;border:2px solid var(--card);font-size:19px;font-weight:700;line-height:1;cursor:pointer;z-index:7;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:var(--shadow)}
-@media (prefers-color-scheme:dark){.gp-expand{color:#1d1808}}
-.gp-chip{position:absolute;width:118px;height:30px;font:inherit;font-size:11px;font-weight:600;text-align:left;padding:4px 7px;background:var(--card);border:1px solid var(--line-strong);border-radius:7px;color:var(--ink-soft);cursor:pointer;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;z-index:3}
-.gp-chip-more{display:flex;align-items:center;cursor:default;color:var(--ink-faint)}
-.gp-chip-wide{position:absolute;height:26px;font-size:11px;padding:4px 7px;background:var(--card);border:1px dashed var(--line-strong);border-radius:6px;color:var(--ink-soft);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;z-index:3}
-.gp-strip{position:relative;height:56px;background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;margin-bottom:8px;overflow:hidden;cursor:pointer;touch-action:none}
-.gp-dot{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--ink-faint);transform:translate(-50%,-50%);pointer-events:none}
-.gp-dot-focus{background:var(--highlight);width:10px;height:10px;z-index:2}
-.gp-stripbox{position:absolute;border:2px solid var(--accent);border-radius:4px;background:rgba(140,110,40,.10);pointer-events:none}
-.gp-hint{font-size:13px;color:var(--ink-faint);margin-top:8px;max-width:75ch}
-@media (max-width:560px){.gp-stage{height:64vh;min-height:320px}.gp-ruler{width:21px}}
+.gp-world svg{position:absolute;left:0;top:0;display:block}
+.gp-hint{font-size:13px;color:var(--ink-faint);margin-top:8px;max-width:78ch}
+@keyframes gpflash{0%,100%{outline-color:transparent}25%,75%{outline-color:var(--accent)}}
+.gp-flash{animation:gpflash 1.5s ease-in-out;outline:3px solid var(--accent);outline-offset:2px;z-index:6}
+/* B2 semantic zoom levels */
+.gp-rail{position:absolute;left:0;top:0;bottom:0;width:92px;pointer-events:none;z-index:5}
+.gp-bandlab{position:absolute;left:6px;transform:translateY(-50%);font-size:11px;font-weight:700;background:var(--card);border:1px solid var(--line);padding:2px 6px;border-radius:6px;color:var(--ink-soft);white-space:nowrap;box-shadow:var(--shadow)}
+.gp-lod0 .node .nm,.gp-lod0 .node .dt,.gp-lod0 .node .cf{display:none}
+.gp-lod0 .node{border-width:2px}
+.gp-lod0 .node.side-dad{background:var(--dad);opacity:.55}
+.gp-lod0 .node.side-mom{background:var(--mom);opacity:.55}
+.gp-lod0 .node.side-center{background:var(--center);opacity:.55}
+.gp-lod1 .node .cf{display:none}
+.gp-lod1 .node .nm{font-size:15.5px;-webkit-line-clamp:1}
+.gp-lod1 .node .dt{-webkit-line-clamp:1}
+/* B3 collapse controls */
+.gp-toggle{position:absolute;top:4px;right:4px;width:27px;height:27px;border-radius:50%;border:1.5px solid var(--accent);background:var(--card);color:var(--accent);font-size:16px;font-weight:800;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:4;padding:0}
+.gp-toggle:hover{background:var(--accent);color:#fff8ea}
+.gp-badge{position:absolute;right:4px;bottom:4px;background:var(--accent);color:#fff8ea;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;z-index:4;pointer-events:none}
+/* B4 line highlighter */
+.gp-b4 .node{opacity:.35}
+.gp-b4 .node.gp-lit{opacity:1}
+.gp-b4 path.gpw-dim{opacity:.08}
+.gp-b4 path.gpw-hl{stroke:var(--highlight);stroke-width:3}
+.gp-b4 circle.gpw-dim{opacity:.08}
+/* B5 line regions */
+.gp-index{position:sticky;top:0;z-index:6;background:var(--bg);padding:8px 0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.gp-index .gp-idx-title{font-weight:700;margin-right:2px}
+.gp-linechip{font:inherit;font-size:13px;font-weight:600;padding:6px 11px;border-radius:999px;cursor:pointer;background:var(--card);color:var(--ink);border:1px solid var(--line-strong)}
+.gp-linechip:hover{border-color:var(--accent);color:var(--accent)}
+.gp-region{margin-top:24px}
+.gp-region-head{font-family:"Spectral",Georgia,serif;font-size:20px;font-weight:700}
+.gp-region-sub{font-size:13px;color:var(--ink-soft);margin:2px 0 8px}
+.gp-region-stage{position:relative;overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--viewport-bg)}
+.gp-region-world{position:relative}
+.gp-region-world svg{position:absolute;left:0;top:0;display:block}
+.gp-xref{position:absolute;right:6px;bottom:5px;font-size:10px;font-weight:700;color:var(--ink-faint);z-index:3;pointer-events:none}
+@media (max-width:560px){.gp-stage{height:64vh;min-height:320px}.gp-rail{width:78px}.gp-bandlab{font-size:10px}}
 /* GP-END */
 </style>
 </head>
@@ -267,20 +265,18 @@ footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);color:v
 <div class="gp-switch" role="group" aria-label="Graph views">
 <span class="gp-sw-title">Graph views</span>
 <button type="button" data-gp="full" class="active">Full tree</button>
-<button type="button" data-gp="f1">F1 · Section</button>
-<button type="button" data-gp="f2">F2 · Wide hourglass</button>
-<button type="button" data-gp="f3">F3 · Focus + map strip</button>
-<button type="button" data-gp="f4">F4 · Generation window</button>
-<button type="button" data-gp="f5">F5 · Expandable</button>
+<button type="button" data-gp="b1">B1 · Tidy tree</button>
+<button type="button" data-gp="b2">B2 · Semantic zoom</button>
+<button type="button" data-gp="b3">B3 · Collapsible branches</button>
+<button type="button" data-gp="b4">B4 · Line highlighter</button>
+<button type="button" data-gp="b5">B5 · Line regions</button>
 </div>
 <div class="gp-focusbar" id="gp-focusbar" hidden>
-<span>Focus: <span class="gp-focusname" id="gp-focus-name"></span></span>
-<span class="gp-searchwrap"><input id="gp-search" type="search" placeholder="Jump to a person — type a name…" aria-label="Focus person search" autocomplete="off" /><span class="gp-suggest" id="gp-suggest" hidden></span></span>
-<span class="gp-depth" id="gp-depth" aria-live="polite"></span>
+<span>Find: <span class="gp-focusname" id="gp-focus-name"></span></span>
+<span class="gp-searchwrap"><input id="gp-search" type="search" placeholder="Jump to a person — type a name…" aria-label="Person search" autocomplete="off" /><span class="gp-suggest" id="gp-suggest" hidden></span></span>
 <button type="button" class="btn" id="gp-profile-btn">Open profile</button>
 </div>
 <!-- GP-END switcher -->
-
 
 <div class="chart-head">
 <div class="controls" role="group" aria-label="Chart views">
@@ -294,57 +290,62 @@ footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);color:v
 <div class="viewport" id="viewport"><div class="canvas" id="canvas"><svg id="wires" aria-hidden="true"></svg></div></div>
 <div class="detail" id="detail" aria-live="polite" hidden></div>
 <!-- GP-BEGIN graph prototype panels -->
-<section class="gp-panel" id="gp-panel-f1" hidden aria-label="F1 Section prototype">
+<section class="gp-panel" id="gp-panel-b1" hidden aria-label="B1 Tidy tree prototype">
 <div class="gp-controls">
-<span class="gp-ptitle">F1 · Section</span>
-<span class="gp-ctl">Ancestors shown: <button type="button" class="btn" id="gp-f1-narrow">− Narrow</button><strong id="gp-f1-upval">4 generations</strong><button type="button" class="btn" id="gp-f1-widen">Widen +</button></span>
-<span class="gp-ctl"><button type="button" class="btn gp-zbtn" data-view="f1" data-z="out">−</button><button type="button" class="btn gp-zbtn" data-view="f1" data-z="in">+</button><button type="button" class="btn gp-zbtn" data-view="f1" data-z="fit">Fit section</button></span>
+<span class="gp-ptitle">B1 · Tidy tree</span>
+<button type="button" class="btn" data-gp-fit="b1">Fit whole tree</button>
+<button type="button" class="btn" data-gp-zout="b1" aria-label="Zoom out">−</button>
+<button type="button" class="btn" data-gp-zin="b1" aria-label="Zoom in">+</button>
+<span class="gp-readout" id="gp-b1-readout"></span>
 </div>
-<div class="gp-stagewrap"><div class="gp-ruler" id="gp-f1-ruler" aria-hidden="true"></div><div class="gp-stage" id="gp-f1-stage"><div class="gp-world" id="gp-f1-world"></div></div></div>
-<p class="gp-hint">The real chart, windowed: the section around the focus person stays lit — ancestors, siblings and their spouses, and descendants to grandchildren — positioned exactly as in the full tree; everyone else is dimmed. It opens framed to fit the whole section. Tap any lit card to re-frame the section on them; tap the focus card again (or “Open profile”) for their story. Badges like “+7 more ↑” mark lines that continue past the frame, and the side ruler shows where the framed band sits in the whole depth.</p>
+<div class="gp-stage" id="gp-stage-b1"><div class="gp-world" id="gp-world-b1"></div></div>
+<p class="gp-hint">The complete tree — all 237 chart people — re-packed: each generation row is tightly packed and family-ordered (barycenter sweeps keep parents over their children and couples together), and the two most crowded generations wrap into sub-bands instead of sprawling. Same cards, same wires, far less empty canvas. Drag to pan, pinch or scroll to zoom, tap a card for the profile.</p>
 </section>
-<section class="gp-panel" id="gp-panel-f2" hidden aria-label="F2 Wide hourglass prototype">
+<section class="gp-panel" id="gp-panel-b2" hidden aria-label="B2 Semantic zoom prototype">
 <div class="gp-controls">
-<span class="gp-ptitle">F2 · Wide hourglass</span>
-<span class="gp-ctl">Generations up <select id="gp-f2-up" aria-label="Generations above"><option value="3">3</option><option value="4">4</option><option value="5" selected>5</option><option value="6">6</option></select></span>
-<span class="gp-ctl">down <select id="gp-f2-down" aria-label="Generations below"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option></select></span>
-<span class="gp-ctl"><label><input type="checkbox" id="gp-f2-aunts" /> Aunts/uncles</label></span>
-<span class="gp-ctl"><button type="button" class="btn gp-zbtn" data-view="f2" data-z="out">−</button><button type="button" class="btn gp-zbtn" data-view="f2" data-z="in">+</button><button type="button" class="btn gp-zbtn" data-view="f2" data-z="fit">Fit section</button></span>
+<span class="gp-ptitle">B2 · Semantic zoom</span>
+<button type="button" class="btn" data-gp-fit="b2">Fit whole tree</button>
+<button type="button" class="btn" data-gp-zout="b2" aria-label="Zoom out">−</button>
+<button type="button" class="btn" data-gp-zin="b2" aria-label="Zoom in">+</button>
+<span class="gp-readout" id="gp-b2-readout"></span>
 </div>
-<div class="gp-stagewrap"><div class="gp-ruler" id="gp-f2-ruler" aria-hidden="true"></div><div class="gp-stage" id="gp-f2-stage"><div class="gp-world" id="gp-f2-world"></div></div></div>
-<p class="gp-hint">A freshly drawn hourglass at full width: up to six generations of ancestors above (spouses side by side, as couples) and three of descendants below, framed to fit the screen on open — small cards at the deep generations are the point of this one. Tap a card to re-center the hourglass on them. “Aunts/uncles” tucks each ancestor’s siblings beside their card. Edge badges count the generations still beyond the frame on that line.</p>
+<div class="gp-stage" id="gp-stage-b2"><div class="gp-world" id="gp-world-b2"></div><div class="gp-rail" id="gp-rail-b2"></div></div>
+<p class="gp-hint">The classic full tree, but the cards change with zoom: far out, people become plain colored blocks and the left edge labels each generation band (generation + typical birth era) so you navigate by shape and era; closer in, cards become name-and-years chips; closer still, the full cards with confidence labels return. Drag to pan, pinch or scroll to zoom.</p>
 </section>
-<section class="gp-panel" id="gp-panel-f3" hidden aria-label="F3 Focus plus map strip prototype">
+<section class="gp-panel" id="gp-panel-b3" hidden aria-label="B3 Collapsible branches prototype">
 <div class="gp-controls">
-<span class="gp-ptitle">F3 · Focus + map strip</span>
-<span class="gp-ctl"><button type="button" class="btn gp-zbtn" data-view="f3" data-z="out">−</button><button type="button" class="btn gp-zbtn" data-view="f3" data-z="in">+</button><button type="button" class="btn gp-zbtn" data-view="f3" data-z="fit">Fit section</button></span>
+<span class="gp-ptitle">B3 · Collapsible branches</span>
+<button type="button" class="btn" data-gp-fit="b3">Fit whole tree</button>
+<button type="button" class="btn" data-gp-zout="b3" aria-label="Zoom out">−</button>
+<button type="button" class="btn" data-gp-zin="b3" aria-label="Zoom in">+</button>
+<button type="button" class="btn" id="gp-b3-expand">Expand all</button>
+<span class="gp-readout" id="gp-b3-readout"></span>
 </div>
-<div class="gp-strip" id="gp-f3-strip" role="button" aria-label="Map of the whole chart — tap a dot to move the focus there"><div id="gp-f3-dots"></div></div>
-<div class="gp-stagewrap"><div class="gp-stage" id="gp-f3-stage"><div class="gp-world" id="gp-f3-world"></div></div></div>
-<p class="gp-hint">The hourglass (four generations up, two down) with the whole chart always in sight: the strip above plots every person in the tree as a dot, the box outlines where the current focus section sits in the whole, and the gold dot is the focus person. Tap any dot in the strip to jump the focus there. Tap a card to re-center; tap the focus card again for their profile.</p>
+<div class="gp-stage" id="gp-stage-b3"><div class="gp-world" id="gp-world-b3"></div></div>
+<p class="gp-hint">The classic full tree with a − button on every card that has a branch beyond it (away from Spencer): tap it to fold that whole branch away — the card keeps a “+N people” badge with the exact hidden count — and tap + to unfold. Start fully expanded; folds are remembered while you try the other views. Shrink the tree to the branches you care about, then Fit.</p>
 </section>
-<section class="gp-panel" id="gp-panel-f4" hidden aria-label="F4 Generation window prototype">
+<section class="gp-panel" id="gp-panel-b4" hidden aria-label="B4 Line highlighter prototype">
 <div class="gp-controls">
-<span class="gp-ptitle">F4 · Generation window</span>
-<span class="gp-ctl">Above <input type="range" id="gp-f4-up" min="0" max="12" step="1" value="5" aria-label="Generations above the focus to show" /><strong id="gp-f4-upval">5</strong></span>
-<span class="gp-ctl">Below <input type="range" id="gp-f4-down" min="0" max="4" step="1" value="2" aria-label="Generations below the focus to show" /><strong id="gp-f4-downval">2</strong></span>
-<span class="gp-ctl"><button type="button" class="btn gp-zbtn" data-view="f4" data-z="out">−</button><button type="button" class="btn gp-zbtn" data-view="f4" data-z="in">+</button><button type="button" class="btn gp-zbtn" data-view="f4" data-z="fit">Fit window</button></span>
+<span class="gp-ptitle">B4 · Line highlighter</span>
+<button type="button" class="btn" data-gp-fit="b4">Fit whole tree</button>
+<button type="button" class="btn" data-gp-zout="b4" aria-label="Zoom out">−</button>
+<button type="button" class="btn" data-gp-zin="b4" aria-label="Zoom in">+</button>
+<button type="button" class="btn" id="gp-b4-clear">Clear highlight</button>
 </div>
-<div class="gp-stagewrap"><div class="gp-ruler" id="gp-f4-ruler" aria-hidden="true"></div><div class="gp-stage" id="gp-f4-stage"><div class="gp-world" id="gp-f4-world"></div></div></div>
-<p class="gp-hint">The real chart again, but visibility is a generation band around the focus person: slide “Above” and “Below” to widen or narrow the band — cousins and in-laws inside the band appear too, everyone outside it is hidden, and the frame re-fits. Tap a card to move the focus (and the band) to them. Boundary cards carry “+N more” badges for the lines the band cuts.</p>
+<div class="gp-caption" id="gp-b4-caption">Tap a person to light their full direct line — ancestors up, descendants down. Tap a second person to light the connecting path between them. Tap a lit person again to open their profile.</div>
+<div class="gp-stage gp-b4" id="gp-stage-b4"><div class="gp-world" id="gp-world-b4"></div></div>
+<p class="gp-hint">The classic full tree, resting dimmed: one tap lights a whole line, two taps light the path between two people, with the route described in words above the chart.</p>
 </section>
-<section class="gp-panel" id="gp-panel-f5" hidden aria-label="F5 Expandable hourglass prototype">
+<section class="gp-panel" id="gp-panel-b5" hidden aria-label="B5 Line regions prototype">
 <div class="gp-controls">
-<span class="gp-ptitle">F5 · Expandable</span>
-<span class="gp-ctl">Showing <strong id="gp-f5-state">3 up · 2 down</strong></span>
-<span class="gp-ctl"><button type="button" class="btn" id="gp-f5-reset">Reset</button></span>
-<span class="gp-ctl"><button type="button" class="btn gp-zbtn" data-view="f5" data-z="out">−</button><button type="button" class="btn gp-zbtn" data-view="f5" data-z="in">+</button><button type="button" class="btn gp-zbtn" data-view="f5" data-z="fit">Fit section</button></span>
+<span class="gp-ptitle">B5 · Line regions</span>
+<span class="gp-readout" id="gp-b5-readout"></span>
 </div>
-<div class="gp-stagewrap"><div class="gp-ruler" id="gp-f5-ruler" aria-hidden="true"></div><div class="gp-stage" id="gp-f5-stage"><div class="gp-world" id="gp-f5-world"></div></div></div>
-<p class="gp-hint">Starts compact — three generations up, two down — and grows in place: the round gold ＋ buttons on the top and bottom edge cards pull one more generation into the frame in that direction without moving the focus. Tap a card itself to re-center on them instead. “Reset” returns to 3 up · 2 down, and the frame re-fits as the tree grows.</p>
+<div class="gp-index" id="gp-b5-index"><span class="gp-idx-title">Lines:</span></div>
+<div id="gp-b5-regions"></div>
+<p class="gp-hint">The complete tree re-arranged into its surname lines: every chart person appears exactly once, in the line they belong to (assigned by their line’s stem ancestors, birth surname, and nearest line connection), each region drawn as its own compact local tree. Tap a line name to jump to that region; a small “↳ from …” tag marks people whose parents sit in another line.</p>
 </section>
 <!-- GP-END panels -->
-
 
 <section aria-labelledby="mig-h">
 <h2 id="mig-h">Migration — the bloodlines across America</h2>
@@ -1223,467 +1224,793 @@ var ASK=[
 })();
 </script>
 <script>
-/* GP-BEGIN — graph prototype views, ROUND 2: five iterations of the Focus concept
-   (F1 Section · F2 Wide hourglass · F3 Focus + map strip · F4 Generation window · F5 Expandable hourglass).
-   Purely additive: reads the existing globals (PEOPLE, BRANCH, BRANCHMAP, pos, CONF, select)
-   and never writes to any existing data var or original DOM node, except toggling the
-   original chart chrome's visibility while a prototype is active. Depth signals: every
-   view carries a live readout of the focus person's full ancestor/descendant depth,
-   "+N more" badges on edge cards whose line continues past the frame, and (F1/F2/F4/F5)
-   a side depth ruler with the framed band highlighted. Remove this block + the GP
-   HTML/CSS blocks to remove the prototypes completely. */
+/* GP-BEGIN — graph prototypes, ROUND 3: five "full tree but better" variants.
+   Purely additive: everything lives in this IIFE and reads the classic engine's
+   globals (PEOPLE, BRANCH, BRANCHMAP, pos, CONF, canvasW, canvasH, select).
+   Removing this block plus the GP CSS/HTML blocks restores the original file. */
 (function(){
 "use strict";
-/*GP-PURE-BEGIN*/
-function P(id){return PEOPLE[id]||(typeof BRANCHMAP!=="undefined"&&BRANCHMAP[id])||null;}
+/* ================= shared data + family graph ================= */
+var ALL={};
+Object.keys(PEOPLE).forEach(function(id){ALL[id]=PEOPLE[id];});
+BRANCH.forEach(function(b){ALL[b.id]=b;});
+var IDS=Object.keys(pos); /* all 237 chart people */
 function parentsOf(id){
-  if(id==="ryan"||id==="chase"){var r=[];if(P("spencer"))r.push("spencer");if(P("fiona"))r.push("fiona");return r;}
-  var p=P(id);if(!p)return[];
-  if(p.father||p.mother){var a=[];if(p.father&&pos[p.father])a.push(p.father);if(p.mother&&pos[p.mother])a.push(p.mother);return a;}
-  if(p.link&&p.link.t==="c"){var b=[];if(p.link.f&&pos[p.link.f])b.push(p.link.f);if(p.link.m&&pos[p.link.m])b.push(p.link.m);return b;}
-  return[];
+  var out=[];
+  if(id==="ryan"||id==="chase")return ["spencer","fiona"];
+  var p=PEOPLE[id];
+  if(p){ if(p.father&&pos[p.father])out.push(p.father); if(p.mother&&pos[p.mother])out.push(p.mother); return out; }
+  var b=BRANCHMAP[id];
+  if(b&&b.link&&b.link.t==="c"){ if(pos[b.link.f])out.push(b.link.f); if(pos[b.link.m])out.push(b.link.m); }
+  return out;
 }
-var ALLIDS=Object.keys(pos);
 var CHILDREN={};
-ALLIDS.forEach(function(id){parentsOf(id).forEach(function(par){(CHILDREN[par]=CHILDREN[par]||[]).push(id);});});
-function childrenOf(id){return CHILDREN[id]||[];}
-var SPOUSE={};
-function addSpouse(a,b){if(!a||!b||a===b)return;(SPOUSE[a]=SPOUSE[a]||{})[b]=1;(SPOUSE[b]=SPOUSE[b]||{})[a]=1;}
-ALLIDS.forEach(function(id){var ps=parentsOf(id);if(ps.length===2)addSpouse(ps[0],ps[1]);});
-if(typeof BRANCH!=="undefined")BRANCH.forEach(function(b){if(b.link&&b.link.t==="s")addSpouse(b.id,b.link.a);});
-addSpouse("spencer","fiona");
-function spousesOf(id){return SPOUSE[id]?Object.keys(SPOUSE[id]):[];}
-var DA={},DB={};
-function depthAbove(id,seen){
-  if(DA[id]!=null)return DA[id];
-  seen=seen||{};if(seen[id])return 0;seen[id]=1;
-  var ps=parentsOf(id),best=0,i,d;
-  for(i=0;i<ps.length;i++){d=depthAbove(ps[i],seen)+1;if(d>best)best=d;}
-  DA[id]=best;return best;
+IDS.forEach(function(id){CHILDREN[id]=[];});
+IDS.forEach(function(id){ parentsOf(id).forEach(function(par){ CHILDREN[par].push(id); }); });
+function spousesOf(id){
+  var set={};
+  IDS.forEach(function(cid){ var ps=parentsOf(cid); if(ps.length===2){ if(ps[0]===id)set[ps[1]]=1; if(ps[1]===id)set[ps[0]]=1; } });
+  BRANCH.forEach(function(b){ var L=b.link; if(L.t==="s"){ if(L.a===id)set[b.id]=1; if(b.id===id)set[L.a]=1; } });
+  if(id==="spencer")set["fiona"]=1;
+  if(id==="fiona")set["spencer"]=1;
+  return Object.keys(set).filter(function(x){return !!pos[x];});
 }
-function depthBelow(id,seen){
-  if(DB[id]!=null)return DB[id];
-  seen=seen||{};if(seen[id])return 0;seen[id]=1;
-  var cs=childrenOf(id),best=0,i,d;
-  for(i=0;i<cs.length;i++){d=depthBelow(cs[i],seen)+1;if(d>best)best=d;}
-  DB[id]=best;return best;
+var ADJ={};
+IDS.forEach(function(id){
+  var s=new Set();
+  parentsOf(id).forEach(function(p){s.add(p);});
+  (CHILDREN[id]||[]).forEach(function(c){s.add(c);});
+  spousesOf(id).forEach(function(x){s.add(x);});
+  ADJ[id]=s;
+});
+function ancestorsOf(id){
+  var seen=new Set(), q=parentsOf(id).slice();
+  q.forEach(function(x){seen.add(x);});
+  while(q.length){ var u=q.shift(); parentsOf(u).forEach(function(p){ if(!seen.has(p)){seen.add(p);q.push(p);} }); }
+  return seen;
 }
-function ancestorsOf(focus,maxG){
-  var g={};g[focus]=0;var fr=[focus],d,i,j;
-  for(d=1;d<=maxG;d++){var nx=[];
-    for(i=0;i<fr.length;i++){var ps=parentsOf(fr[i]);for(j=0;j<ps.length;j++){if(g[ps[j]]==null){g[ps[j]]=-d;nx.push(ps[j]);}}}
-    fr=nx;}
-  return g;
+function descendantsOf(id){
+  var seen=new Set(), q=(CHILDREN[id]||[]).slice();
+  q.forEach(function(x){seen.add(x);});
+  while(q.length){ var u=q.shift(); (CHILDREN[u]||[]).forEach(function(c){ if(!seen.has(c)){seen.add(c);q.push(c);} }); }
+  return seen;
 }
-function descendantsOf(focus,maxG){
-  var g={};g[focus]=0;var fr=[focus],d,i,j;
-  for(d=1;d<=maxG;d++){var nx=[];
-    for(i=0;i<fr.length;i++){var cs=childrenOf(fr[i]);for(j=0;j<cs.length;j++){if(g[cs[j]]==null){g[cs[j]]=d;nx.push(cs[j]);}}}
-    fr=nx;}
-  return g;
+function upDistance(from, to){ /* directed generations from -> ancestor to, or -1 */
+  if(from===to)return 0;
+  var seen={}, q=[[from,0]]; seen[from]=1;
+  while(q.length){ var cur=q.shift(); var ps=parentsOf(cur[0]);
+    for(var i=0;i<ps.length;i++){ if(ps[i]===to)return cur[1]+1; if(!seen[ps[i]]){ seen[ps[i]]=1; q.push([ps[i],cur[1]+1]); } } }
+  return -1;
 }
-function relGenOf(focus){
-  var g={};g[focus]=0;var q=[focus];
-  while(q.length){
-    var id=q.shift(),base=g[id];
-    spousesOf(id).forEach(function(s){if(g[s]==null){g[s]=base;q.push(s);}});
-    parentsOf(id).forEach(function(p){if(g[p]==null){g[p]=base-1;q.push(p);}});
-    childrenOf(id).forEach(function(c){if(g[c]==null){g[c]=base+1;q.push(c);}});
-  }
-  return g;
+function bfsPath(a,b){
+  var prev={}, q=[a]; prev[a]=null;
+  while(q.length){ var u=q.shift(); if(u===b)break; ADJ[u].forEach(function(v){ if(!(v in prev)){ prev[v]=u; q.push(v); } }); }
+  if(!(b in prev))return null;
+  var path=[], cur=b;
+  while(cur){ path.unshift(cur); cur=prev[cur]; }
+  return path;
 }
-function siblingsOf(id){
-  var ps=parentsOf(id),out={},i;
-  for(i=0;i<ps.length;i++){childrenOf(ps[i]).forEach(function(c){if(c!==id)out[c]=1;});}
-  return Object.keys(out);
+function edgeKind(a,b){ if(parentsOf(a).indexOf(b)>=0)return "up"; if(parentsOf(b).indexOf(a)>=0)return "down"; return "spouse"; }
+/* visible set when the nodes in C act as terminals (B3 collapse semantics) */
+function visibleWithTerminals(C){
+  var seen=new Set(["spencer"]), q=["spencer"];
+  while(q.length){ var u=q.shift(); if(C.has(u))continue; ADJ[u].forEach(function(v){ if(!seen.has(v)){seen.add(v);q.push(v);} }); }
+  return seen;
 }
-var CW=168,CH=110,PITCH=186,ROWH=152;
-function layoutHourglass(focus,upG,downG){
-  var anc=ancestorsOf(focus,upG),desc=descendantsOf(focus,downG);
-  var slot={},nextSlot=0;
-  function placeAnc(id){
-    if(slot[id]!=null)return slot[id];
-    var ps=parentsOf(id).filter(function(p){return anc[p]!=null;});
-    if(!ps.length||anc[id]===-upG){slot[id]=nextSlot++;return slot[id];}
-    var xs=ps.map(placeAnc);
-    slot[id]=(Math.min.apply(null,xs)+Math.max.apply(null,xs))/2;
-    return slot[id];
-  }
-  placeAnc(focus);
-  var dwidth={};
-  function descW(id){
-    if(dwidth[id]!=null)return dwidth[id];
-    dwidth[id]=1;
-    var cs=childrenOf(id).filter(function(c){return desc[c]!=null;});
-    if(!cs.length||desc[id]===downG)return 1;
-    var s=0,i;for(i=0;i<cs.length;i++)s+=descW(cs[i]);
-    dwidth[id]=Math.max(1,s);return dwidth[id];
-  }
-  var dslot={};
-  function placeDesc(id,left){
-    if(dslot[id]!=null)return;
-    var w=descW(id);dslot[id]=left+w/2;
-    var cs=childrenOf(id).filter(function(c){return desc[c]!=null;});
-    var cur=left,i;for(i=0;i<cs.length;i++){placeDesc(cs[i],cur);cur+=descW(cs[i]);}
-  }
-  placeDesc(focus,0);
-  var focusAncX=slot[focus]*PITCH,focusDescX=dslot[focus]*PITCH,off=focusAncX-focusDescX;
-  var raw={};
-  Object.keys(anc).forEach(function(id){raw[id]={cx:slot[id]*PITCH,g:anc[id],spouse:false};});
-  Object.keys(desc).forEach(function(id){if(id!==focus)raw[id]={cx:dslot[id]*PITCH+off,g:desc[id],spouse:false};});
-  spousesOf(focus).forEach(function(s){if(!raw[s]&&pos[s])raw[s]={cx:focusAncX+PITCH,g:0,spouse:true};});
-  var minCx=1e9,maxCx=-1e9;
-  Object.keys(raw).forEach(function(id){minCx=Math.min(minCx,raw[id].cx);maxCx=Math.max(maxCx,raw[id].cx);});
-  var shift=-minCx+CW/2+10,out={};
-  Object.keys(raw).forEach(function(id){
-    out[id]={x:raw[id].cx+shift-CW/2,y:(raw[id].g+upG)*ROWH,g:raw[id].g,spouse:raw[id].spouse};
-  });
-  return {place:out,w:maxCx-minCx+CW+20,h:(upG+downG+1)*ROWH,anc:anc,desc:desc};
-}
-/*GP-PURE-END*/
-function el(id){return document.getElementById(id);}
-var GP={view:"full",focus:"spencer",suppressClick:false,
-        f1Up:4,f2Up:5,f2Down:2,f2Aunts:false,f4Up:5,f4Down:2,f5Up:3,f5Down:2};
-var ST={};
-function bboxOf(place){
-  var x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
-  Object.keys(place).forEach(function(id){var p=place[id];x0=Math.min(x0,p.x);y0=Math.min(y0,p.y);x1=Math.max(x1,p.x+CW);y1=Math.max(y1,p.y+CH);});
-  return {x0:x0,y0:y0,x1:x1,y1:y1};
-}
-function makeStage(stageEl,worldEl){
-  var st={k:1,x:0,y:0,bbox:null,lod:""};
-  function apply(){
-    worldEl.style.transform="translate("+st.x+"px,"+st.y+"px) scale("+st.k+")";
-    var l=st.k>=0.55?"lod-full":(st.k>=0.30?"lod-med":"lod-compact");
-    if(st.lod!==l){st.lod=l;worldEl.classList.remove("lod-full");worldEl.classList.remove("lod-med");worldEl.classList.remove("lod-compact");worldEl.classList.add(l);}
-  }
-  st.apply=apply;
-  st.fit=function(bbox,anim){
-    if(!bbox)return;st.bbox=bbox;
-    var W=stageEl.clientWidth||360,H=stageEl.clientHeight||420;
-    var bw=bbox.x1-bbox.x0,bh=bbox.y1-bbox.y0;
-    var k=Math.min(W/(bw+24),H/(bh+24));k=Math.max(0.02,Math.min(k,1));
-    st.k=k;st.x=(W-bw*k)/2-bbox.x0*k;
-    st.y=(bh*k<H*0.86)?(14-bbox.y0*k):((H-bh*k)/2-bbox.y0*k);
-    if(anim)worldEl.classList.add("gp-anim");else worldEl.classList.remove("gp-anim");
-    apply();
-  };
-  st.zoomBy=function(f,cxp,cyp){
-    var W=stageEl.clientWidth||360,H=stageEl.clientHeight||420;
-    var cx=(cxp==null?W/2:cxp),cy=(cyp==null?H/2:cyp);
-    var nk=Math.max(0.02,Math.min(2.5,st.k*f));
-    st.x=cx-(cx-st.x)*(nk/st.k);st.y=cy-(cy-st.y)*(nk/st.k);st.k=nk;
-    worldEl.classList.remove("gp-anim");apply();
-  };
-  var pointers={},lastX=0,lastY=0,dragMoved=0,pinchD=0;
-  function pList(){var ks=Object.keys(pointers),r=[],i;for(i=0;i<ks.length;i++)r.push(pointers[ks[i]]);return r;}
-  stageEl.addEventListener("pointerdown",function(e){
-    pointers[e.pointerId]={x:e.clientX,y:e.clientY};
-    var ps=pList();
-    if(ps.length===1){lastX=e.clientX;lastY=e.clientY;dragMoved=0;}
-    if(ps.length===2)pinchD=Math.sqrt(Math.pow(ps[0].x-ps[1].x,2)+Math.pow(ps[0].y-ps[1].y,2));
-  });
-  stageEl.addEventListener("pointermove",function(e){
-    if(!pointers[e.pointerId])return;
-    pointers[e.pointerId]={x:e.clientX,y:e.clientY};
-    var ps=pList();
-    if(ps.length===1){
-      var dx=e.clientX-lastX,dy=e.clientY-lastY;lastX=e.clientX;lastY=e.clientY;
-      dragMoved+=Math.abs(dx)+Math.abs(dy);
-      if(dragMoved>4){st.x+=dx;st.y+=dy;worldEl.classList.remove("gp-anim");apply();GP.suppressClick=true;}
-    }else if(ps.length===2){
-      var d=Math.sqrt(Math.pow(ps[0].x-ps[1].x,2)+Math.pow(ps[0].y-ps[1].y,2));
-      if(pinchD>0&&d>0){var r=stageEl.getBoundingClientRect();st.zoomBy(d/pinchD,(ps[0].x+ps[1].x)/2-r.left,(ps[0].y+ps[1].y)/2-r.top);}
-      pinchD=d;GP.suppressClick=true;
-    }
-  });
-  function endP(e){delete pointers[e.pointerId];if(!Object.keys(pointers).length)setTimeout(function(){GP.suppressClick=false;},60);}
-  stageEl.addEventListener("pointerup",endP);
-  stageEl.addEventListener("pointercancel",endP);
-  stageEl.addEventListener("wheel",function(e){e.preventDefault();var r=stageEl.getBoundingClientRect();st.zoomBy(e.deltaY<0?1.12:1/1.12,e.clientX-r.left,e.clientY-r.top);},{passive:false});
-  return st;
-}
-function cardEl(id,o){
-  var p=P(id);if(!p)return null;
-  var b=document.createElement("button");b.type="button";
-  b.className="gp-node side-"+(p.side||"center")+(id===GP.focus?" gp-focus-card":"");
-  b.style.left=o.x+"px";b.style.top=o.y+"px";
-  var html='<span class="nm">'+(p.short||p.name)+'</span><span class="dt">'+(p.dates||"")+'</span>';
-  var cf=(typeof CONF!=="undefined")?CONF[p.conf]:null;
-  if(cf)html+='<span class="cf '+cf.cls+'"><span class="dot"></span>'+cf.label+'</span>';
-  if(o.badgeUp)html+='<span class="gp-badge gp-badge-up">+'+o.badgeUp+' more ↑</span>';
-  if(o.badgeDown)html+='<span class="gp-badge gp-badge-down">+'+o.badgeDown+' more ↓</span>';
-  b.innerHTML=html;
-  b.setAttribute("aria-label",p.name+(p.rel?" — "+p.rel:""));
-  b.addEventListener("click",function(){if(GP.suppressClick)return;GP.cardTap(id);});
+/* ================= shared UI helpers ================= */
+var GP_DRAG={movedAt:0};
+function dragGuard(){ return Date.now()-GP_DRAG.movedAt<220; }
+function gpCard(id){
+  var p=ALL[id];
+  var b=document.createElement("div");
+  b.className="node side-"+(p.side||"center")+(p.unknown?" unknown":"")+(BRANCHMAP[id]?" branch-node":"");
+  b.setAttribute("role","button");
+  b.setAttribute("tabindex","0");
+  b.setAttribute("aria-label",p.name+" — "+p.rel);
+  b.dataset.gpid=id;
+  b.innerHTML='<span class="nm">'+p.short+'</span><span class="dt">'+p.dates+'</span><span class="cf '+CONF[p.conf].cls+'"><span class="dot"></span>'+CONF[p.conf].label+"</span>";
+  b.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); b.click(); } });
   return b;
 }
-var SVGNS="http://www.w3.org/2000/svg";
-function wiresEl(place,w,h,rowH){
-  var svg=document.createElementNS(SVGNS,"svg");
-  svg.setAttribute("width",w);svg.setAttribute("height",h);
-  svg.setAttribute("viewBox","0 0 "+w+" "+h);svg.setAttribute("class","gp-wires");
-  svg.setAttribute("aria-hidden","true");
-  Object.keys(place).forEach(function(id){
-    var ps=parentsOf(id).filter(function(p){return place[p];});
-    if(!ps.length)return;
-    var c=place[id],childCx=c.x+CW/2,midY=c.y-(rowH-CH)/2;
-    ps.forEach(function(par){
-      var pp=place[par],pCx=pp.x+CW/2;
-      var path=document.createElementNS(SVGNS,"path");
-      path.setAttribute("d","M "+pCx+" "+(pp.y+CH)+" V "+midY+" M "+pCx+" "+midY+" H "+childCx);
-      svg.appendChild(path);
-    });
-    var drop=document.createElementNS(SVGNS,"path");
-    drop.setAttribute("d","M "+childCx+" "+midY+" V "+c.y);
-    svg.appendChild(drop);
-  });
-  return svg;
+function gpFlash(el){
+  if(!el)return;
+  el.classList.remove("gp-flash");
+  void el.offsetWidth;
+  el.classList.add("gp-flash");
+  setTimeout(function(){ el.classList.remove("gp-flash"); },1700);
 }
-function badgeOpts(id,inside){
-  var o={};
-  if(depthAbove(id)>0&&parentsOf(id).some(function(p){return !inside[p];}))o.badgeUp=depthAbove(id);
-  if(depthBelow(id)>0&&childrenOf(id).some(function(c){return !inside[c];}))o.badgeDown=depthBelow(id);
-  return o;
-}
-function renderRuler(id,upShown,downShown){
-  var r=el(id);if(!r)return;
-  var N=depthAbove(GP.focus),M=depthBelow(GP.focus),html="",g;
-  html+='<div class="gp-rlab">↑'+N+'</div>';
-  for(g=-N;g<=M;g++){
-    html+='<div class="gp-rseg'+(g>=-upShown&&g<=downShown?" in":"")+(g===0?" zero":"")+'"></div>';
+/* wires in the classic elbow style; returns pair map "child|parent" -> [els];
+   every el gets _gpEnds = [ids whose visibility it depends on] */
+function gpBuildWires(svg,posMap,pitchY){
+  var NS="http://www.w3.org/2000/svg", pairMap={}, all=[];
+  function reg(el,child,parent){
+    el._gpChild=child; el._gpParent=parent; el._gpEnds=parent?[child,parent]:[child];
+    svg.appendChild(el); all.push(el);
+    if(child&&parent){ var k=child+"|"+parent; (pairMap[k]=pairMap[k]||[]).push(el); }
+    return el;
   }
-  html+='<div class="gp-rlab">↓'+M+'</div>';
-  r.innerHTML=html;
-}
-function updateFocusUI(){
-  var p=P(GP.focus);
-  el("gp-focus-name").textContent=p?(p.short||p.name):"";
-  var na=depthAbove(GP.focus),nb=depthBelow(GP.focus);
-  el("gp-depth").textContent="↑ "+na+" generation"+(na===1?"":"s")+" above · ↓ "+nb+" generation"+(nb===1?"":"s")+" below — in this chart";
-}
-function renderF1(anim){
-  var world=el("gp-f1-world");world.innerHTML="";
-  var set={},anc=ancestorsOf(GP.focus,GP.f1Up),desc=descendantsOf(GP.focus,2);
-  Object.keys(anc).forEach(function(id){set[id]=1;});
-  Object.keys(desc).forEach(function(id){set[id]=1;});
-  spousesOf(GP.focus).forEach(function(s){if(pos[s])set[s]=1;});
-  siblingsOf(GP.focus).forEach(function(s){set[s]=1;spousesOf(s).forEach(function(x){if(pos[x])set[x]=1;});});
-  Object.keys(desc).forEach(function(id){spousesOf(id).forEach(function(x){if(pos[x])set[x]=1;});});
-  var place={};
-  Object.keys(set).forEach(function(id){place[id]={x:pos[id].x,y:pos[id].y};});
-  world.style.width=canvasW+"px";world.style.height=canvasH+"px";
-  world.appendChild(wiresEl(place,canvasW,canvasH,176));
-  ALLIDS.forEach(function(id){
-    var o={x:pos[id].x,y:pos[id].y},c;
-    if(set[id]){var bo=badgeOpts(id,set);if(bo.badgeUp)o.badgeUp=bo.badgeUp;if(bo.badgeDown)o.badgeDown=bo.badgeDown;}
-    c=cardEl(id,o);if(!c)return;
-    if(!set[id]){c.classList.add("gp-dim");c.disabled=true;}
-    world.appendChild(c);
+  function mkPath(d,child,parent,cls){
+    var lp=document.createElementNS(NS,"path");
+    lp.setAttribute("d",d); if(cls)lp.setAttribute("class",cls);
+    return reg(lp,child,parent);
+  }
+  IDS.forEach(function(id){
+    if(!posMap[id])return;
+    var pars=parentsOf(id).filter(function(p){return !!posMap[p];});
+    if(!pars.length)return;
+    var c=posMap[id], midY=c.y-(pitchY-110)/2, ccx=c.x+84;
+    var shared=[];
+    var drop=mkPath("M "+ccx+" "+midY+" V "+c.y, id, null);
+    var dot=document.createElementNS(NS,"circle");
+    dot.setAttribute("cx",ccx); dot.setAttribute("cy",midY); dot.setAttribute("r",3.2); dot.setAttribute("class","busdot");
+    reg(dot,id,null);
+    shared.push(drop,dot);
+    pars.forEach(function(par){
+      var pp=posMap[par], pcx=pp.x+84;
+      mkPath("M "+pcx+" "+(pp.y+110)+" V "+midY+" M "+pcx+" "+midY+" H "+ccx, id, par);
+      var k=id+"|"+par; shared.forEach(function(el){ pairMap[k].push(el); el._gpEnds=[id,par]; });
+    });
   });
-  el("gp-f1-upval").textContent=GP.f1Up+" generation"+(GP.f1Up===1?"":"s");
-  ST.f1.fit(bboxOf(place),anim);
-  renderRuler("gp-f1-ruler",GP.f1Up,2);
-}
-function renderHourglassInto(worldKey,upG,downG,aunts){
-  var world=el("gp-"+worldKey+"-world");world.innerHTML="";
-  var L=layoutHourglass(GP.focus,upG,downG);
-  world.style.width=L.w+"px";world.style.height=L.h+"px";
-  world.appendChild(wiresEl(L.place,L.w,L.h,ROWH));
-  Object.keys(L.place).forEach(function(id){
-    var pl=L.place[id],o={x:pl.x,y:pl.y},bo=badgeOpts(id,L.place);
-    if(bo.badgeUp)o.badgeUp=bo.badgeUp;if(bo.badgeDown)o.badgeDown=bo.badgeDown;
-    world.appendChild(cardEl(id,o));
-  });
-  if(aunts)renderAunts(world,L);
-  return L;
-}
-function renderAunts(world,L){
-  Object.keys(L.place).forEach(function(id){
-    if(L.place[id].spouse)return;
-    var sibs=siblingsOf(id).filter(function(s){return !L.place[s]&&pos[s];});
-    if(!sibs.length)return;
-    var p=L.place[id];
-    var rightFree=!Object.keys(L.place).some(function(oid){var q=L.place[oid];return q.g===p.g&&Math.abs(q.x-(p.x+PITCH))<4;});
-    if(rightFree){
-      sibs.slice(0,4).forEach(function(s,i){
-        var chip=document.createElement("button");chip.type="button";chip.className="gp-chip";
-        chip.style.left=(p.x+CW+8)+"px";chip.style.top=(p.y+i*36)+"px";
-        chip.textContent=(P(s).short||P(s).name);
-        chip.setAttribute("aria-label","Aunt/uncle line: "+P(s).name+" — tap to focus");
-        chip.addEventListener("click",function(){if(GP.suppressClick)return;GP.setFocus(s);});
-        world.appendChild(chip);
-      });
-      if(sibs.length>4){
-        var more=document.createElement("div");more.className="gp-chip gp-chip-more";
-        more.style.left=(p.x+CW+8)+"px";more.style.top=(p.y+4*36)+"px";
-        more.textContent="+"+(sibs.length-4)+" more";world.appendChild(more);
-      }
-    }else{
-      var wide=document.createElement("div");wide.className="gp-chip-wide";
-      wide.style.left=p.x+"px";wide.style.top=(p.y+CH+6)+"px";wide.style.width=CW+"px";
-      wide.textContent="Sibs: "+sibs.map(function(s){return P(s).short||P(s).name;}).join(", ");
-      world.appendChild(wide);
+  BRANCH.forEach(function(b){
+    var L=b.link;
+    if(L.t==="s"&&posMap[b.id]&&posMap[L.a]){
+      var a=posMap[L.a], bb=posMap[b.id], yMid=a.y+55;
+      mkPath("M "+(Math.min(a.x,bb.x)+168)+" "+yMid+" H "+Math.max(a.x,bb.x), b.id, L.a, "fam-link");
     }
   });
+  if(posMap.spencer&&posMap.fiona){
+    var sp=posMap.spencer, fi=posMap.fiona;
+    mkPath("M "+(sp.x+168)+" "+(sp.y+55)+" H "+fi.x, "fiona", "spencer", "fam-link");
+  }
+  return {pairMap:pairMap, all:all};
 }
-function renderF2(){
-  var L=renderHourglassInto("f2",GP.f2Up,GP.f2Down,GP.f2Aunts);
-  ST.f2.fit({x0:0,y0:0,x1:L.w,y1:L.h},false);
-  renderRuler("gp-f2-ruler",GP.f2Up,GP.f2Down);
+/* pan / pinch / wheel stage */
+function GPStage(stage,world,opts){
+  opts=opts||{};
+  var st={x:0,y:0,k:1}, api={state:st};
+  var minK=opts.minK||0.02, maxK=opts.maxK||2.2;
+  function clampK(k){ return Math.max(minK,Math.min(k,maxK)); }
+  function apply(){ world.style.transform="translate("+st.x+"px,"+st.y+"px) scale("+st.k+")"; if(opts.onView)opts.onView(st); }
+  api.apply=apply;
+  api.fit=function(w,h){
+    var sw=stage.clientWidth||300, sh=stage.clientHeight||300;
+    var k=clampK(Math.min(sw/(w+48), sh/(h+48)));
+    st.k=k; st.x=(sw-w*k)/2; st.y=(sh-h*k)/2; if(st.y<8)st.y=8;
+    apply();
+  };
+  api.centerOn=function(wx,wy,k){
+    var sw=stage.clientWidth||300, sh=stage.clientHeight||300;
+    if(k!=null)st.k=clampK(k);
+    st.x=sw/2-wx*st.k; st.y=sh*0.42-wy*st.k;
+    apply();
+  };
+  api.zoomBy=function(f){
+    var sw=stage.clientWidth||300, sh=stage.clientHeight||300;
+    var nk=clampK(st.k*f);
+    st.x=sw/2-(sw/2-st.x)*(nk/st.k); st.y=sh/2-(sh/2-st.y)*(nk/st.k); st.k=nk;
+    apply();
+  };
+  var pts={}, pinchD=0, lastX=0, lastY=0, moved=false;
+  stage.addEventListener("pointerdown",function(e){
+    stage.setPointerCapture(e.pointerId);
+    pts[e.pointerId]={x:e.clientX,y:e.clientY};
+    lastX=e.clientX; lastY=e.clientY; moved=false;
+    if(Object.keys(pts).length===2){ var a=Object.values(pts); pinchD=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y); }
+  });
+  stage.addEventListener("pointermove",function(e){
+    if(!pts[e.pointerId])return;
+    pts[e.pointerId]={x:e.clientX,y:e.clientY};
+    var n=Object.keys(pts).length;
+    if(n===2){
+      var a=Object.values(pts), d=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);
+      if(pinchD>0&&Math.abs(d/pinchD-1)>0.005){ api.zoomBy(d/pinchD); moved=true; }
+      pinchD=d;
+    }else if(n===1){
+      var dx=e.clientX-lastX, dy=e.clientY-lastY;
+      if(dx||dy){ st.x+=dx; st.y+=dy; if(Math.abs(dx)+Math.abs(dy)>2)moved=true; apply(); }
+    }
+    lastX=e.clientX; lastY=e.clientY;
+  });
+  function endP(e){ delete pts[e.pointerId]; if(moved)GP_DRAG.movedAt=Date.now(); }
+  stage.addEventListener("pointerup",endP);
+  stage.addEventListener("pointercancel",endP);
+  stage.addEventListener("wheel",function(e){
+    e.preventDefault();
+    var r=stage.getBoundingClientRect(), mx=e.clientX-r.left, my=e.clientY-r.top;
+    var nk=clampK(st.k*(e.deltaY<0?1.12:1/1.12));
+    st.x=mx-(mx-st.x)*(nk/st.k); st.y=my-(my-st.y)*(nk/st.k); st.k=nk;
+    apply();
+  },{passive:false});
+  return api;
 }
-function renderF3(){
-  var L=renderHourglassInto("f3",4,2,false);
-  ST.f3.fit({x0:0,y0:0,x1:L.w,y1:L.h},false);
-  renderStrip(L);
+function gpWireStage(world,w,h){
+  world.style.width=w+"px"; world.style.height=h+"px";
+  var NS="http://www.w3.org/2000/svg";
+  var svg=document.createElementNS(NS,"svg");
+  svg.setAttribute("width",w); svg.setAttribute("height",h);
+  svg.setAttribute("viewBox","0 0 "+w+" "+h);
+  svg.setAttribute("aria-hidden","true");
+  world.appendChild(svg);
+  return svg;
 }
-function renderStrip(L){
-  var dots=el("gp-f3-dots");if(!dots)return;dots.innerHTML="";
-  var bb={x0:1e9,y0:1e9,x1:-1e9,y1:-1e9};
-  Object.keys(L.place).forEach(function(id){var p=pos[id];if(!p)return;bb.x0=Math.min(bb.x0,p.x);bb.y0=Math.min(bb.y0,p.y);bb.x1=Math.max(bb.x1,p.x+CW);bb.y1=Math.max(bb.y1,p.y+CH);});
-  ALLIDS.forEach(function(id){
+/* ================= variant registry ================= */
+var GP_BUILT={}, GP_STAGE={}, GP_CARDS={b1:{},b2:{},b3:{},b4:{},b5:{}}, GP_POSMAP={};
+var GP_CUR="full", GP_FOCUS=null;
+/* ================= B1 · Tidy tree ================= */
+function gpTidyLayout(){
+  var PITCH=180, BANDH=150, CAP=26;
+  var byGen={};
+  IDS.forEach(function(id){ var g=Math.round(pos[id].y/176); (byGen[g]=byGen[g]||[]).push(id); });
+  var bands=[], bandOf={};
+  Object.keys(byGen).map(Number).sort(function(a,b){return a-b;}).forEach(function(g){
+    var arr=byGen[g].slice().sort(function(a,b){return pos[a].x-pos[b].x;});
+    for(var i=0;i<arr.length;i+=CAP){
+      var band=arr.slice(i,i+CAP), bi=bands.length;
+      bands.push(band);
+      band.forEach(function(id){bandOf[id]=bi;});
+    }
+  });
+  var tx={}, ty={};
+  bands.forEach(function(band,bi){ band.forEach(function(id,i){ tx[id]=i*PITCH; ty[id]=bi*BANDH; }); });
+  function nbrs(id){
+    var out=[];
+    parentsOf(id).forEach(function(p){out.push(p);});
+    (CHILDREN[id]||[]).forEach(function(c){out.push(c);});
+    spousesOf(id).forEach(function(s){out.push(s);out.push(s);});
+    return out;
+  }
+  for(var sweep=0;sweep<12;sweep++){
+    bands.forEach(function(band){
+      var order=band.map(function(id,i){
+        var ns=nbrs(id).filter(function(n){return tx[n]!=null;});
+        var d=ns.length?ns.reduce(function(a,n){return a+tx[n];},0)/ns.length:tx[id];
+        return {id:id,d:d,i:i};
+      }).sort(function(a,b){return (a.d-b.d)||(a.i-b.i);});
+      order.forEach(function(o,idx){ tx[o.id]=idx*PITCH; });
+      band.splice(0,band.length);
+      order.forEach(function(o){band.push(o.id);});
+    });
+  }
+  var W=0;
+  bands.forEach(function(band){ W=Math.max(W,(band.length-1)*PITCH+168); });
+  var posMap={};
+  IDS.forEach(function(id){ posMap[id]={x:tx[id],y:ty[id]}; });
+  return {posMap:posMap,W:W,H:bands.length*BANDH-40+110,bands:bands.length};
+}
+function gpBuildB1(){
+  var world=document.getElementById("gp-world-b1");
+  var lay=gpTidyLayout();
+  GP_POSMAP.b1=lay.posMap;
+  var svg=gpWireStage(world,lay.W,lay.H);
+  gpBuildWires(svg,lay.posMap,150);
+  IDS.forEach(function(id){
+    var c=gpCard(id);
+    c.style.left=lay.posMap[id].x+"px"; c.style.top=lay.posMap[id].y+"px";
+    c.addEventListener("click",function(){ if(dragGuard())return; select(id,true); });
+    world.appendChild(c); GP_CARDS.b1[id]=c;
+  });
+  GP_STAGE.b1=GPStage(document.getElementById("gp-stage-b1"),world,{minK:0.02});
+  var ro=document.getElementById("gp-b1-readout");
+  if(ro)ro.textContent="Tidy canvas "+lay.W.toLocaleString()+" × "+lay.H.toLocaleString()+" px in "+lay.bands+" bands vs classic "+canvasW.toLocaleString()+" × "+canvasH.toLocaleString()+" px — whole tree fits about "+(canvasW/lay.W).toFixed(1)+"× larger.";
+  GP_BUILT.b1={W:lay.W,H:lay.H};
+}
+/* ================= B2 · Semantic zoom ================= */
+var GP_B2={lod:-1,timer:null,rows:[]};
+function gpBuildB2(){
+  var world=document.getElementById("gp-world-b2");
+  GP_POSMAP.b2=pos;
+  var svg=gpWireStage(world,canvasW,canvasH);
+  gpBuildWires(svg,pos,176);
+  IDS.forEach(function(id){
+    var c=gpCard(id);
+    c.style.left=pos[id].x+"px"; c.style.top=pos[id].y+"px";
+    c.addEventListener("click",function(){ if(dragGuard())return; select(id,true); });
+    world.appendChild(c); GP_CARDS.b2[id]=c;
+  });
+  /* generation rows for the band rail */
+  var byRow={};
+  IDS.forEach(function(id){ var r=Math.round(pos[id].y/176); (byRow[r]=byRow[r]||[]).push(id); });
+  GP_B2.rows=Object.keys(byRow).map(Number).sort(function(a,b){return a-b;}).map(function(r){
+    var years=byRow[r].map(function(id){return bornYearFor(id);}).filter(function(y){return y!=null;}).sort(function(a,b){return a-b;});
+    var med=years.length?years[Math.floor(years.length/2)]:null;
+    var gen=(typeof maxGen!=="undefined"?maxGen:15)-r;
+    var label="Gen "+gen+(med!=null?" · b. ~"+(Math.floor(med/100)*100)+"s":"");
+    return {r:r,y:r*176,label:label};
+  });
+  var rail=document.getElementById("gp-rail-b2");
+  GP_B2.rows.forEach(function(row){
     var d=document.createElement("div");
-    d.className="gp-dot"+(id===GP.focus?" gp-dot-focus":"");
-    d.style.left=((pos[id].x+CW/2)/canvasW*100)+"%";
-    d.style.top=((pos[id].y+CH/2)/canvasH*100)+"%";
-    dots.appendChild(d);
+    d.className="gp-bandlab"; d.textContent=row.label; d.style.display="none";
+    rail.appendChild(d); row.el=d;
   });
-  var box=document.createElement("div");box.className="gp-stripbox";
-  box.style.left=(bb.x0/canvasW*100)+"%";box.style.top=(bb.y0/canvasH*100)+"%";
-  box.style.width=((bb.x1-bb.x0)/canvasW*100)+"%";box.style.height=((bb.y1-bb.y0)/canvasH*100)+"%";
-  dots.appendChild(box);
+  GP_STAGE.b2=GPStage(document.getElementById("gp-stage-b2"),world,{minK:0.02,onView:function(){ gpB2View(); }});
+  GP_BUILT.b2={W:canvasW,H:canvasH};
 }
-function renderF4(){
-  var world=el("gp-f4-world");world.innerHTML="";
-  var rg=relGenOf(GP.focus),shown={};
-  ALLIDS.forEach(function(id){var g=rg[id];if(g!=null&&g>=-GP.f4Up&&g<=GP.f4Down)shown[id]=1;});
-  var place={};
-  Object.keys(shown).forEach(function(id){place[id]={x:pos[id].x,y:pos[id].y};});
-  world.style.width=canvasW+"px";world.style.height=canvasH+"px";
-  world.appendChild(wiresEl(place,canvasW,canvasH,176));
-  Object.keys(place).forEach(function(id){
-    var o={x:place[id].x,y:place[id].y},bo=badgeOpts(id,shown);
-    if(bo.badgeUp)o.badgeUp=bo.badgeUp;if(bo.badgeDown)o.badgeDown=bo.badgeDown;
-    world.appendChild(cardEl(id,o));
+function gpB2Lod(k){ return k<0.10?0:(k<0.34?1:2); }
+function gpB2View(){
+  if(!GP_STAGE.b2)return;
+  var st=GP_STAGE.b2.state, stage=document.getElementById("gp-stage-b2");
+  clearTimeout(GP_B2.timer);
+  GP_B2.timer=setTimeout(function(){
+    var lod=gpB2Lod(st.k);
+    if(lod!==GP_B2.lod){
+      GP_B2.lod=lod;
+      stage.classList.remove("gp-lod0","gp-lod1","gp-lod2");
+      stage.classList.add("gp-lod"+lod);
+      var ro=document.getElementById("gp-b2-readout");
+      if(ro)ro.textContent="Zoom "+st.k.toFixed(2)+" · detail: "+(lod===0?"shape blocks + generation bands":lod===1?"name + years chips":"full cards");
+    }
+    var sh=stage.clientHeight||300, lastShown=-100;
+    GP_B2.rows.forEach(function(row){
+      var sy=(row.y+55)*st.k+st.y;
+      var show=GP_B2.lod<2&&sy>-10&&sy<sh+10&&(sy-lastShown)>=17;
+      row.el.style.display=show?"":"none";
+      if(show){ row.el.style.top=sy+"px"; lastShown=sy; }
+    });
+  },110);
+}
+/* ================= B3 · Collapsible branches ================= */
+var GP_B3={collapsed:new Set(),badgeCount:{},cards:{},wireEls:[],potentials:{}};
+function gpBuildB3(){
+  var world=document.getElementById("gp-world-b3");
+  GP_POSMAP.b3=pos;
+  var svg=gpWireStage(world,canvasW,canvasH);
+  var wires=gpBuildWires(svg,pos,176);
+  GP_B3.wireEls=wires.all;
+  IDS.forEach(function(id){
+    var c=gpCard(id);
+    c.style.left=pos[id].x+"px"; c.style.top=pos[id].y+"px";
+    c.addEventListener("click",function(){ if(dragGuard())return; select(id,true); });
+    var tg=document.createElement("button");
+    tg.type="button"; tg.className="gp-toggle"; tg.style.display="none";
+    tg.setAttribute("aria-label","Collapse or expand the branch beyond this person");
+    tg.addEventListener("click",function(e){ e.stopPropagation(); gpB3Toggle(id); });
+    c.appendChild(tg);
+    var bd=document.createElement("span");
+    bd.className="gp-badge"; bd.style.display="none";
+    c.appendChild(bd);
+    world.appendChild(c);
+    GP_CARDS.b3[id]=c; GP_B3.cards[id]={card:c,toggle:tg,badge:bd};
   });
-  el("gp-f4-upval").textContent=GP.f4Up;
-  el("gp-f4-downval").textContent=GP.f4Down;
-  ST.f4.fit(bboxOf(place),false);
-  renderRuler("gp-f4-ruler",GP.f4Up,GP.f4Down);
+  GP_STAGE.b3=GPStage(document.getElementById("gp-stage-b3"),world,{minK:0.02});
+  var ex=document.getElementById("gp-b3-expand");
+  if(ex)ex.addEventListener("click",function(){ GP_B3.collapsed.clear(); GP_B3.badgeCount={}; gpB3Apply(); });
+  GP_BUILT.b3={W:canvasW,H:canvasH};
+  gpB3Apply();
 }
-function renderF5(){
-  var world=el("gp-f5-world");
-  var L=renderHourglassInto("f5",GP.f5Up,GP.f5Down,false);
-  var maxUp=depthAbove(GP.focus),maxDown=depthBelow(GP.focus);
-  Object.keys(L.place).forEach(function(id){
-    var pl=L.place[id];
-    if(pl.g===-GP.f5Up&&parentsOf(id).length&&GP.f5Up<maxUp)addExpander(world,pl.x+CW/2-16,pl.y-16,"up");
-    if(pl.g===GP.f5Down&&childrenOf(id).length&&GP.f5Down<maxDown)addExpander(world,pl.x+CW/2-16,pl.y+CH-16,"down");
+function gpB3Potentials(vis){
+  var pot={};
+  IDS.forEach(function(id){
+    if(!vis.has(id)||GP_B3.collapsed.has(id))return;
+    var C2=new Set(GP_B3.collapsed); C2.add(id);
+    var vis2=visibleWithTerminals(C2), n=0;
+    vis.forEach(function(v){ if(!vis2.has(v)&&v!==id)n++; });
+    if(n>0)pot[id]=n;
   });
-  el("gp-f5-state").textContent=GP.f5Up+" up · "+GP.f5Down+" down";
-  ST.f5.fit({x0:0,y0:0,x1:L.w,y1:L.h},false);
-  renderRuler("gp-f5-ruler",GP.f5Up,GP.f5Down);
+  return pot;
 }
-function addExpander(world,x,y,dir){
-  var b=document.createElement("button");b.type="button";b.className="gp-expand";
-  b.style.left=x+"px";b.style.top=y+"px";b.textContent="+";
-  b.setAttribute("aria-label",dir==="up"?"Show one more generation above":"Show one more generation below");
-  b.addEventListener("click",function(e){
-    if(e&&e.stopPropagation)e.stopPropagation();
-    if(GP.suppressClick)return;
-    if(dir==="up")GP.f5Up=Math.min(depthAbove(GP.focus),GP.f5Up+1);
-    else GP.f5Down=Math.min(depthBelow(GP.focus),GP.f5Down+1);
-    renderF5();
+function gpB3Apply(){
+  var C=GP_B3.collapsed;
+  var vis=visibleWithTerminals(C);
+  GP_B3.potentials=gpB3Potentials(vis);
+  IDS.forEach(function(id){
+    var rec=GP_B3.cards[id]; if(!rec)return;
+    var shown=vis.has(id);
+    rec.card.style.display=shown?"":"none";
+    if(!shown){ rec.toggle.style.display="none"; rec.badge.style.display="none"; return; }
+    if(C.has(id)){
+      rec.toggle.style.display=""; rec.toggle.textContent="+";
+      rec.badge.style.display=""; rec.badge.textContent="+"+(GP_B3.badgeCount[id]||0)+" people";
+    }else{
+      rec.badge.style.display="none";
+      if(GP_B3.potentials[id]){ rec.toggle.style.display=""; rec.toggle.textContent="−"; }
+      else rec.toggle.style.display="none";
+    }
   });
-  world.appendChild(b);
+  GP_B3.wireEls.forEach(function(el){
+    var show;
+    if(el._gpParent){ show=vis.has(el._gpChild)&&vis.has(el._gpParent); }
+    else{ var ch=el._gpChild; show=vis.has(ch)&&parentsOf(ch).some(function(p){return vis.has(p);}); }
+    el.style.display=show?"":"none";
+  });
+  var hidden=IDS.length-vis.size;
+  var ro=document.getElementById("gp-b3-readout");
+  if(ro)ro.textContent=C.size?C.size+" branch"+(C.size>1?"es":"")+" folded · "+hidden+" people hidden · "+vis.size+" shown":"Fully expanded · all "+IDS.length+" people shown.";
 }
-function renderActive(anim){
-  if(GP.view==="f1")renderF1(anim);
-  else if(GP.view==="f2")renderF2();
-  else if(GP.view==="f3")renderF3();
-  else if(GP.view==="f4")renderF4();
-  else if(GP.view==="f5")renderF5();
+function gpB3Toggle(id){
+  var C=GP_B3.collapsed;
+  if(C.has(id)){ C.delete(id); delete GP_B3.badgeCount[id]; }
+  else{ GP_B3.badgeCount[id]=GP_B3.potentials[id]||0; C.add(id); }
+  gpB3Apply();
 }
-GP.setFocus=function(id){
-  if(!P(id))return;
-  GP.focus=id;updateFocusUI();renderActive(true);
+function gpB3EnsureVisible(id){
+  var guard=0;
+  while(!visibleWithTerminals(GP_B3.collapsed).has(id)&&guard++<60){
+    var C=GP_B3.collapsed, removed=false;
+    C.forEach(function(c){
+      var C2=new Set(C); C2.delete(c);
+      if(visibleWithTerminals(C2).has(id)){ C.delete(c); delete GP_B3.badgeCount[c]; removed=true; }
+    });
+    if(!removed)break;
+  }
+  gpB3Apply();
+}
+
+/* ================= B4 · Line highlighter ================= */
+var GP_B4={sel1:null,sel2:null,pairMap:{},wireEls:[]};
+function gpBuildB4(){
+  var world=document.getElementById("gp-world-b4");
+  GP_POSMAP.b4=pos;
+  var svg=gpWireStage(world,canvasW,canvasH);
+  var wires=gpBuildWires(svg,pos,176);
+  GP_B4.pairMap=wires.pairMap; GP_B4.wireEls=wires.all;
+  IDS.forEach(function(id){
+    var c=gpCard(id);
+    c.style.left=pos[id].x+"px"; c.style.top=pos[id].y+"px";
+    c.addEventListener("click",function(){ if(dragGuard())return; gpB4Tap(id); });
+    world.appendChild(c); GP_CARDS.b4[id]=c;
+  });
+  GP_STAGE.b4=GPStage(document.getElementById("gp-stage-b4"),world,{minK:0.02});
+  var cl=document.getElementById("gp-b4-clear");
+  if(cl)cl.addEventListener("click",gpB4Clear);
+  GP_BUILT.b4={W:canvasW,H:canvasH};
+}
+function gpB4SetCaption(html){ var cap=document.getElementById("gp-b4-caption"); if(cap)cap.innerHTML=html; }
+function gpB4Light(lit,pairs){
+  IDS.forEach(function(id){ GP_CARDS.b4[id].classList.toggle("gp-lit",lit.has(id)); });
+  var onEls=new Set();
+  pairs.forEach(function(k){ (GP_B4.pairMap[k]||[]).forEach(function(el){ onEls.add(el); }); });
+  GP_B4.wireEls.forEach(function(el){
+    var on=onEls.has(el);
+    el.classList.toggle("gpw-hl",on);
+    el.classList.toggle("gpw-dim",!on);
+  });
+}
+function gpB4PairsFor(lit){
+  var pairs=new Set();
+  Object.keys(GP_B4.pairMap).forEach(function(k){
+    var parts=k.split("|");
+    if(lit.has(parts[0])&&lit.has(parts[1]))pairs.add(k);
+  });
+  return pairs;
+}
+function gpB4DescribePath(a,b,path){
+  var nm=function(id){ return ALL[id].short; };
+  var dup=upDistance(a,b);
+  if(dup>0)return "<strong>"+nm(b)+"</strong> is a direct ancestor of <strong>"+nm(a)+"</strong> — "+dup+" generation"+(dup>1?"s":"")+" up, "+(path.length-1)+" steps on the lit path.";
+  var ddown=upDistance(b,a);
+  if(ddown>0)return "<strong>"+nm(b)+"</strong> is a direct descendant of <strong>"+nm(a)+"</strong> — "+ddown+" generation"+(ddown>1?"s":"")+" down, "+(path.length-1)+" steps on the lit path.";
+  var runs=[], i=0;
+  while(i<path.length-1){
+    var kind=edgeKind(path[i],path[i+1]), j=i;
+    while(j<path.length-1&&edgeKind(path[j],path[j+1])===kind)j++;
+    runs.push({kind:kind,n:j-i,end:path[j]});
+    i=j;
+  }
+  var txt=runs.map(function(r){
+    if(r.kind==="up")return "↑"+r.n+" to <strong>"+nm(r.end)+"</strong>";
+    if(r.kind==="down")return "↓"+r.n+" to <strong>"+nm(r.end)+"</strong>";
+    return "— spouse — <strong>"+nm(r.end)+"</strong>";
+  }).join(" · ");
+  return "Path: <strong>"+nm(a)+"</strong> · "+txt+" · "+(path.length-1)+" steps total.";
+}
+function gpB4Tap(id){
+  var S=GP_B4;
+  if(!S.sel1){ S.sel1=id; gpB4Line(id); return; }
+  if(!S.sel2){
+    if(id===S.sel1){ select(id,true); return; }
+    S.sel2=id; gpB4Path(); return;
+  }
+  if(id===S.sel1||id===S.sel2){ select(id,true); return; }
+  S.sel1=id; S.sel2=null; gpB4Line(id);
+}
+function gpB4Line(id){
+  var lit=ancestorsOf(id); descendantsOf(id).forEach(function(x){lit.add(x);}); lit.add(id);
+  gpB4Light(lit,gpB4PairsFor(lit));
+  var anc=ancestorsOf(id).size, desc=descendantsOf(id).size;
+  gpB4SetCaption("<strong>"+ALL[id].short+"</strong> — direct line lit: "+anc+" ancestor"+(anc===1?"":"s")+" up, "+desc+" descendant"+(desc===1?"":"s")+" down. Tap a second person for the connecting path, or tap "+ALL[id].short+" again for the profile.");
+}
+function gpB4Path(){
+  var S=GP_B4, path=bfsPath(S.sel1,S.sel2);
+  if(!path){ gpB4SetCaption("No connecting path found."); return; }
+  var lit=new Set(path), pairs=new Set();
+  for(var i=0;i<path.length-1;i++){
+    var a=path[i], b=path[i+1];
+    [a+"|"+b, b+"|"+a].forEach(function(k){ if(GP_B4.pairMap[k])pairs.add(k); });
+  }
+  gpB4Light(lit,pairs);
+  gpB4SetCaption(gpB4DescribePath(S.sel1,S.sel2,path)+" Tap either person again for their profile, or Clear to reset.");
+}
+function gpB4Clear(){
+  GP_B4.sel1=null; GP_B4.sel2=null;
+  IDS.forEach(function(id){ GP_CARDS.b4[id].classList.remove("gp-lit"); });
+  GP_B4.wireEls.forEach(function(el){ el.classList.remove("gpw-hl"); el.classList.remove("gpw-dim"); });
+  gpB4SetCaption("Tap a person to light their full direct line — ancestors up, descendants down. Tap a second person to light the connecting path between them. Tap a lit person again to open their profile.");
+}
+/* ================= B5 · Line regions ================= */
+var GP_B5_REGIONS=[
+  {key:"morrison",name:"Morrison",stems:["spencer","patrick"],surnames:["morrison"]},
+  {key:"jeppesen",name:"Jeppesen",stems:["knud"],surnames:["jeppesen"]},
+  {key:"hansen",name:"Hansen / Hammer",stems:["andreashammer","annecathrine"],surnames:["hansen","hammer"]},
+  {key:"schultz",name:"Schultz / Duus",stems:["nielsschultz","anneduus"],surnames:["schultz","duus"]},
+  {key:"doolittle",name:"Doolittle",stems:["lola"],surnames:["doolittle"]},
+  {key:"harvey",name:"Harvey / Davis",stems:["lydia","ellenor"],surnames:["harvey","davis"]},
+  {key:"duncanson",name:"Duncanson",stems:["eunice"],surnames:["duncanson"]},
+  {key:"benjamin",name:"Benjamin",stems:["eleanor","calebbenjamin"],surnames:["benjamin"]},
+  {key:"bump",name:"Bump / Hurd",stems:["lydiabump"],surnames:["bump","bumpas","hurd"]},
+  {key:"howard",name:"Howard",stems:["cleve"],surnames:["howard"]},
+  {key:"wight",name:"Wight",stems:["trudy"],surnames:["wight"]}
+];
+function gpBirthSurname(id){
+  var nm=ALL[id].name||"";
+  var m=/\(([^)]+)\)/.exec(nm);
+  if(m)return m[1].toLowerCase();
+  var parts=nm.replace(/\s*[—].*$/,"").trim().split(/\s+/);
+  while(parts.length>1&&/^(jr|sr|ii|iii|iv|v)\.?$/i.test(parts[parts.length-1]))parts.pop();
+  return (parts[parts.length-1]||"").toLowerCase();
+}
+function gpRegionBySurname(id){
+  var sn=gpBirthSurname(id);
+  for(var i=0;i<GP_B5_REGIONS.length;i++){ if(GP_B5_REGIONS[i].surnames.indexOf(sn)>=0)return GP_B5_REGIONS[i].key; }
+  return null;
+}
+function gpUpDistToStems(id,stemRegion){
+  var dist={}, seen={}, q=[[id,0]]; seen[id]=0;
+  while(q.length){
+    var cur=q.shift(), u=cur[0], d=cur[1];
+    if(stemRegion[u]!=null)dist[u]=d;
+    parentsOf(u).forEach(function(par){ if(seen[par]==null){ seen[par]=d+1; q.push([par,d+1]); } });
+  }
+  return dist;
+}
+function gpBfsDist(from,targets){ /* undirected distance from `from` to nearest target id */
+  var seen={}, q=[[from,0]]; seen[from]=1;
+  while(q.length){ var cur=q.shift(); if(targets.has(cur[0]))return cur[1];
+    ADJ[cur[0]].forEach(function(v){ if(!seen[v]){ seen[v]=1; q.push([v,cur[1]+1]); } }); }
+  return 1e9;
+}
+function gpAssignRegions(){
+  /* Assignment logic ported verbatim from the validated prototype:
+     1) a line stem belongs to its own line;
+     2) birth-surname line, when that line's stem is among the person's ancestors;
+     3) nearest ancestor stem by upward distance (ties: surname, then discovery order);
+     4) nearest stem in the whole graph (ties: surname, then discovery order). */
+  var stemRegion={};
+  GP_B5_REGIONS.forEach(function(rg){ rg.stems.forEach(function(s){ stemRegion[s]=rg.key; }); });
+  function assignOne(id){
+    if(stemRegion[id])return stemRegion[id];
+    var ud=gpUpDistToStems(id,stemRegion), stemIds=Object.keys(ud);
+    var snReg=gpRegionBySurname(id);
+    if(snReg&&stemIds.some(function(s){return stemRegion[s]===snReg;}))return snReg;
+    if(stemIds.length){
+      var minD=Math.min.apply(null,stemIds.map(function(s){return ud[s];}));
+      var tied=stemIds.filter(function(s){return ud[s]===minD;});
+      if(tied.length===1)return stemRegion[tied[0]];
+      var tiedRegions=tied.map(function(s){return stemRegion[s];});
+      return (snReg&&tiedRegions.indexOf(snReg)>=0)?snReg:tiedRegions[0];
+    }
+    var seen={}; seen[id]=0; var q=[id], found=[];
+    while(q.length&&!found.length){
+      var layer=q.splice(0,q.length);
+      layer.forEach(function(u){ if(stemRegion[u])found.push(u); });
+      if(!found.length){
+        var nxt=[];
+        layer.forEach(function(u){ ADJ[u].forEach(function(v){ if(seen[v]==null){ seen[v]=seen[u]+1; nxt.push(v); } }); });
+        q=nxt;
+      }
+    }
+    if(found.length===1)return stemRegion[found[0]];
+    var regs=found.map(function(s){return stemRegion[s];});
+    if(snReg&&regs.indexOf(snReg)>=0)return snReg;
+    return regs[0];
+  }
+  var out={};
+  IDS.forEach(function(id){ out[id]=assignOne(id); });
+  return out;
+}
+function gpBuildB5(){
+  var assign=gpAssignRegions(), regionByKey={};
+  GP_B5_REGIONS.forEach(function(rg){ rg.members=[]; regionByKey[rg.key]=rg; });
+  IDS.forEach(function(id){ regionByKey[assign[id]].members.push(id); });
+  GP_B5_REGIONS.forEach(function(rg){
+    var d=gpBfsDist("spencer",new Set(rg.stems));
+    rg._ord=d;
+  });
+  var ordered=GP_B5_REGIONS.slice().sort(function(a,b){ return (a._ord-b._ord)||(GP_B5_REGIONS.indexOf(a)-GP_B5_REGIONS.indexOf(b)); });
+  var idx=document.getElementById("gp-b5-index"), host=document.getElementById("gp-b5-regions");
+  ordered.forEach(function(rg){
+    var chip=document.createElement("button");
+    chip.type="button"; chip.className="gp-linechip";
+    chip.textContent=rg.name+" · "+rg.members.length;
+    chip.addEventListener("click",function(){ var t=document.getElementById("gp-region-"+rg.key); if(t)t.scrollIntoView({behavior:"smooth",block:"start"}); });
+    idx.appendChild(chip);
+    /* local layout: depth = longest path from a region root */
+    var mem=new Set(rg.members), depth={}, visiting={};
+    function dep(id){
+      if(depth[id]!=null)return depth[id];
+      if(visiting[id])return 0;
+      visiting[id]=1;
+      var ps=parentsOf(id).filter(function(p){return mem.has(p);});
+      var d=ps.length?1+Math.max.apply(null,ps.map(dep)):0;
+      visiting[id]=0; depth[id]=d; return d;
+    }
+    rg.members.forEach(dep);
+    var rows={};
+    rg.members.forEach(function(id){ (rows[depth[id]]=rows[depth[id]]||[]).push(id); });
+    var rowIdx=Object.keys(rows).map(Number).sort(function(a,b){return a-b;});
+    rowIdx.forEach(function(r){ rows[r].sort(function(a,b){return pos[a].x-pos[b].x;}); });
+    var lx={}, ly={};
+    /* two barycenter sweeps inside the region */
+    function placeAll(){ rowIdx.forEach(function(r){ rows[r].forEach(function(id,i){ lx[id]=i*182; ly[id]=r*126; }); }); }
+    placeAll();
+    for(var sw=0;sw<2;sw++){
+      rowIdx.forEach(function(r){
+        rows[r]=rows[r].map(function(id,i){
+          var rel=parentsOf(id).concat(CHILDREN[id]||[]).filter(function(n){return mem.has(n)&&lx[n]!=null;});
+          var d=rel.length?rel.reduce(function(a,n){return a+lx[n];},0)/rel.length:lx[id];
+          return {id:id,d:d,i:i};
+        }).sort(function(a,b){return (a.d-b.d)||(a.i-b.i);}).map(function(o){return o.id;});
+      });
+      placeAll();
+    }
+    var W=0;
+    rowIdx.forEach(function(r){ W=Math.max(W,(rows[r].length-1)*182+168); });
+    var H=rowIdx.length*126-16+110;
+    var sec=document.createElement("div");
+    sec.className="gp-region"; sec.id="gp-region-"+rg.key;
+    var stemNames=rg.stems.map(function(s){return ALL[s].short;}).join(" · ");
+    sec.innerHTML='<div class="gp-region-head">'+rg.name+" line — "+rg.members.length+' people</div><p class="gp-region-sub">Line of '+stemNames+". Local tree: parents above, children below; scroll sideways if a generation runs wide.</p>";
+    var stageEl=document.createElement("div");
+    stageEl.className="gp-region-stage";
+    var world=document.createElement("div");
+    world.className="gp-region-world";
+    world.style.width=W+"px"; world.style.height=H+"px";
+    var NS="http://www.w3.org/2000/svg";
+    var svg=document.createElementNS(NS,"svg");
+    svg.setAttribute("width",W); svg.setAttribute("height",H);
+    svg.setAttribute("viewBox","0 0 "+W+" "+H);
+    svg.setAttribute("aria-hidden","true");
+    world.appendChild(svg);
+    var localPos={};
+    rg.members.forEach(function(id){ localPos[id]={x:lx[id],y:ly[id]}; });
+    /* local wires: only edges fully inside the region */
+    rg.members.forEach(function(id){
+      var pars=parentsOf(id).filter(function(p){return mem.has(p);});
+      if(!pars.length)return;
+      var c=localPos[id], midY=c.y-8, ccx=c.x+84;
+      pars.forEach(function(par){
+        var pp=localPos[par], pcx=pp.x+84, lp=document.createElementNS(NS,"path");
+        lp.setAttribute("d","M "+pcx+" "+(pp.y+110)+" V "+midY+" M "+pcx+" "+midY+" H "+ccx);
+        svg.appendChild(lp);
+      });
+      var dp=document.createElementNS(NS,"path");
+      dp.setAttribute("d","M "+ccx+" "+midY+" V "+c.y);
+      svg.appendChild(dp);
+      var dot=document.createElementNS(NS,"circle");
+      dot.setAttribute("cx",ccx); dot.setAttribute("cy",midY); dot.setAttribute("r",3.2); dot.setAttribute("class","busdot");
+      svg.appendChild(dot);
+    });
+    rg.members.forEach(function(id){
+      spousesOf(id).forEach(function(sp){
+        if(!mem.has(sp)||id>sp)return;
+        var a=localPos[id], b=localPos[sp];
+        if(a.y!==b.y)return;
+        var lp=document.createElementNS(NS,"path");
+        lp.setAttribute("d","M "+(Math.min(a.x,b.x)+168)+" "+(a.y+55)+" H "+Math.max(a.x,b.x));
+        lp.setAttribute("class","fam-link");
+        svg.appendChild(lp);
+      });
+    });
+    rg.members.forEach(function(id){
+      var c=gpCard(id);
+      c.style.left=localPos[id].x+"px"; c.style.top=localPos[id].y+"px";
+      var foreign=parentsOf(id).filter(function(p){return assign[p]!==rg.key;});
+      if(foreign.length){
+        var xr=document.createElement("span");
+        xr.className="gp-xref";
+        xr.textContent="↳ from "+regionByKey[assign[foreign[0]]].name+" line";
+        c.appendChild(xr);
+      }
+      c.addEventListener("click",function(){ select(id,true); });
+      world.appendChild(c);
+      GP_CARDS.b5[id]=c;
+    });
+    stageEl.appendChild(world);
+    sec.appendChild(stageEl);
+    host.appendChild(sec);
+  });
+  var ro=document.getElementById("gp-b5-readout");
+  if(ro)ro.textContent=ordered.map(function(rg){return rg.name+" "+rg.members.length;}).join(" · ")+" — "+IDS.length+" people, each in exactly one line.";
+  GP_BUILT.b5={};
+}
+/* ================= switcher + search ================= */
+var GP_BUILDERS={b1:gpBuildB1,b2:gpBuildB2,b3:gpBuildB3,b4:gpBuildB4,b5:gpBuildB5};
+var GP_ACTIVATE={
+  b1:function(){ GP_STAGE.b1.fit(GP_BUILT.b1.W,GP_BUILT.b1.H); },
+  b2:function(){ GP_STAGE.b2.fit(canvasW,canvasH); GP_B2.lod=-1; gpB2View(); },
+  b3:function(){ GP_STAGE.b3.fit(canvasW,canvasH); },
+  b4:function(){ GP_STAGE.b4.fit(canvasW,canvasH); },
+  b5:function(){}
 };
-GP.cardTap=function(id){
-  if(id===GP.focus){if(typeof select==="function")select(id,true);}
-  else GP.setFocus(id);
-};
-function setView(v){
-  GP.view=v;
-  var btns=document.querySelectorAll("[data-gp]"),i;
-  for(i=0;i<btns.length;i++)btns[i].classList.toggle("active",btns[i].getAttribute("data-gp")===v);
-  var isGP=v!=="full";
-  var ch=document.querySelector(".chart-head"),vp=el("viewport");
+function gpShow(name){
+  GP_CUR=name;
+  document.querySelectorAll(".gp-switch button").forEach(function(b){ b.classList.toggle("active",b.dataset.gp===name); });
+  var isGP=name!=="full";
+  var ch=document.querySelector(".chart-head"), vp=document.getElementById("viewport");
   if(ch)ch.style.display=isGP?"none":"";
   if(vp)vp.style.display=isGP?"none":"";
-  el("gp-focusbar").hidden=!isGP;
-  ["f1","f2","f3","f4","f5"].forEach(function(k){el("gp-panel-"+k).hidden=(k!==v);});
+  ["b1","b2","b3","b4","b5"].forEach(function(k){
+    var p=document.getElementById("gp-panel-"+k);
+    if(p)p.hidden=(name!==k);
+  });
+  var fb=document.getElementById("gp-focusbar");
+  if(fb)fb.hidden=!isGP;
   if(isGP){
-    if(typeof selectedId!=="undefined"&&selectedId&&P(selectedId)&&selectedId!==GP.focus){GP.focus=selectedId;updateFocusUI();}
-    renderActive(false);
+    if(!GP_BUILT[name])GP_BUILDERS[name]();
+    if(GP_ACTIVATE[name])GP_ACTIVATE[name]();
+    if(GP_FOCUS)gpJump(GP_FOCUS,true);
   }
 }
-function init(){
-  ST.f1=makeStage(el("gp-f1-stage"),el("gp-f1-world"));
-  ST.f2=makeStage(el("gp-f2-stage"),el("gp-f2-world"));
-  ST.f3=makeStage(el("gp-f3-stage"),el("gp-f3-world"));
-  ST.f4=makeStage(el("gp-f4-stage"),el("gp-f4-world"));
-  ST.f5=makeStage(el("gp-f5-stage"),el("gp-f5-world"));
-  var btns=document.querySelectorAll("[data-gp]"),i;
-  for(i=0;i<btns.length;i++)(function(b){b.addEventListener("click",function(){setView(b.getAttribute("data-gp"));});})(btns[i]);
-  var zb=document.querySelectorAll(".gp-zbtn");
-  for(i=0;i<zb.length;i++)(function(b){b.addEventListener("click",function(){
-    var st=ST[b.getAttribute("data-view")];if(!st)return;
-    var z=b.getAttribute("data-z");
-    if(z==="in")st.zoomBy(1.4);else if(z==="out")st.zoomBy(1/1.4);else if(z==="fit"&&st.bbox)st.fit(st.bbox,true);
-  });})(zb[i]);
-  el("gp-profile-btn").addEventListener("click",function(){if(typeof select==="function")select(GP.focus,true);});
-  el("gp-f1-widen").addEventListener("click",function(){GP.f1Up=Math.min(8,GP.f1Up+1);renderF1(true);});
-  el("gp-f1-narrow").addEventListener("click",function(){GP.f1Up=Math.max(1,GP.f1Up-1);renderF1(true);});
-  el("gp-f2-up").addEventListener("change",function(){GP.f2Up=parseInt(el("gp-f2-up").value,10)||5;renderF2();});
-  el("gp-f2-down").addEventListener("change",function(){GP.f2Down=parseInt(el("gp-f2-down").value,10)||2;renderF2();});
-  el("gp-f2-aunts").addEventListener("change",function(){GP.f2Aunts=!!el("gp-f2-aunts").checked;renderF2();});
-  el("gp-f4-up").addEventListener("input",function(){GP.f4Up=parseInt(el("gp-f4-up").value,10)||0;renderF4();});
-  el("gp-f4-down").addEventListener("input",function(){GP.f4Down=parseInt(el("gp-f4-down").value,10)||0;renderF4();});
-  el("gp-f5-reset").addEventListener("click",function(){GP.f5Up=3;GP.f5Down=2;renderF5();});
-  var strip=el("gp-f3-strip");
-  strip.addEventListener("pointerdown",function(e){
-    var r=strip.getBoundingClientRect();if(!r.width)return;
-    var nx=(e.clientX-r.left)/r.width*canvasW,ny=(e.clientY-r.top)/r.height*canvasH,best=null,bd=1e18;
-    ALLIDS.forEach(function(id){var dx=pos[id].x+CW/2-nx,dy=pos[id].y+CH/2-ny,d=dx*dx+dy*dy;if(d<bd){bd=d;best=id;}});
-    if(best)GP.setFocus(best);
+document.querySelectorAll(".gp-switch button").forEach(function(b){
+  b.addEventListener("click",function(){ gpShow(b.dataset.gp); });
+});
+document.querySelectorAll("[data-gp-fit]").forEach(function(b){
+  b.addEventListener("click",function(){
+    var k=b.dataset.gpFit, st=GP_STAGE[k];
+    if(st)st.fit(GP_BUILT[k].W,GP_BUILT[k].H);
   });
-  var search=el("gp-search"),suggest=el("gp-suggest");
-  search.addEventListener("input",function(){
-    var q=search.value.replace(/^\s+|\s+$/g,"").toLowerCase();
-    if(!q){suggest.hidden=true;suggest.innerHTML="";return;}
-    var hits=ALLIDS.filter(function(id){var p=P(id);return p&&(((p.name||"").toLowerCase().indexOf(q)>=0)||((p.short||"").toLowerCase().indexOf(q)>=0));}).slice(0,8);
-    suggest.innerHTML="";
-    hits.forEach(function(id){
-      var p=P(id),b=document.createElement("button");b.type="button";b.className="gp-sug";
-      b.textContent=p.name+" · "+(p.dates||"");
-      b.addEventListener("click",function(){GP.setFocus(id);search.value="";suggest.hidden=true;});
-      suggest.appendChild(b);
-    });
-    suggest.hidden=!hits.length;
-  });
-  search.addEventListener("keydown",function(e){if(e.key==="Escape"){suggest.hidden=true;}});
-  var rszT=null;
-  window.addEventListener("resize",function(){
-    if(GP.view==="full")return;
-    if(rszT)clearTimeout(rszT);
-    rszT=setTimeout(function(){var st=ST[GP.view];if(st&&st.bbox)st.fit(st.bbox,false);},180);
-  });
-  updateFocusUI();
+});
+document.querySelectorAll("[data-gp-zin]").forEach(function(b){
+  b.addEventListener("click",function(){ var st=GP_STAGE[b.dataset.gpZin]; if(st)st.zoomBy(1.3); });
+});
+document.querySelectorAll("[data-gp-zout]").forEach(function(b){
+  b.addEventListener("click",function(){ var st=GP_STAGE[b.dataset.gpZout]; if(st)st.zoomBy(1/1.3); });
+});
+function gpJump(id,keepZoom){
+  GP_FOCUS=id;
+  var nm=document.getElementById("gp-focus-name");
+  if(nm)nm.textContent=ALL[id].name;
+  var pm=GP_POSMAP[GP_CUR];
+  if((GP_CUR==="b1"||GP_CUR==="b2"||GP_CUR==="b3"||GP_CUR==="b4")&&pm&&pm[id]){
+    if(GP_CUR==="b3")gpB3EnsureVisible(id);
+    var st=GP_STAGE[GP_CUR];
+    var k=keepZoom?Math.max(st.state.k,0.3):0.6;
+    st.centerOn(pm[id].x+84,pm[id].y+55,k);
+    gpFlash(GP_CARDS[GP_CUR][id]);
+    if(GP_CUR==="b4"&&!keepZoom)gpB4Tap(id);
+  }else if(GP_CUR==="b5"){
+    var card=GP_CARDS.b5[id];
+    if(card){ card.scrollIntoView({behavior:"smooth",block:"center"}); setTimeout(function(){ gpFlash(card); },350); }
+  }
 }
-init();
-window.__GPTEST={GP:GP,parentsOf:parentsOf,childrenOf:childrenOf,spousesOf:spousesOf,siblingsOf:siblingsOf,depthAbove:depthAbove,depthBelow:depthBelow,ancestorsOf:ancestorsOf,descendantsOf:descendantsOf,relGenOf:relGenOf,layoutHourglass:layoutHourglass,setView:setView,ST:ST};
+var gpSearchEl=document.getElementById("gp-search"), gpSuggestEl=document.getElementById("gp-suggest");
+function gpHideSuggest(){ if(gpSuggestEl){ gpSuggestEl.hidden=true; gpSuggestEl.innerHTML=""; } }
+if(gpSearchEl){
+  gpSearchEl.addEventListener("input",function(){
+    var q=gpSearchEl.value.trim().toLowerCase();
+    if(q.length<2){ gpHideSuggest(); return; }
+    var hits=IDS.filter(function(id){
+      return ALL[id].name.toLowerCase().indexOf(q)>=0||ALL[id].short.toLowerCase().indexOf(q)>=0;
+    }).slice(0,8);
+    if(!hits.length){ gpHideSuggest(); return; }
+    gpSuggestEl.innerHTML="";
+    hits.forEach(function(id){
+      var b=document.createElement("button");
+      b.type="button";
+      b.textContent=ALL[id].name+" ("+ALL[id].dates+")";
+      b.addEventListener("click",function(){ gpSearchEl.value=""; gpHideSuggest(); gpJump(id,false); });
+      gpSuggestEl.appendChild(b);
+    });
+    gpSuggestEl.hidden=false;
+  });
+  gpSearchEl.addEventListener("blur",function(){ setTimeout(gpHideSuggest,180); });
+}
+var gpProfileBtn=document.getElementById("gp-profile-btn");
+if(gpProfileBtn)gpProfileBtn.addEventListener("click",function(){ if(GP_FOCUS)select(GP_FOCUS,true); });
+/* test hooks (used by the automated smoke test; harmless in production) */
+window.__gpTest={tidy:gpTidyLayout,assign:gpAssignRegions,parentsOf:parentsOf,visibleWithTerminals:visibleWithTerminals,bfsPath:bfsPath,ancestorsOf:ancestorsOf,IDS:IDS};
 })();
+/* GP-END */
 </script>
-
 </body>
 </html>
