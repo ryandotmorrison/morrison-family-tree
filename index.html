@@ -177,72 +177,67 @@ footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);color:v
 @media (max-width:560px){.wrap{padding:20px 12px 48px}.viewport{height:68vh;min-height:380px}.detail{padding:15px 15px}.viewtoggle button{padding:9px 13px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
-/* GP-BEGIN — graph prototype views (additive; safe to remove as one block) */
-.gp-switch{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:16px}
-.gp-switch-label{font-size:13.5px;font-weight:700;color:var(--ink-soft);margin-right:2px}
-.gp-note{font-size:13.5px;color:var(--ink-faint);margin-top:8px;max-width:74ch}
-.gp-searchrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
-.gp-searchrow label{font-size:13.5px;font-weight:700;color:var(--ink-soft)}
-.gp-combo{position:relative;flex:1 1 240px;min-width:0;max-width:430px}
-.gp-combo input{font:inherit;font-size:15px;padding:9px 14px;border-radius:999px;border:1px solid var(--line-strong);background:var(--card);color:var(--ink);width:100%;min-height:38px}
-.gp-results{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:40;background:var(--card);border:1px solid var(--line-strong);border-radius:12px;box-shadow:var(--shadow);max-height:320px;overflow:auto;padding:4px}
-.gp-results[hidden]{display:none}
-.gp-result{display:flex;justify-content:space-between;gap:10px;align-items:baseline;width:100%;text-align:left;font:inherit;padding:9px 10px;border:0;border-radius:8px;background:transparent;color:var(--ink);cursor:pointer;min-height:36px}
-.gp-result:hover,.gp-result:focus{background:var(--bg-soft)}
-.gp-rname{font-weight:600;font-size:14.5px}
-.gp-rdates{font-size:12px;color:var(--ink-faint);flex:none}
-.gp-focusname{font-size:13.5px;color:var(--ink-soft)}
-.gp-focusname strong{color:var(--ink)}
-.gp-panel{margin-top:14px;border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:var(--shadow);padding:14px 14px 16px}
-.gp-panel[hidden]{display:none}
-.gp-phead{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;margin-bottom:6px}
-.gp-ptitle{font-family:"Spectral",Georgia,serif;font-size:19px;font-weight:700}
-.gp-ptag{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:2px 8px;margin-right:8px;vertical-align:2px}
-.gp-pcontrols{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.gp-pnote{font-size:13px;color:var(--ink-faint);margin:2px 0 10px;max-width:76ch}
-.gp-stagewrap{overflow:auto;max-height:72vh;border:1px solid var(--line);border-radius:10px;background:var(--viewport-bg);position:relative;-webkit-overflow-scrolling:touch}
-.gp-stage{position:relative}
-.gp-stage svg{position:absolute;left:0;top:0;display:block}
-.gp-stage svg path{fill:none;stroke:var(--connector);stroke-width:1.6}
-.gp-stage .node{position:absolute}
-.gp-fanwrap{display:flex;justify-content:center;background:var(--viewport-bg);border:1px solid var(--line);border-radius:10px;padding:8px}
-.gp-fanwrap svg{width:min(94vw,660px);height:auto;display:block}
-.gp-fanseg{cursor:pointer;stroke:var(--line-strong);stroke-width:.7}
-.gp-fanseg:hover{stroke:var(--accent);stroke-width:1.8}
-.gp-fantext{font-family:"Source Sans 3",-apple-system,"Segoe UI",sans-serif;fill:var(--ink);pointer-events:none;text-anchor:middle}
-.gp-fancenter{cursor:pointer}
-.gp-orow{display:flex;align-items:center;gap:4px;padding:2px 4px;border-radius:6px}
-.gp-orow:hover{background:var(--bg-soft)}
-.gp-otoggle{flex:none;width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);font-size:13px;cursor:pointer;line-height:1}
-.gp-otoggle:disabled{opacity:.35;cursor:default}
-.gp-ospacer{flex:none;width:32px}
-.gp-oname{font:inherit;font-size:15px;font-weight:600;background:none;border:0;color:var(--ink);cursor:pointer;text-align:left;padding:5px 2px;min-height:32px}
-.gp-oname:hover{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
-.gp-ometa{font-size:12px;color:var(--ink-faint);white-space:nowrap}
-.gp-navwrap{position:relative}
-.gp-navwrap .viewport{margin-top:0}
-.gp-minimap{position:absolute;right:10px;bottom:10px;width:196px;height:132px;background:var(--card);border:1px solid var(--line-strong);border-radius:8px;z-index:6;overflow:hidden;box-shadow:var(--shadow);touch-action:none;cursor:pointer}
-.gp-mmdot{position:absolute;width:3px;height:3px;border-radius:50%;margin:-1px 0 0 -1px}
-.gp-mmrect{position:absolute;border:1.5px solid var(--accent);background:rgba(122,92,30,.10);border-radius:2px;pointer-events:none}
-@media (prefers-color-scheme:dark){.gp-mmrect{background:rgba(217,179,106,.12)}}
-.gp-tlwrap{overflow:auto;max-height:72vh;border:1px solid var(--line);border-radius:10px;background:var(--viewport-bg);-webkit-overflow-scrolling:touch}
-.gp-tlinner{position:relative}
-.gp-tlrow{display:flex;border-top:1px solid var(--line)}
-.gp-tlrow:first-child{border-top:0}
-.gp-tllab{position:sticky;left:0;flex:none;width:118px;z-index:3;background:var(--bg-soft);border-right:1px solid var(--line);font-size:11.5px;font-weight:700;color:var(--ink-soft);padding:6px 8px;line-height:1.3}
-.gp-tllab .cnt{display:block;font-weight:400;color:var(--ink-faint);font-size:11px}
-.gp-tltrack{position:relative;flex:none}
-.gp-tlaxis{position:relative;flex:none;height:26px}
-.gp-tltick{position:absolute;top:5px;font-size:10.5px;color:var(--ink-faint);transform:translateX(3px);white-space:nowrap}
-.gp-tlgrid{position:absolute;top:0;bottom:0;width:1px;background:var(--line);opacity:.55}
-.gp-tlitem{position:absolute;display:flex;align-items:center;gap:4px;white-space:nowrap;height:18px}
-.gp-tldot{width:9px;height:9px;border-radius:50%;flex:none;position:relative;z-index:1}
-.gp-tlbar{position:absolute;left:5px;top:50%;height:3px;transform:translateY(-50%);border-radius:2px;opacity:.45;z-index:0}
-.gp-tlname{font:inherit;font-size:11.5px;font-weight:600;background:none;border:0;color:var(--ink);cursor:pointer;padding:2px 1px;position:relative;z-index:1}
-.gp-tlname:hover{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
-.gp-tlconf{position:relative;z-index:1;display:inline-flex}
-.gp-tlconf .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
-@media (max-width:560px){.gp-minimap{width:136px;height:94px}.gp-panel{padding:11px 10px 13px}.gp-tllab{width:92px}}
+/* GP-BEGIN — graph prototype views, ROUND 2 (additive; safe to remove as one block) */
+.gp-switch{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:20px}
+.gp-switch .gp-sw-title{font-weight:700;margin-right:2px}
+.gp-switch button{font:inherit;font-size:13.5px;font-weight:600;padding:7px 13px;border-radius:999px;cursor:pointer;background:var(--card);color:var(--ink);border:1px solid var(--line-strong)}
+.gp-switch button:hover{border-color:var(--accent);color:var(--accent)}
+.gp-switch button.active{background:var(--accent);border-color:var(--accent);color:#fff8ea}
+@media (prefers-color-scheme:dark){.gp-switch button.active{color:#1d1808}}
+.gp-focusbar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:10px;padding:10px 12px;background:var(--bg-soft);border:1px solid var(--line);border-radius:10px}
+.gp-focusbar[hidden]{display:none}
+.gp-searchwrap{position:relative;display:inline-block}
+.gp-searchwrap input{font:inherit;font-size:14.5px;padding:8px 11px;border-radius:8px;border:1px solid var(--line-strong);background:var(--card);color:var(--ink);min-width:min(240px,62vw)}
+.gp-suggest{position:absolute;top:calc(100% + 4px);left:0;z-index:60;background:var(--card);border:1px solid var(--line-strong);border-radius:10px;box-shadow:var(--shadow);min-width:270px;max-width:88vw;padding:4px}
+.gp-sug{display:block;width:100%;text-align:left;background:none;border:0;padding:9px 10px;font:inherit;font-size:14px;color:var(--ink);cursor:pointer;border-radius:6px}
+.gp-sug:hover{background:var(--bg-soft)}
+.gp-focusname{font-weight:700}
+.gp-depth{font-weight:700;color:var(--accent)}
+.gp-panel{margin-top:14px}
+.gp-controls{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-bottom:8px}
+.gp-ptitle{font-family:"Spectral",Georgia,serif;font-weight:700;font-size:17px;margin-right:2px}
+.gp-ctl{display:inline-flex;gap:6px;align-items:center;font-size:13.5px;color:var(--ink-soft)}
+.gp-ctl select,.gp-ctl input[type=range]{font:inherit;accent-color:var(--accent)}
+.gp-ctl input[type=range]{width:110px}
+.gp-stagewrap{display:flex;gap:8px;align-items:stretch}
+.gp-ruler{width:26px;flex:none;display:flex;flex-direction:column;align-items:stretch;padding:2px 0}
+.gp-ruler .gp-rlab{font-size:9.5px;font-weight:700;color:var(--accent);text-align:center;line-height:1.15}
+.gp-rseg{flex:1;min-height:2px;background:var(--line);opacity:.35;margin:1px 2px;border-radius:2px}
+.gp-rseg.in{background:var(--accent);opacity:1}
+.gp-rseg.zero{box-shadow:inset 0 0 0 2px var(--highlight)}
+.gp-stage{position:relative;flex:1;height:min(70vh,600px);min-height:340px;background:var(--viewport-bg);border:1px solid var(--line);border-radius:14px;overflow:hidden;touch-action:none;cursor:grab}
+.gp-stage:active{cursor:grabbing}
+.gp-world{position:absolute;left:0;top:0;transform-origin:0 0}
+.gp-world.gp-anim{transition:transform .45s ease}
+.gp-wires{position:absolute;left:0;top:0;display:block}
+.gp-wires path{fill:none;stroke:var(--connector);stroke-width:1.6}
+.gp-node{position:absolute;width:168px;height:110px;padding:8px 10px 8px 13px;text-align:left;background:var(--card);border:1px solid var(--line-strong);border-radius:10px;box-shadow:var(--shadow);cursor:pointer;font:inherit;color:var(--ink);display:flex;flex-direction:column;overflow:visible}
+.gp-node::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--line-strong);border-radius:10px 0 0 10px}
+.gp-node.side-dad::before{background:var(--dad)}.gp-node.side-mom::before{background:var(--mom)}.gp-node.side-center::before{background:var(--center)}
+.gp-node .nm{font-family:"Spectral",Georgia,serif;font-weight:600;font-size:13.5px;line-height:1.18;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:none}
+.gp-node .dt{font-size:11px;color:var(--ink-soft);line-height:1.3;margin-top:2px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:none}
+.gp-node .cf{margin-top:auto;padding-top:4px;font-size:10px;font-weight:700;line-height:1.25;display:inline-flex;align-items:center;gap:4px;align-self:flex-start;flex:none}
+.gp-node .cf .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.gp-node.gp-focus-card{outline:2.5px solid var(--highlight);outline-offset:1px;z-index:4}
+.gp-node.gp-dim{opacity:.13;box-shadow:none}
+.gp-world.lod-med .gp-node .cf{display:none}
+.gp-world.lod-compact .gp-node .cf,.gp-world.lod-compact .gp-node .dt{display:none}
+.gp-world.lod-compact .gp-node .nm{font-size:16.5px;-webkit-line-clamp:4;line-height:1.22}
+.gp-badge{position:absolute;left:8px;z-index:6;background:var(--accent);color:#fff8ea;font-size:10.5px;font-weight:700;line-height:1;padding:3px 8px;border-radius:999px;white-space:nowrap;box-shadow:var(--shadow);pointer-events:none}
+@media (prefers-color-scheme:dark){.gp-badge{color:#1d1808}}
+.gp-badge-up{top:-9px}
+.gp-badge-down{bottom:-9px}
+.gp-expand{position:absolute;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff8ea;border:2px solid var(--card);font-size:19px;font-weight:700;line-height:1;cursor:pointer;z-index:7;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:var(--shadow)}
+@media (prefers-color-scheme:dark){.gp-expand{color:#1d1808}}
+.gp-chip{position:absolute;width:118px;height:30px;font:inherit;font-size:11px;font-weight:600;text-align:left;padding:4px 7px;background:var(--card);border:1px solid var(--line-strong);border-radius:7px;color:var(--ink-soft);cursor:pointer;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;z-index:3}
+.gp-chip-more{display:flex;align-items:center;cursor:default;color:var(--ink-faint)}
+.gp-chip-wide{position:absolute;height:26px;font-size:11px;padding:4px 7px;background:var(--card);border:1px dashed var(--line-strong);border-radius:6px;color:var(--ink-soft);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;z-index:3}
+.gp-strip{position:relative;height:56px;background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;margin-bottom:8px;overflow:hidden;cursor:pointer;touch-action:none}
+.gp-dot{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--ink-faint);transform:translate(-50%,-50%);pointer-events:none}
+.gp-dot-focus{background:var(--highlight);width:10px;height:10px;z-index:2}
+.gp-stripbox{position:absolute;border:2px solid var(--accent);border-radius:4px;background:rgba(140,110,40,.10);pointer-events:none}
+.gp-hint{font-size:13px;color:var(--ink-faint);margin-top:8px;max-width:75ch}
+@media (max-width:560px){.gp-stage{height:64vh;min-height:320px}.gp-ruler{width:21px}}
 /* GP-END */
 </style>
 </head>
@@ -269,23 +264,20 @@ footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);color:v
 <p class="view-note" id="view-note"><strong>Direct lineage</strong> shows only the direct ancestors — branch relatives (siblings, cousins, in-laws) join the tree in <strong>Full tree</strong>. Every documented person’s profile is in the directory below, in both views.</p>
 </header>
 <!-- GP-BEGIN graph prototype switcher -->
-<div class="gp-switch" role="group" aria-label="Graph view prototypes">
-<span class="gp-switch-label">Graph views:</span>
-<button type="button" class="btn gp-vbtn active" data-gpview="fulltree">Full tree</button>
-<button type="button" class="btn gp-vbtn" data-gpview="focus">1 · Focus</button>
-<button type="button" class="btn gp-vbtn" data-gpview="fan">2 · Fan chart</button>
-<button type="button" class="btn gp-vbtn" data-gpview="outline">3 · Outline</button>
-<button type="button" class="btn gp-vbtn" data-gpview="navigator">4 · Navigator</button>
-<button type="button" class="btn gp-vbtn" data-gpview="timeline">5 · Timeline</button>
+<div class="gp-switch" role="group" aria-label="Graph views">
+<span class="gp-sw-title">Graph views</span>
+<button type="button" data-gp="full" class="active">Full tree</button>
+<button type="button" data-gp="f1">F1 · Section</button>
+<button type="button" data-gp="f2">F2 · Wide hourglass</button>
+<button type="button" data-gp="f3">F3 · Focus + map strip</button>
+<button type="button" data-gp="f4">F4 · Generation window</button>
+<button type="button" data-gp="f5">F5 · Expandable</button>
 </div>
-<p class="gp-note" id="gp-note">The tree as it has always been — use the Direct lineage / Full tree toggle above; drag to pan, scroll or pinch to zoom, tap a person for their story. The five numbered views are new prototypes: pick one to try it, then choose a winner.</p>
-<div class="gp-searchrow" id="gp-searchrow" hidden>
-<label for="gp-search">Person:</label>
-<div class="gp-combo">
-<input id="gp-search" type="search" placeholder="Type a name — e.g. Jeppesen, Lola, Peder Hansen…" aria-label="Choose the focus person" autocomplete="off" />
-<div class="gp-results" id="gp-results" hidden></div>
-</div>
-<span class="gp-focusname" id="gp-focusname"></span>
+<div class="gp-focusbar" id="gp-focusbar" hidden>
+<span>Focus: <span class="gp-focusname" id="gp-focus-name"></span></span>
+<span class="gp-searchwrap"><input id="gp-search" type="search" placeholder="Jump to a person — type a name…" aria-label="Focus person search" autocomplete="off" /><span class="gp-suggest" id="gp-suggest" hidden></span></span>
+<span class="gp-depth" id="gp-depth" aria-live="polite"></span>
+<button type="button" class="btn" id="gp-profile-btn">Open profile</button>
 </div>
 <!-- GP-END switcher -->
 
@@ -302,64 +294,55 @@ footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);color:v
 <div class="viewport" id="viewport"><div class="canvas" id="canvas"><svg id="wires" aria-hidden="true"></svg></div></div>
 <div class="detail" id="detail" aria-live="polite" hidden></div>
 <!-- GP-BEGIN graph prototype panels -->
-<div id="gp-panels">
-<section class="gp-panel" id="gp-panel-focus" hidden aria-label="Prototype 1 — Focus hourglass view">
-<div class="gp-phead"><div><span class="gp-ptag">Prototype 1</span><span class="gp-ptitle">Focus — the hourglass</span></div>
-<div class="gp-pcontrols"><button type="button" class="btn" id="gp-focus-profile">Open profile</button></div></div>
-<p class="gp-pnote">One person in the middle, ancestors fanning up (to 4 generations), descendants below (children and grandchildren). Tap any card to re-center the view on that person; tap the center card to open its profile.</p>
-<div class="gp-stagewrap" id="gp-focus-wrap"><div class="gp-stage" id="gp-focus-stage"></div></div>
-</section>
-<section class="gp-panel" id="gp-panel-fan" hidden aria-label="Prototype 2 — Fan chart">
-<div class="gp-phead"><div><span class="gp-ptag">Prototype 2</span><span class="gp-ptitle">Fan chart</span></div>
-<div class="gp-pcontrols" role="group" aria-label="Fan depth">
-<button type="button" class="btn gp-fandepth" data-fandepth="4">4 generations</button>
-<button type="button" class="btn gp-fandepth active" data-fandepth="5">5</button>
-<button type="button" class="btn gp-fandepth" data-fandepth="6">6</button>
-<button type="button" class="btn" id="gp-fan-profile">Open profile</button>
-</div></div>
-<p class="gp-pnote">Ancestors as a radial fan — father's side in blue-grey, mother's in rust. Tap any segment to re-center the fan on that person; tap the middle to open the center person's profile. Hover or long-press a segment for the full name and dates.</p>
-<div class="gp-fanwrap" id="gp-fan-wrap"></div>
-</section>
-<section class="gp-panel" id="gp-panel-outline" hidden aria-label="Prototype 3 — Outline">
-<div class="gp-phead"><div><span class="gp-ptag">Prototype 3</span><span class="gp-ptitle">Outline</span></div>
-<div class="gp-pcontrols" role="group" aria-label="Outline direction">
-<button type="button" class="btn gp-outdir active" data-outdir="anc">Ancestors</button>
-<button type="button" class="btn gp-outdir" data-outdir="desc">Descendants</button>
-<button type="button" class="btn" id="gp-out-expand">Expand all</button>
-<button type="button" class="btn" id="gp-out-collapse">Collapse all</button>
-</div></div>
-<p class="gp-pnote" id="gp-outline-note">The tree as an indented list, starting from the focus person. Use + / − to walk the father-line and mother-line one step at a time; tap a name for the full profile.</p>
-<div id="gp-outline-rows"></div>
-</section>
-<section class="gp-panel" id="gp-panel-navigator" hidden aria-label="Prototype 4 — Navigator">
-<div class="gp-phead"><div><span class="gp-ptag">Prototype 4</span><span class="gp-ptitle">Navigator</span></div>
-<div class="gp-pcontrols">
-<button type="button" class="btn" id="gp-nav-fit">Fit</button>
-<button type="button" class="btn zoom" id="gp-nav-out" aria-label="Zoom out">−</button>
-<button type="button" class="btn zoom" id="gp-nav-in" aria-label="Zoom in">+</button>
-<button type="button" class="btn" id="gp-nav-reset">Reset</button>
-</div></div>
-<p class="gp-pnote">The same full tree and layout as the standard view — with a minimap (bottom right; tap or drag on it to jump around), zoom buttons, and search-and-jump. Drag to pan and pinch or scroll to zoom, as usual.</p>
-<div class="gp-searchrow" style="margin:0 0 10px">
-<label for="gp-nav-search">Jump to:</label>
-<div class="gp-combo">
-<input id="gp-nav-search" type="search" placeholder="Type a name to jump to them…" aria-label="Search and jump to a person" autocomplete="off" />
-<div class="gp-results" id="gp-nav-results" hidden></div>
+<section class="gp-panel" id="gp-panel-f1" hidden aria-label="F1 Section prototype">
+<div class="gp-controls">
+<span class="gp-ptitle">F1 · Section</span>
+<span class="gp-ctl">Ancestors shown: <button type="button" class="btn" id="gp-f1-narrow">− Narrow</button><strong id="gp-f1-upval">4 generations</strong><button type="button" class="btn" id="gp-f1-widen">Widen +</button></span>
+<span class="gp-ctl"><button type="button" class="btn gp-zbtn" data-view="f1" data-z="out">−</button><button type="button" class="btn gp-zbtn" data-view="f1" data-z="in">+</button><button type="button" class="btn gp-zbtn" data-view="f1" data-z="fit">Fit section</button></span>
 </div>
-</div>
-<div class="gp-navwrap" id="gp-navwrap"><div class="gp-minimap" id="gp-minimap" aria-label="Minimap of the whole tree"><div id="gp-mm-dots"></div><div class="gp-mmrect" id="gp-mm-rect"></div></div></div>
+<div class="gp-stagewrap"><div class="gp-ruler" id="gp-f1-ruler" aria-hidden="true"></div><div class="gp-stage" id="gp-f1-stage"><div class="gp-world" id="gp-f1-world"></div></div></div>
+<p class="gp-hint">The real chart, windowed: the section around the focus person stays lit — ancestors, siblings and their spouses, and descendants to grandchildren — positioned exactly as in the full tree; everyone else is dimmed. It opens framed to fit the whole section. Tap any lit card to re-frame the section on them; tap the focus card again (or “Open profile”) for their story. Badges like “+7 more ↑” mark lines that continue past the frame, and the side ruler shows where the framed band sits in the whole depth.</p>
 </section>
-<section class="gp-panel" id="gp-panel-timeline" hidden aria-label="Prototype 5 — Timeline">
-<div class="gp-phead"><div><span class="gp-ptag">Prototype 5</span><span class="gp-ptitle">Timeline</span></div>
-<div class="gp-pcontrols">
-<button type="button" class="btn" id="gp-tl-fit">Fit all years</button>
-<button type="button" class="btn zoom" id="gp-tl-out" aria-label="Zoom timeline out">−</button>
-<button type="button" class="btn zoom" id="gp-tl-in" aria-label="Zoom timeline in">+</button>
-</div></div>
-<p class="gp-pnote">Everyone in the chart on a time axis, placed at their birth year and grouped by generation. A bar runs from birth to death where both are known. Tap a name for the full profile; scroll sideways to travel through the centuries.</p>
-<div class="gp-tlwrap" id="gp-tl-wrap"><div class="gp-tlinner" id="gp-tl-inner"></div></div>
-</section>
+<section class="gp-panel" id="gp-panel-f2" hidden aria-label="F2 Wide hourglass prototype">
+<div class="gp-controls">
+<span class="gp-ptitle">F2 · Wide hourglass</span>
+<span class="gp-ctl">Generations up <select id="gp-f2-up" aria-label="Generations above"><option value="3">3</option><option value="4">4</option><option value="5" selected>5</option><option value="6">6</option></select></span>
+<span class="gp-ctl">down <select id="gp-f2-down" aria-label="Generations below"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option></select></span>
+<span class="gp-ctl"><label><input type="checkbox" id="gp-f2-aunts" /> Aunts/uncles</label></span>
+<span class="gp-ctl"><button type="button" class="btn gp-zbtn" data-view="f2" data-z="out">−</button><button type="button" class="btn gp-zbtn" data-view="f2" data-z="in">+</button><button type="button" class="btn gp-zbtn" data-view="f2" data-z="fit">Fit section</button></span>
 </div>
+<div class="gp-stagewrap"><div class="gp-ruler" id="gp-f2-ruler" aria-hidden="true"></div><div class="gp-stage" id="gp-f2-stage"><div class="gp-world" id="gp-f2-world"></div></div></div>
+<p class="gp-hint">A freshly drawn hourglass at full width: up to six generations of ancestors above (spouses side by side, as couples) and three of descendants below, framed to fit the screen on open — small cards at the deep generations are the point of this one. Tap a card to re-center the hourglass on them. “Aunts/uncles” tucks each ancestor’s siblings beside their card. Edge badges count the generations still beyond the frame on that line.</p>
+</section>
+<section class="gp-panel" id="gp-panel-f3" hidden aria-label="F3 Focus plus map strip prototype">
+<div class="gp-controls">
+<span class="gp-ptitle">F3 · Focus + map strip</span>
+<span class="gp-ctl"><button type="button" class="btn gp-zbtn" data-view="f3" data-z="out">−</button><button type="button" class="btn gp-zbtn" data-view="f3" data-z="in">+</button><button type="button" class="btn gp-zbtn" data-view="f3" data-z="fit">Fit section</button></span>
+</div>
+<div class="gp-strip" id="gp-f3-strip" role="button" aria-label="Map of the whole chart — tap a dot to move the focus there"><div id="gp-f3-dots"></div></div>
+<div class="gp-stagewrap"><div class="gp-stage" id="gp-f3-stage"><div class="gp-world" id="gp-f3-world"></div></div></div>
+<p class="gp-hint">The hourglass (four generations up, two down) with the whole chart always in sight: the strip above plots every person in the tree as a dot, the box outlines where the current focus section sits in the whole, and the gold dot is the focus person. Tap any dot in the strip to jump the focus there. Tap a card to re-center; tap the focus card again for their profile.</p>
+</section>
+<section class="gp-panel" id="gp-panel-f4" hidden aria-label="F4 Generation window prototype">
+<div class="gp-controls">
+<span class="gp-ptitle">F4 · Generation window</span>
+<span class="gp-ctl">Above <input type="range" id="gp-f4-up" min="0" max="12" step="1" value="5" aria-label="Generations above the focus to show" /><strong id="gp-f4-upval">5</strong></span>
+<span class="gp-ctl">Below <input type="range" id="gp-f4-down" min="0" max="4" step="1" value="2" aria-label="Generations below the focus to show" /><strong id="gp-f4-downval">2</strong></span>
+<span class="gp-ctl"><button type="button" class="btn gp-zbtn" data-view="f4" data-z="out">−</button><button type="button" class="btn gp-zbtn" data-view="f4" data-z="in">+</button><button type="button" class="btn gp-zbtn" data-view="f4" data-z="fit">Fit window</button></span>
+</div>
+<div class="gp-stagewrap"><div class="gp-ruler" id="gp-f4-ruler" aria-hidden="true"></div><div class="gp-stage" id="gp-f4-stage"><div class="gp-world" id="gp-f4-world"></div></div></div>
+<p class="gp-hint">The real chart again, but visibility is a generation band around the focus person: slide “Above” and “Below” to widen or narrow the band — cousins and in-laws inside the band appear too, everyone outside it is hidden, and the frame re-fits. Tap a card to move the focus (and the band) to them. Boundary cards carry “+N more” badges for the lines the band cuts.</p>
+</section>
+<section class="gp-panel" id="gp-panel-f5" hidden aria-label="F5 Expandable hourglass prototype">
+<div class="gp-controls">
+<span class="gp-ptitle">F5 · Expandable</span>
+<span class="gp-ctl">Showing <strong id="gp-f5-state">3 up · 2 down</strong></span>
+<span class="gp-ctl"><button type="button" class="btn" id="gp-f5-reset">Reset</button></span>
+<span class="gp-ctl"><button type="button" class="btn gp-zbtn" data-view="f5" data-z="out">−</button><button type="button" class="btn gp-zbtn" data-view="f5" data-z="in">+</button><button type="button" class="btn gp-zbtn" data-view="f5" data-z="fit">Fit section</button></span>
+</div>
+<div class="gp-stagewrap"><div class="gp-ruler" id="gp-f5-ruler" aria-hidden="true"></div><div class="gp-stage" id="gp-f5-stage"><div class="gp-world" id="gp-f5-world"></div></div></div>
+<p class="gp-hint">Starts compact — three generations up, two down — and grows in place: the round gold ＋ buttons on the top and bottom edge cards pull one more generation into the frame in that direction without moving the focus. Tap a card itself to re-center on them instead. “Reset” returns to 3 up · 2 down, and the frame re-fits as the tree grows.</p>
+</section>
 <!-- GP-END panels -->
 
 
@@ -1240,593 +1223,465 @@ var ASK=[
 })();
 </script>
 <script>
-/* GP-BEGIN — graph prototype views: switcher + Focus / Fan / Outline / Navigator / Timeline.
-   Purely additive: reads the existing globals (PEOPLE, BRANCH, BRANCHMAP, BORN_BY_ID,
-   genOf, pos, canvasW/H, view) and calls the existing select()/fitAll()/zoomBy()/apply().
-   It never writes to any existing data var or DOM node of the original page, except
-   relocating #viewport into the Navigator panel while that prototype is active
-   (and restoring it, untouched, afterwards). Remove this block + the GP HTML/CSS
-   blocks to remove the prototypes completely. */
+/* GP-BEGIN — graph prototype views, ROUND 2: five iterations of the Focus concept
+   (F1 Section · F2 Wide hourglass · F3 Focus + map strip · F4 Generation window · F5 Expandable hourglass).
+   Purely additive: reads the existing globals (PEOPLE, BRANCH, BRANCHMAP, pos, CONF, select)
+   and never writes to any existing data var or original DOM node, except toggling the
+   original chart chrome's visibility while a prototype is active. Depth signals: every
+   view carries a live readout of the focus person's full ancestor/descendant depth,
+   "+N more" badges on edge cards whose line continues past the frame, and (F1/F2/F4/F5)
+   a side depth ruler with the framed band highlighted. Remove this block + the GP
+   HTML/CSS blocks to remove the prototypes completely. */
 (function(){
 "use strict";
-/*__PURE__*/
+/*GP-PURE-BEGIN*/
 function P(id){return PEOPLE[id]||(typeof BRANCHMAP!=="undefined"&&BRANCHMAP[id])||null;}
 function parentsOf(id){
-  if(id==="ryan"||id==="chase"){
-    var sp=[];
-    if(P("spencer"))sp.push({id:"spencer",role:"Father"});
-    if(P("fiona"))sp.push({id:"fiona",role:"Mother"});
-    return sp;
+  if(id==="ryan"||id==="chase"){var r=[];if(P("spencer"))r.push("spencer");if(P("fiona"))r.push("fiona");return r;}
+  var p=P(id);if(!p)return[];
+  if(p.father||p.mother){var a=[];if(p.father&&pos[p.father])a.push(p.father);if(p.mother&&pos[p.mother])a.push(p.mother);return a;}
+  if(p.link&&p.link.t==="c"){var b=[];if(p.link.f&&pos[p.link.f])b.push(p.link.f);if(p.link.m&&pos[p.link.m])b.push(p.link.m);return b;}
+  return[];
+}
+var ALLIDS=Object.keys(pos);
+var CHILDREN={};
+ALLIDS.forEach(function(id){parentsOf(id).forEach(function(par){(CHILDREN[par]=CHILDREN[par]||[]).push(id);});});
+function childrenOf(id){return CHILDREN[id]||[];}
+var SPOUSE={};
+function addSpouse(a,b){if(!a||!b||a===b)return;(SPOUSE[a]=SPOUSE[a]||{})[b]=1;(SPOUSE[b]=SPOUSE[b]||{})[a]=1;}
+ALLIDS.forEach(function(id){var ps=parentsOf(id);if(ps.length===2)addSpouse(ps[0],ps[1]);});
+if(typeof BRANCH!=="undefined")BRANCH.forEach(function(b){if(b.link&&b.link.t==="s")addSpouse(b.id,b.link.a);});
+addSpouse("spencer","fiona");
+function spousesOf(id){return SPOUSE[id]?Object.keys(SPOUSE[id]):[];}
+var DA={},DB={};
+function depthAbove(id,seen){
+  if(DA[id]!=null)return DA[id];
+  seen=seen||{};if(seen[id])return 0;seen[id]=1;
+  var ps=parentsOf(id),best=0,i,d;
+  for(i=0;i<ps.length;i++){d=depthAbove(ps[i],seen)+1;if(d>best)best=d;}
+  DA[id]=best;return best;
+}
+function depthBelow(id,seen){
+  if(DB[id]!=null)return DB[id];
+  seen=seen||{};if(seen[id])return 0;seen[id]=1;
+  var cs=childrenOf(id),best=0,i,d;
+  for(i=0;i<cs.length;i++){d=depthBelow(cs[i],seen)+1;if(d>best)best=d;}
+  DB[id]=best;return best;
+}
+function ancestorsOf(focus,maxG){
+  var g={};g[focus]=0;var fr=[focus],d,i,j;
+  for(d=1;d<=maxG;d++){var nx=[];
+    for(i=0;i<fr.length;i++){var ps=parentsOf(fr[i]);for(j=0;j<ps.length;j++){if(g[ps[j]]==null){g[ps[j]]=-d;nx.push(ps[j]);}}}
+    fr=nx;}
+  return g;
+}
+function descendantsOf(focus,maxG){
+  var g={};g[focus]=0;var fr=[focus],d,i,j;
+  for(d=1;d<=maxG;d++){var nx=[];
+    for(i=0;i<fr.length;i++){var cs=childrenOf(fr[i]);for(j=0;j<cs.length;j++){if(g[cs[j]]==null){g[cs[j]]=d;nx.push(cs[j]);}}}
+    fr=nx;}
+  return g;
+}
+function relGenOf(focus){
+  var g={};g[focus]=0;var q=[focus];
+  while(q.length){
+    var id=q.shift(),base=g[id];
+    spousesOf(id).forEach(function(s){if(g[s]==null){g[s]=base;q.push(s);}});
+    parentsOf(id).forEach(function(p){if(g[p]==null){g[p]=base-1;q.push(p);}});
+    childrenOf(id).forEach(function(c){if(g[c]==null){g[c]=base+1;q.push(c);}});
   }
-  var out=[],p=PEOPLE[id];
-  if(p){
-    if(p.father&&P(p.father))out.push({id:p.father,role:"Father"});
-    if(p.mother&&P(p.mother))out.push({id:p.mother,role:"Mother"});
-    return out;
+  return g;
+}
+function siblingsOf(id){
+  var ps=parentsOf(id),out={},i;
+  for(i=0;i<ps.length;i++){childrenOf(ps[i]).forEach(function(c){if(c!==id)out[c]=1;});}
+  return Object.keys(out);
+}
+var CW=168,CH=110,PITCH=186,ROWH=152;
+function layoutHourglass(focus,upG,downG){
+  var anc=ancestorsOf(focus,upG),desc=descendantsOf(focus,downG);
+  var slot={},nextSlot=0;
+  function placeAnc(id){
+    if(slot[id]!=null)return slot[id];
+    var ps=parentsOf(id).filter(function(p){return anc[p]!=null;});
+    if(!ps.length||anc[id]===-upG){slot[id]=nextSlot++;return slot[id];}
+    var xs=ps.map(placeAnc);
+    slot[id]=(Math.min.apply(null,xs)+Math.max.apply(null,xs))/2;
+    return slot[id];
   }
-  var b=(typeof BRANCHMAP!=="undefined")?BRANCHMAP[id]:null;
-  if(b&&b.link&&b.link.t==="c"){
-    if(b.link.f&&P(b.link.f))out.push({id:b.link.f,role:"Father"});
-    if(b.link.m&&P(b.link.m))out.push({id:b.link.m,role:"Mother"});
+  placeAnc(focus);
+  var dwidth={};
+  function descW(id){
+    if(dwidth[id]!=null)return dwidth[id];
+    dwidth[id]=1;
+    var cs=childrenOf(id).filter(function(c){return desc[c]!=null;});
+    if(!cs.length||desc[id]===downG)return 1;
+    var s=0,i;for(i=0;i<cs.length;i++)s+=descW(cs[i]);
+    dwidth[id]=Math.max(1,s);return dwidth[id];
   }
-  return out;
+  var dslot={};
+  function placeDesc(id,left){
+    if(dslot[id]!=null)return;
+    var w=descW(id);dslot[id]=left+w/2;
+    var cs=childrenOf(id).filter(function(c){return desc[c]!=null;});
+    var cur=left,i;for(i=0;i<cs.length;i++){placeDesc(cs[i],cur);cur+=descW(cs[i]);}
+  }
+  placeDesc(focus,0);
+  var focusAncX=slot[focus]*PITCH,focusDescX=dslot[focus]*PITCH,off=focusAncX-focusDescX;
+  var raw={};
+  Object.keys(anc).forEach(function(id){raw[id]={cx:slot[id]*PITCH,g:anc[id],spouse:false};});
+  Object.keys(desc).forEach(function(id){if(id!==focus)raw[id]={cx:dslot[id]*PITCH+off,g:desc[id],spouse:false};});
+  spousesOf(focus).forEach(function(s){if(!raw[s]&&pos[s])raw[s]={cx:focusAncX+PITCH,g:0,spouse:true};});
+  var minCx=1e9,maxCx=-1e9;
+  Object.keys(raw).forEach(function(id){minCx=Math.min(minCx,raw[id].cx);maxCx=Math.max(maxCx,raw[id].cx);});
+  var shift=-minCx+CW/2+10,out={};
+  Object.keys(raw).forEach(function(id){
+    out[id]={x:raw[id].cx+shift-CW/2,y:(raw[id].g+upG)*ROWH,g:raw[id].g,spouse:raw[id].spouse};
+  });
+  return {place:out,w:maxCx-minCx+CW+20,h:(upG+downG+1)*ROWH,anc:anc,desc:desc};
 }
-function fatherOf(id){var ps=parentsOf(id);for(var i=0;i<ps.length;i++)if(ps[i].role==="Father")return ps[i].id;return null;}
-function motherOf(id){var ps=parentsOf(id);for(var i=0;i<ps.length;i++)if(ps[i].role==="Mother")return ps[i].id;return null;}
-function childrenOf(id){
-  var out=[],seen={};
-  function add(c){if(c&&P(c)&&!seen[c]){seen[c]=1;out.push(c);}}
-  Object.keys(PEOPLE).forEach(function(cid){var p=PEOPLE[cid];if(p.father===id||p.mother===id)add(cid);});
-  BRANCH.forEach(function(b){if(b.link&&b.link.t==="c"&&(b.link.f===id||b.link.m===id))add(b.id);});
-  if(id==="spencer"||id==="fiona"){add("ryan");add("chase");}
-  return out;
+/*GP-PURE-END*/
+function el(id){return document.getElementById(id);}
+var GP={view:"full",focus:"spencer",suppressClick:false,
+        f1Up:4,f2Up:5,f2Down:2,f2Aunts:false,f4Up:5,f4Down:2,f5Up:3,f5Down:2};
+var ST={};
+function bboxOf(place){
+  var x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  Object.keys(place).forEach(function(id){var p=place[id];x0=Math.min(x0,p.x);y0=Math.min(y0,p.y);x1=Math.max(x1,p.x+CW);y1=Math.max(y1,p.y+CH);});
+  return {x0:x0,y0:y0,x1:x1,y1:y1};
 }
-function yearOf(id){
-  if(typeof BORN_BY_ID!=="undefined"&&BORN_BY_ID[id]!=null)return Math.floor(BORN_BY_ID[id]);
-  var p=P(id);if(!p)return null;
-  var m=/(\d{4})/.exec(p.dates||"");return m?parseInt(m[1],10):null;
-}
-function deathYearOf(id){
-  var p=P(id);if(!p)return null;
-  var ms=(p.dates||"").match(/\d{4}/g);
-  if(!ms||ms.length<2)return null;
-  var b=yearOf(id),d=parseInt(ms[ms.length-1],10);
-  return (b!=null&&d>b)?d:null;
-}
-function yearsLabel(id){
-  var p=P(id);if(!p)return "";
-  var ms=(p.dates||"").match(/\d{4}/g);
-  if(!ms)return "";
-  return ms.length>1?ms[0]+"–"+ms[ms.length-1]:ms[0];
-}
-var depthMemo={};
-function depthOf(id){
-  if(depthMemo[id]!=null)return depthMemo[id];
-  depthMemo[id]=0;
-  var d;
-  if(id==="spencer")d=0;
-  else if(id==="ryan"||id==="chase")d=-1;
-  else if(id==="fiona")d=0;
-  else if(typeof genOf!=="undefined"&&genOf[id]!=null)d=genOf[id];
-  else{
-    var b=(typeof BRANCHMAP!=="undefined")?BRANCHMAP[id]:null;
-    if(b&&b.link&&b.link.t==="c"){
-      var par=(b.link.f&&P(b.link.f))?b.link.f:b.link.m;
-      d=par?depthOf(par)-1:0;
-    }else if(b&&b.link&&b.link.t==="s"){
-      d=depthOf(b.link.a);
-    }else{
-      var ps=parentsOf(id);
-      if(ps.length)d=Math.max.apply(null,ps.map(function(r){return depthOf(r.id); }))+1;
-      else d=0;
+function makeStage(stageEl,worldEl){
+  var st={k:1,x:0,y:0,bbox:null,lod:""};
+  function apply(){
+    worldEl.style.transform="translate("+st.x+"px,"+st.y+"px) scale("+st.k+")";
+    var l=st.k>=0.55?"lod-full":(st.k>=0.30?"lod-med":"lod-compact");
+    if(st.lod!==l){st.lod=l;worldEl.classList.remove("lod-full");worldEl.classList.remove("lod-med");worldEl.classList.remove("lod-compact");worldEl.classList.add(l);}
+  }
+  st.apply=apply;
+  st.fit=function(bbox,anim){
+    if(!bbox)return;st.bbox=bbox;
+    var W=stageEl.clientWidth||360,H=stageEl.clientHeight||420;
+    var bw=bbox.x1-bbox.x0,bh=bbox.y1-bbox.y0;
+    var k=Math.min(W/(bw+24),H/(bh+24));k=Math.max(0.02,Math.min(k,1));
+    st.k=k;st.x=(W-bw*k)/2-bbox.x0*k;
+    st.y=(bh*k<H*0.86)?(14-bbox.y0*k):((H-bh*k)/2-bbox.y0*k);
+    if(anim)worldEl.classList.add("gp-anim");else worldEl.classList.remove("gp-anim");
+    apply();
+  };
+  st.zoomBy=function(f,cxp,cyp){
+    var W=stageEl.clientWidth||360,H=stageEl.clientHeight||420;
+    var cx=(cxp==null?W/2:cxp),cy=(cyp==null?H/2:cyp);
+    var nk=Math.max(0.02,Math.min(2.5,st.k*f));
+    st.x=cx-(cx-st.x)*(nk/st.k);st.y=cy-(cy-st.y)*(nk/st.k);st.k=nk;
+    worldEl.classList.remove("gp-anim");apply();
+  };
+  var pointers={},lastX=0,lastY=0,dragMoved=0,pinchD=0;
+  function pList(){var ks=Object.keys(pointers),r=[],i;for(i=0;i<ks.length;i++)r.push(pointers[ks[i]]);return r;}
+  stageEl.addEventListener("pointerdown",function(e){
+    pointers[e.pointerId]={x:e.clientX,y:e.clientY};
+    var ps=pList();
+    if(ps.length===1){lastX=e.clientX;lastY=e.clientY;dragMoved=0;}
+    if(ps.length===2)pinchD=Math.sqrt(Math.pow(ps[0].x-ps[1].x,2)+Math.pow(ps[0].y-ps[1].y,2));
+  });
+  stageEl.addEventListener("pointermove",function(e){
+    if(!pointers[e.pointerId])return;
+    pointers[e.pointerId]={x:e.clientX,y:e.clientY};
+    var ps=pList();
+    if(ps.length===1){
+      var dx=e.clientX-lastX,dy=e.clientY-lastY;lastX=e.clientX;lastY=e.clientY;
+      dragMoved+=Math.abs(dx)+Math.abs(dy);
+      if(dragMoved>4){st.x+=dx;st.y+=dy;worldEl.classList.remove("gp-anim");apply();GP.suppressClick=true;}
+    }else if(ps.length===2){
+      var d=Math.sqrt(Math.pow(ps[0].x-ps[1].x,2)+Math.pow(ps[0].y-ps[1].y,2));
+      if(pinchD>0&&d>0){var r=stageEl.getBoundingClientRect();st.zoomBy(d/pinchD,(ps[0].x+ps[1].x)/2-r.left,(ps[0].y+ps[1].y)/2-r.top);}
+      pinchD=d;GP.suppressClick=true;
     }
+  });
+  function endP(e){delete pointers[e.pointerId];if(!Object.keys(pointers).length)setTimeout(function(){GP.suppressClick=false;},60);}
+  stageEl.addEventListener("pointerup",endP);
+  stageEl.addEventListener("pointercancel",endP);
+  stageEl.addEventListener("wheel",function(e){e.preventDefault();var r=stageEl.getBoundingClientRect();st.zoomBy(e.deltaY<0?1.12:1/1.12,e.clientX-r.left,e.clientY-r.top);},{passive:false});
+  return st;
+}
+function cardEl(id,o){
+  var p=P(id);if(!p)return null;
+  var b=document.createElement("button");b.type="button";
+  b.className="gp-node side-"+(p.side||"center")+(id===GP.focus?" gp-focus-card":"");
+  b.style.left=o.x+"px";b.style.top=o.y+"px";
+  var html='<span class="nm">'+(p.short||p.name)+'</span><span class="dt">'+(p.dates||"")+'</span>';
+  var cf=(typeof CONF!=="undefined")?CONF[p.conf]:null;
+  if(cf)html+='<span class="cf '+cf.cls+'"><span class="dot"></span>'+cf.label+'</span>';
+  if(o.badgeUp)html+='<span class="gp-badge gp-badge-up">+'+o.badgeUp+' more ↑</span>';
+  if(o.badgeDown)html+='<span class="gp-badge gp-badge-down">+'+o.badgeDown+' more ↓</span>';
+  b.innerHTML=html;
+  b.setAttribute("aria-label",p.name+(p.rel?" — "+p.rel:""));
+  b.addEventListener("click",function(){if(GP.suppressClick)return;GP.cardTap(id);});
+  return b;
+}
+var SVGNS="http://www.w3.org/2000/svg";
+function wiresEl(place,w,h,rowH){
+  var svg=document.createElementNS(SVGNS,"svg");
+  svg.setAttribute("width",w);svg.setAttribute("height",h);
+  svg.setAttribute("viewBox","0 0 "+w+" "+h);svg.setAttribute("class","gp-wires");
+  svg.setAttribute("aria-hidden","true");
+  Object.keys(place).forEach(function(id){
+    var ps=parentsOf(id).filter(function(p){return place[p];});
+    if(!ps.length)return;
+    var c=place[id],childCx=c.x+CW/2,midY=c.y-(rowH-CH)/2;
+    ps.forEach(function(par){
+      var pp=place[par],pCx=pp.x+CW/2;
+      var path=document.createElementNS(SVGNS,"path");
+      path.setAttribute("d","M "+pCx+" "+(pp.y+CH)+" V "+midY+" M "+pCx+" "+midY+" H "+childCx);
+      svg.appendChild(path);
+    });
+    var drop=document.createElementNS(SVGNS,"path");
+    drop.setAttribute("d","M "+childCx+" "+midY+" V "+c.y);
+    svg.appendChild(drop);
+  });
+  return svg;
+}
+function badgeOpts(id,inside){
+  var o={};
+  if(depthAbove(id)>0&&parentsOf(id).some(function(p){return !inside[p];}))o.badgeUp=depthAbove(id);
+  if(depthBelow(id)>0&&childrenOf(id).some(function(c){return !inside[c];}))o.badgeDown=depthBelow(id);
+  return o;
+}
+function renderRuler(id,upShown,downShown){
+  var r=el(id);if(!r)return;
+  var N=depthAbove(GP.focus),M=depthBelow(GP.focus),html="",g;
+  html+='<div class="gp-rlab">↑'+N+'</div>';
+  for(g=-N;g<=M;g++){
+    html+='<div class="gp-rseg'+(g>=-upShown&&g<=downShown?" in":"")+(g===0?" zero":"")+'"></div>';
   }
-  depthMemo[id]=d;return d;
-}
-var GP_ANC_MAX=4,GP_DESC_MAX=2;
-function ancWidth(id,depth){
-  if(depth>=GP_ANC_MAX)return 1;
-  var f=fatherOf(id),m=motherOf(id);
-  if(!f&&!m)return 1;
-  var w=0;
-  if(f)w+=ancWidth(f,depth+1);
-  if(m)w+=ancWidth(m,depth+1);
-  return Math.max(w,1);
-}
-function descWidth(id,depth){
-  if(depth>=GP_DESC_MAX)return 1;
-  var kids=childrenOf(id);
-  if(!kids.length)return 1;
-  var w=0;
-  kids.forEach(function(k){w+=descWidth(k,depth+1);});
-  return Math.max(w,1);
-}
-function buildFanSlots(center,depth){
-  var slots={};
-  (function rec(id,g,s){
-    if(!id||g>depth)return;
-    slots[g+":"+s]=id;
-    if(g>=depth)return;
-    rec(fatherOf(id),g+1,s*2);
-    rec(motherOf(id),g+1,s*2+1);
-  })(center,0,0);
-  return slots;
-}
-/*__/PURE__*/
-function esc(t){return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
-var GP={view:"fulltree",focus:"spencer",fanDepth:5,outlineDir:"anc",outExpanded:{"":true},tlScale:0,tlEffScale:1};
-var ALLIDS=Object.keys(PEOPLE).concat(BRANCH.map(function(b){return b.id;}));
-var viewportEl=document.getElementById("viewport");
-var vpHome={parent:viewportEl.parentNode,next:viewportEl.nextSibling};
-var chartHeadEl=document.querySelector(".chart-head");
-var searchRow=document.getElementById("gp-searchrow");
-var noteEl=document.getElementById("gp-note");
-var PANEL_IDS={focus:"gp-panel-focus",fan:"gp-panel-fan",outline:"gp-panel-outline",navigator:"gp-panel-navigator",timeline:"gp-panel-timeline"};
-var NOTES={
-  fulltree:"The tree as it has always been — use the Direct lineage / Full tree toggle above; drag to pan, scroll or pinch to zoom, tap a person for their story. The five numbered views are new prototypes: pick one to try it, then choose a winner.",
-  focus:"Prototype 1 — Focus (hourglass). One person centered, ancestors above, descendants below. Best for: reading one person's immediate family at a glance and hopping person to person.",
-  fan:"Prototype 2 — Fan chart. Ancestors only, as a radial fan around the focus person. Best for: seeing the whole ancestry's shape — and which lines run dry — at once.",
-  outline:"Prototype 3 — Outline. The pedigree as an expandable list. Best for: stepping through one line carefully, name by name, with no map to get lost in.",
-  navigator:"Prototype 4 — Navigator. The existing full tree and layout, given a minimap, zoom buttons and search-and-jump. Best for: keeping the familiar tree, just making it navigable.",
-  timeline:"Prototype 5 — Timeline. Everyone placed at their birth year, by generation. Best for: seeing who was alive when, and how the generations stack across the centuries."
-};
-function scrollDetail(){
-  var d=document.getElementById("detail");
-  if(d&&!d.hidden)d.scrollIntoView({behavior:"smooth",block:"nearest"});
-}
-function restoreViewport(){
-  if(viewportEl.parentNode!==vpHome.parent)vpHome.parent.insertBefore(viewportEl,vpHome.next);
-}
-function hideAllPanels(){
-  Object.keys(PANEL_IDS).forEach(function(k){document.getElementById(PANEL_IDS[k]).hidden=true;});
-}
-function setFocus(id){
-  if(!P(id))return;
-  GP.focus=id;
-  GP.outExpanded={"":true};
-  updateFocusUI();
-  renderActive();
+  html+='<div class="gp-rlab">↓'+M+'</div>';
+  r.innerHTML=html;
 }
 function updateFocusUI(){
   var p=P(GP.focus);
-  document.getElementById("gp-focusname").innerHTML="Now showing: <strong>"+esc(p.name)+"</strong> · "+esc(p.dates);
+  el("gp-focus-name").textContent=p?(p.short||p.name):"";
+  var na=depthAbove(GP.focus),nb=depthBelow(GP.focus);
+  el("gp-depth").textContent="↑ "+na+" generation"+(na===1?"":"s")+" above · ↓ "+nb+" generation"+(nb===1?"":"s")+" below — in this chart";
 }
-function renderActive(){
-  if(GP.view==="focus")renderFocus();
-  else if(GP.view==="fan")renderFan();
-  else if(GP.view==="outline")renderOutline();
-  else if(GP.view==="timeline")renderTimeline();
-}
-function gpSetView(name){
-  GP.view=name;
-  document.querySelectorAll(".gp-vbtn").forEach(function(b){b.classList.toggle("active",b.getAttribute("data-gpview")===name);});
-  noteEl.textContent=NOTES[name]||"";
-  stopMinimap();
-  restoreViewport();
-  if(name==="fulltree"){
-    chartHeadEl.style.display="";
-    viewportEl.style.display="";
-    hideAllPanels();
-    searchRow.hidden=true;
-    return;
-  }
-  if((name==="focus"||name==="fan"||name==="outline")&&typeof selectedId!=="undefined"&&selectedId&&P(selectedId)&&selectedId!==GP.focus){
-    GP.focus=selectedId;
-    GP.outExpanded={"":true};
-  }
-  updateFocusUI();
-  if(name==="navigator"){
-    chartHeadEl.style.display="none";
-    viewportEl.style.display="";
-    hideAllPanels();
-    document.getElementById(PANEL_IDS.navigator).hidden=false;
-    searchRow.hidden=true;
-    document.getElementById("gp-navwrap").appendChild(viewportEl);
-    buildMinimap();
-    startMinimap();
-    return;
-  }
-  chartHeadEl.style.display="none";
-  viewportEl.style.display="none";
-  hideAllPanels();
-  document.getElementById(PANEL_IDS[name]).hidden=false;
-  searchRow.hidden=!(name==="focus"||name==="fan"||name==="outline");
-  renderActive();
-}
-function makeCombo(inputEl,listEl,onPick){
-  var items=ALLIDS.map(function(id){var p=P(id);return {id:id,name:p.name,dates:p.dates,short:p.short};});
-  function close(){listEl.hidden=true;listEl.innerHTML="";}
-  function open(){
-    var q=inputEl.value.trim().toLowerCase();
-    var hits=items.filter(function(it){
-      return !q||it.name.toLowerCase().indexOf(q)>=0||it.short.toLowerCase().indexOf(q)>=0;
-    }).slice(0,14);
-    if(!hits.length){close();return;}
-    listEl.innerHTML="";
-    hits.forEach(function(it){
-      var b=document.createElement("button");
-      b.type="button";b.className="gp-result";
-      var n=document.createElement("span");n.className="gp-rname";n.textContent=it.name;
-      var d=document.createElement("span");d.className="gp-rdates";d.textContent=it.dates;
-      b.appendChild(n);b.appendChild(d);
-      b.addEventListener("click",function(){inputEl.value="";close();onPick(it.id);});
-      listEl.appendChild(b);
-    });
-    listEl.hidden=false;
-  }
-  inputEl.addEventListener("input",open);
-  inputEl.addEventListener("focus",open);
-  inputEl.addEventListener("keydown",function(e){
-    if(e.key==="Escape")close();
-    if(e.key==="Enter"){var f=listEl.querySelector(".gp-result");if(f){e.preventDefault();f.click();}}
+function renderF1(anim){
+  var world=el("gp-f1-world");world.innerHTML="";
+  var set={},anc=ancestorsOf(GP.focus,GP.f1Up),desc=descendantsOf(GP.focus,2);
+  Object.keys(anc).forEach(function(id){set[id]=1;});
+  Object.keys(desc).forEach(function(id){set[id]=1;});
+  spousesOf(GP.focus).forEach(function(s){if(pos[s])set[s]=1;});
+  siblingsOf(GP.focus).forEach(function(s){set[s]=1;spousesOf(s).forEach(function(x){if(pos[x])set[x]=1;});});
+  Object.keys(desc).forEach(function(id){spousesOf(id).forEach(function(x){if(pos[x])set[x]=1;});});
+  var place={};
+  Object.keys(set).forEach(function(id){place[id]={x:pos[id].x,y:pos[id].y};});
+  world.style.width=canvasW+"px";world.style.height=canvasH+"px";
+  world.appendChild(wiresEl(place,canvasW,canvasH,176));
+  ALLIDS.forEach(function(id){
+    var o={x:pos[id].x,y:pos[id].y},c;
+    if(set[id]){var bo=badgeOpts(id,set);if(bo.badgeUp)o.badgeUp=bo.badgeUp;if(bo.badgeDown)o.badgeDown=bo.badgeDown;}
+    c=cardEl(id,o);if(!c)return;
+    if(!set[id]){c.classList.add("gp-dim");c.disabled=true;}
+    world.appendChild(c);
   });
-  document.addEventListener("click",function(e){
-    if(e.target!==inputEl&&!listEl.contains(e.target))close();
+  el("gp-f1-upval").textContent=GP.f1Up+" generation"+(GP.f1Up===1?"":"s");
+  ST.f1.fit(bboxOf(place),anim);
+  renderRuler("gp-f1-ruler",GP.f1Up,2);
+}
+function renderHourglassInto(worldKey,upG,downG,aunts){
+  var world=el("gp-"+worldKey+"-world");world.innerHTML="";
+  var L=layoutHourglass(GP.focus,upG,downG);
+  world.style.width=L.w+"px";world.style.height=L.h+"px";
+  world.appendChild(wiresEl(L.place,L.w,L.h,ROWH));
+  Object.keys(L.place).forEach(function(id){
+    var pl=L.place[id],o={x:pl.x,y:pl.y},bo=badgeOpts(id,L.place);
+    if(bo.badgeUp)o.badgeUp=bo.badgeUp;if(bo.badgeDown)o.badgeDown=bo.badgeDown;
+    world.appendChild(cardEl(id,o));
   });
+  if(aunts)renderAunts(world,L);
+  return L;
 }
-
-/* ---------- Prototype 1: Focus (hourglass) ---------- */
-var FCW=168,FCH=110,FX=204,FR=152;
-function nodeHTML(p){
-  var c=(typeof CONF!=="undefined"&&CONF[p.conf])?CONF[p.conf]:{cls:"conf-unk",label:"Unknown"};
-  return '<span class="nm">'+esc(p.short)+'</span><span class="dt">'+esc(p.dates)+'</span><span class="cf '+c.cls+'"><span class="dot"></span>'+esc(c.label)+"</span>";
-}
-function renderFocus(){
-  var stage=document.getElementById("gp-focus-stage");
-  var wrap=document.getElementById("gp-focus-wrap");
-  var center=GP.focus,entries={},wires=[];
-  function placeAnc(id,depth,left){
-    var f=null,m=null,cx;
-    if(depth<GP_ANC_MAX){f=fatherOf(id);m=motherOf(id);}
-    if(!f&&!m){cx=left+0.5;}
-    else{
-      var fx=null,mx=null,wf=0;
-      if(f){wf=ancWidth(f,depth+1);fx=placeAnc(f,depth+1,left);}
-      if(m){mx=placeAnc(m,depth+1,left+wf);}
-      cx=(fx!=null&&mx!=null)?(fx+mx)/2:(fx!=null?fx:mx);
-      if(f)wires.push([id,f]);
-      if(m)wires.push([id,m]);
-    }
-    entries["a"+depth+"|"+id]={id:id,cx:cx,row:-depth};
-    return cx;
-  }
-  function placeDesc(id,depth,left){
-    var kids=depth<GP_DESC_MAX?childrenOf(id):[],cx;
-    if(!kids.length){cx=left+0.5;}
-    else{
-      var cur=left,centers=[];
-      kids.forEach(function(k){centers.push(placeDesc(k,depth+1,cur));wires.push([k,id]);cur+=descWidth(k,depth+1);});
-      cx=(centers[0]+centers[centers.length-1])/2;
-    }
-    if(depth>0)entries["d"+depth+"|"+id]={id:id,cx:cx,row:depth};
-    return cx;
-  }
-  var cAnc=placeAnc(center,0,0);
-  var cDesc=placeDesc(center,0,0);
-  var shift=cAnc-cDesc;
-  Object.keys(entries).forEach(function(k){if(k.charAt(0)==="d")entries[k].cx+=shift;});
-  var minCx=1e9,maxCx=-1e9;
-  Object.keys(entries).forEach(function(k){minCx=Math.min(minCx,entries[k].cx);maxCx=Math.max(maxCx,entries[k].cx);});
-  var off=-minCx+0.62;
-  var idPos={};
-  Object.keys(entries).forEach(function(k){
-    var e=entries[k];
-    e.px=(e.cx+off)*FX-FCW/2;
-    e.py=(e.row+GP_ANC_MAX)*FR+14;
-    if(!idPos[e.id])idPos[e.id]=e;
-  });
-  var stageW=(maxCx-minCx+1.24)*FX;
-  var stageH=(GP_ANC_MAX+GP_DESC_MAX+1)*FR+28;
-  var paths="";
-  wires.forEach(function(w){
-    var ch=idPos[w[0]],pa=idPos[w[1]];
-    if(!ch||!pa)return;
-    var pcx=pa.px+FCW/2,pBot=pa.py+FCH,ccx=ch.px+FCW/2,cTop=ch.py,midY=(pBot+cTop)/2;
-    paths+='<path d="M '+pcx+" "+pBot+" V "+midY+" H "+ccx+" V "+cTop+'"/>';
-  });
-  var html='<svg width="'+stageW+'" height="'+stageH+'" viewBox="0 0 '+stageW+" "+stageH+'" aria-hidden="true">'+paths+"</svg>";
-  Object.keys(entries).forEach(function(k){
-    var e=entries[k],p=P(e.id);
-    html+='<button type="button" class="node side-'+esc(p.side||"center")+(e.id===center?" selected":"")+'" style="left:'+e.px.toFixed(1)+"px;top:"+e.py.toFixed(1)+'px" data-gpid="'+esc(e.id)+'" aria-label="'+esc(p.name+" — "+p.rel)+'">'+nodeHTML(p)+"</button>";
-  });
-  stage.style.width=stageW+"px";
-  stage.style.height=stageH+"px";
-  stage.innerHTML=html;
-  var ce=idPos[center];
-  if(ce){
-    wrap.scrollLeft=Math.max(0,ce.px+FCW/2-wrap.clientWidth/2);
-    wrap.scrollTop=Math.max(0,ce.py+FCH/2-wrap.clientHeight/2);
-  }
-}
-/* ---------- Prototype 2: Fan chart ---------- */
-function pol(cx,cy,r,angDeg){
-  var a=angDeg*Math.PI/180;
-  return [cx+r*Math.sin(a),cy-r*Math.cos(a)];
-}
-function sectorPath(cx,cy,rIn,rOut,a0,a1){
-  var os=pol(cx,cy,rOut,a0),oe=pol(cx,cy,rOut,a1),ie=pol(cx,cy,rIn,a1),is=pol(cx,cy,rIn,a0);
-  var laf=(a1-a0)>180?1:0;
-  function f(pt){return pt[0].toFixed(1)+" "+pt[1].toFixed(1);}
-  return "M "+f(os)+" A "+rOut+" "+rOut+" 0 "+laf+" 1 "+f(oe)+" L "+f(ie)+" A "+rIn+" "+rIn+" 0 "+laf+" 0 "+f(is)+" Z";
-}
-function renderFan(){
-  var wrap=document.getElementById("gp-fan-wrap");
-  var depth=GP.fanDepth,center=GP.focus;
-  var slots=buildFanSlots(center,depth);
-  var size=640,C=size/2,R0=54,rOutMax=size/2-8,ringT=(rOutMax-R0)/depth;
-  var parts=['<svg viewBox="0 0 '+size+' '+size+'" role="img" aria-label="Fan chart of the ancestors of '+esc(P(center).name)+'">'];
-  for(var g=depth;g>=1;g--){
-    var n=Math.pow(2,g),span=360/n,rIn=R0+(g-1)*ringT,rOut=rIn+ringT;
-    for(var s2=0;s2<n;s2++){
-      var id=slots[g+":"+s2];
-      var a0=s2*span,a1=a0+span;
-      var fatherSide=Math.floor(s2/Math.pow(2,g-1))===0;
-      var fill,op;
-      if(id){fill=fatherSide?"var(--dad)":"var(--mom)";op=(0.85-0.09*(g-1)).toFixed(2);}
-      else{fill="var(--card-dim)";op="1";}
-      parts.push('<path class="gp-fanseg" d="'+sectorPath(C,C,rIn,rOut,a0,a1)+'" style="fill:'+fill+'" fill-opacity="'+op+'"'+(id?' data-fanid="'+esc(id)+'"':"")+'><title>'+(id?esc(P(id).name+" · "+P(id).dates):"Not known")+"</title></path>");
-      if(id){
-        var am=(a0+a1)/2,rm=(rIn+rOut)/2,pt=pol(C,C,rm,am);
-        var fs=g<=1?12.5:g===2?11:g===3?9.5:g===4?8.5:g===5?7.5:7;
-        var arc=2*Math.PI*rm*span/360;
-        var label=P(id).short;
-        if(g<=3){var yl=yearsLabel(id);if(yl)label=label+" · "+yl;}
-        var maxCh=Math.floor(arc/(fs*0.5));
-        if(maxCh>=4){
-          var txt=label.length>maxCh?label.slice(0,Math.max(1,maxCh-1))+"…":label;
-          var rot=(am>90&&am<270)?am+180:am;
-          parts.push('<text class="gp-fantext" x="'+pt[0].toFixed(1)+'" y="'+pt[1].toFixed(1)+'" font-size="'+fs+'" transform="rotate('+rot.toFixed(1)+" "+pt[0].toFixed(1)+" "+pt[1].toFixed(1)+')" dy="0.35em">'+esc(txt)+"</text>");
-        }
+function renderAunts(world,L){
+  Object.keys(L.place).forEach(function(id){
+    if(L.place[id].spouse)return;
+    var sibs=siblingsOf(id).filter(function(s){return !L.place[s]&&pos[s];});
+    if(!sibs.length)return;
+    var p=L.place[id];
+    var rightFree=!Object.keys(L.place).some(function(oid){var q=L.place[oid];return q.g===p.g&&Math.abs(q.x-(p.x+PITCH))<4;});
+    if(rightFree){
+      sibs.slice(0,4).forEach(function(s,i){
+        var chip=document.createElement("button");chip.type="button";chip.className="gp-chip";
+        chip.style.left=(p.x+CW+8)+"px";chip.style.top=(p.y+i*36)+"px";
+        chip.textContent=(P(s).short||P(s).name);
+        chip.setAttribute("aria-label","Aunt/uncle line: "+P(s).name+" — tap to focus");
+        chip.addEventListener("click",function(){if(GP.suppressClick)return;GP.setFocus(s);});
+        world.appendChild(chip);
+      });
+      if(sibs.length>4){
+        var more=document.createElement("div");more.className="gp-chip gp-chip-more";
+        more.style.left=(p.x+CW+8)+"px";more.style.top=(p.y+4*36)+"px";
+        more.textContent="+"+(sibs.length-4)+" more";world.appendChild(more);
       }
-    }
-  }
-  parts.push('<circle class="gp-fancenter" cx="'+C+'" cy="'+C+'" r="'+(R0-4)+'" style="fill:var(--center)"><title>'+esc(P(center).name+" · "+P(center).dates)+"</title></circle>");
-  parts.push('<text class="gp-fantext" x="'+C+'" y="'+(C-5)+'" font-size="12.5" font-weight="700" style="fill:var(--bg)">'+esc(P(center).short)+"</text>");
-  parts.push('<text class="gp-fantext" x="'+C+'" y="'+(C+13)+'" font-size="10" style="fill:var(--bg)">'+esc(P(center).dates)+"</text>");
-  parts.push("</svg>");
-  wrap.innerHTML=parts.join("");
-  wrap.querySelectorAll("[data-fanid]").forEach(function(el){
-    el.addEventListener("click",function(){setFocus(el.getAttribute("data-fanid"));});
-  });
-  var cc=wrap.querySelector(".gp-fancenter");
-  if(cc)cc.addEventListener("click",function(){if(typeof select==="function")select(center,true);scrollDetail();});
-}
-/* ---------- Prototype 3: Outline ---------- */
-function outlineRow(id,path,depth,role){
-  var frag=document.createDocumentFragment();
-  var p=P(id);
-  var kids=GP.outlineDir==="anc"?parentsOf(id):childrenOf(id);
-  var hasKids=kids.length>0&&depth<18;
-  var expanded=!!GP.outExpanded[path];
-  var row=document.createElement("div");
-  row.className="gp-orow";
-  row.style.paddingLeft=(depth*22)+"px";
-  var tog=document.createElement("button");
-  tog.type="button";tog.className="gp-otoggle";
-  if(hasKids){
-    tog.textContent=expanded?"−":"+";
-    tog.setAttribute("aria-label",(expanded?"Collapse ":"Expand ")+p.name);
-    tog.addEventListener("click",function(){
-      if(GP.outExpanded[path])delete GP.outExpanded[path];else GP.outExpanded[path]=true;
-      renderOutline();
-    });
-  }else{
-    tog.disabled=true;tog.textContent="·";
-  }
-  row.appendChild(tog);
-  var nm=document.createElement("button");
-  nm.type="button";nm.className="gp-oname";nm.textContent=p.name;
-  nm.addEventListener("click",function(){if(typeof select==="function")select(id,true);scrollDetail();});
-  row.appendChild(nm);
-  var meta=document.createElement("span");
-  meta.className="gp-ometa";
-  var c=(typeof CONF!=="undefined"&&CONF[p.conf])?CONF[p.conf]:{cls:"conf-unk",label:"Unknown"};
-  meta.innerHTML=(role?esc(role)+" · ":"")+esc(p.dates)+' &nbsp;<span class="conf '+c.cls+'"><span class="dot"></span>'+esc(c.label)+"</span>";
-  row.appendChild(meta);
-  frag.appendChild(row);
-  if(expanded&&hasKids){
-    if(GP.outlineDir==="anc"){
-      kids.forEach(function(r){frag.appendChild(outlineRow(r.id,path+"/"+(r.role==="Father"?"f":"m"),depth+1,r.role));});
     }else{
-      kids.forEach(function(cid){frag.appendChild(outlineRow(cid,path+"/k"+cid,depth+1,"Child"));});
+      var wide=document.createElement("div");wide.className="gp-chip-wide";
+      wide.style.left=p.x+"px";wide.style.top=(p.y+CH+6)+"px";wide.style.width=CW+"px";
+      wide.textContent="Sibs: "+sibs.map(function(s){return P(s).short||P(s).name;}).join(", ");
+      world.appendChild(wide);
     }
+  });
+}
+function renderF2(){
+  var L=renderHourglassInto("f2",GP.f2Up,GP.f2Down,GP.f2Aunts);
+  ST.f2.fit({x0:0,y0:0,x1:L.w,y1:L.h},false);
+  renderRuler("gp-f2-ruler",GP.f2Up,GP.f2Down);
+}
+function renderF3(){
+  var L=renderHourglassInto("f3",4,2,false);
+  ST.f3.fit({x0:0,y0:0,x1:L.w,y1:L.h},false);
+  renderStrip(L);
+}
+function renderStrip(L){
+  var dots=el("gp-f3-dots");if(!dots)return;dots.innerHTML="";
+  var bb={x0:1e9,y0:1e9,x1:-1e9,y1:-1e9};
+  Object.keys(L.place).forEach(function(id){var p=pos[id];if(!p)return;bb.x0=Math.min(bb.x0,p.x);bb.y0=Math.min(bb.y0,p.y);bb.x1=Math.max(bb.x1,p.x+CW);bb.y1=Math.max(bb.y1,p.y+CH);});
+  ALLIDS.forEach(function(id){
+    var d=document.createElement("div");
+    d.className="gp-dot"+(id===GP.focus?" gp-dot-focus":"");
+    d.style.left=((pos[id].x+CW/2)/canvasW*100)+"%";
+    d.style.top=((pos[id].y+CH/2)/canvasH*100)+"%";
+    dots.appendChild(d);
+  });
+  var box=document.createElement("div");box.className="gp-stripbox";
+  box.style.left=(bb.x0/canvasW*100)+"%";box.style.top=(bb.y0/canvasH*100)+"%";
+  box.style.width=((bb.x1-bb.x0)/canvasW*100)+"%";box.style.height=((bb.y1-bb.y0)/canvasH*100)+"%";
+  dots.appendChild(box);
+}
+function renderF4(){
+  var world=el("gp-f4-world");world.innerHTML="";
+  var rg=relGenOf(GP.focus),shown={};
+  ALLIDS.forEach(function(id){var g=rg[id];if(g!=null&&g>=-GP.f4Up&&g<=GP.f4Down)shown[id]=1;});
+  var place={};
+  Object.keys(shown).forEach(function(id){place[id]={x:pos[id].x,y:pos[id].y};});
+  world.style.width=canvasW+"px";world.style.height=canvasH+"px";
+  world.appendChild(wiresEl(place,canvasW,canvasH,176));
+  Object.keys(place).forEach(function(id){
+    var o={x:place[id].x,y:place[id].y},bo=badgeOpts(id,shown);
+    if(bo.badgeUp)o.badgeUp=bo.badgeUp;if(bo.badgeDown)o.badgeDown=bo.badgeDown;
+    world.appendChild(cardEl(id,o));
+  });
+  el("gp-f4-upval").textContent=GP.f4Up;
+  el("gp-f4-downval").textContent=GP.f4Down;
+  ST.f4.fit(bboxOf(place),false);
+  renderRuler("gp-f4-ruler",GP.f4Up,GP.f4Down);
+}
+function renderF5(){
+  var world=el("gp-f5-world");
+  var L=renderHourglassInto("f5",GP.f5Up,GP.f5Down,false);
+  var maxUp=depthAbove(GP.focus),maxDown=depthBelow(GP.focus);
+  Object.keys(L.place).forEach(function(id){
+    var pl=L.place[id];
+    if(pl.g===-GP.f5Up&&parentsOf(id).length&&GP.f5Up<maxUp)addExpander(world,pl.x+CW/2-16,pl.y-16,"up");
+    if(pl.g===GP.f5Down&&childrenOf(id).length&&GP.f5Down<maxDown)addExpander(world,pl.x+CW/2-16,pl.y+CH-16,"down");
+  });
+  el("gp-f5-state").textContent=GP.f5Up+" up · "+GP.f5Down+" down";
+  ST.f5.fit({x0:0,y0:0,x1:L.w,y1:L.h},false);
+  renderRuler("gp-f5-ruler",GP.f5Up,GP.f5Down);
+}
+function addExpander(world,x,y,dir){
+  var b=document.createElement("button");b.type="button";b.className="gp-expand";
+  b.style.left=x+"px";b.style.top=y+"px";b.textContent="+";
+  b.setAttribute("aria-label",dir==="up"?"Show one more generation above":"Show one more generation below");
+  b.addEventListener("click",function(e){
+    if(e&&e.stopPropagation)e.stopPropagation();
+    if(GP.suppressClick)return;
+    if(dir==="up")GP.f5Up=Math.min(depthAbove(GP.focus),GP.f5Up+1);
+    else GP.f5Down=Math.min(depthBelow(GP.focus),GP.f5Down+1);
+    renderF5();
+  });
+  world.appendChild(b);
+}
+function renderActive(anim){
+  if(GP.view==="f1")renderF1(anim);
+  else if(GP.view==="f2")renderF2();
+  else if(GP.view==="f3")renderF3();
+  else if(GP.view==="f4")renderF4();
+  else if(GP.view==="f5")renderF5();
+}
+GP.setFocus=function(id){
+  if(!P(id))return;
+  GP.focus=id;updateFocusUI();renderActive(true);
+};
+GP.cardTap=function(id){
+  if(id===GP.focus){if(typeof select==="function")select(id,true);}
+  else GP.setFocus(id);
+};
+function setView(v){
+  GP.view=v;
+  var btns=document.querySelectorAll("[data-gp]"),i;
+  for(i=0;i<btns.length;i++)btns[i].classList.toggle("active",btns[i].getAttribute("data-gp")===v);
+  var isGP=v!=="full";
+  var ch=document.querySelector(".chart-head"),vp=el("viewport");
+  if(ch)ch.style.display=isGP?"none":"";
+  if(vp)vp.style.display=isGP?"none":"";
+  el("gp-focusbar").hidden=!isGP;
+  ["f1","f2","f3","f4","f5"].forEach(function(k){el("gp-panel-"+k).hidden=(k!==v);});
+  if(isGP){
+    if(typeof selectedId!=="undefined"&&selectedId&&P(selectedId)&&selectedId!==GP.focus){GP.focus=selectedId;updateFocusUI();}
+    renderActive(false);
   }
-  return frag;
 }
-function renderOutline(){
-  var box=document.getElementById("gp-outline-rows");
-  box.innerHTML="";
-  box.appendChild(outlineRow(GP.focus,"",0,P(GP.focus).rel||""));
-}
-function outlineExpandAll(){
-  var limit=GP.outlineDir==="anc"?16:6,count=0;
-  GP.outExpanded={"":true};
-  (function walk(id,path,depth){
-    if(depth>=limit||count>600)return;
-    GP.outExpanded[path]=true;
-    if(GP.outlineDir==="anc"){
-      parentsOf(id).forEach(function(r){count++;walk(r.id,path+"/"+(r.role==="Father"?"f":"m"),depth+1);});
-    }else{
-      childrenOf(id).forEach(function(cid){count++;walk(cid,path+"/k"+cid,depth+1);});
-    }
-  })(GP.focus,"",0);
-  renderOutline();
-}
-/* ---------- Prototype 4: Navigator (minimap) ---------- */
-var mmRAF=null,mmBuilt=false,mmDrag=false;
-function sideColor(id,p){
-  if(id==="spencer"||id==="fiona"||id==="ryan"||id==="chase")return "var(--center)";
-  if(p&&p.side==="mom")return "var(--mom)";
-  if(p&&p.side==="dad")return "var(--dad)";
-  return "var(--center)";
-}
-function buildMinimap(){
-  if(mmBuilt)return;
-  var html="";
-  Object.keys(pos).forEach(function(id){
-    var p=P(id);if(!p)return;
-    html+='<span class="gp-mmdot" style="left:'+(((pos[id].x+84)/canvasW)*100).toFixed(2)+'%;top:'+(((pos[id].y+55)/canvasH)*100).toFixed(2)+'%;background:'+sideColor(id,p)+'"></span>';
+function init(){
+  ST.f1=makeStage(el("gp-f1-stage"),el("gp-f1-world"));
+  ST.f2=makeStage(el("gp-f2-stage"),el("gp-f2-world"));
+  ST.f3=makeStage(el("gp-f3-stage"),el("gp-f3-world"));
+  ST.f4=makeStage(el("gp-f4-stage"),el("gp-f4-world"));
+  ST.f5=makeStage(el("gp-f5-stage"),el("gp-f5-world"));
+  var btns=document.querySelectorAll("[data-gp]"),i;
+  for(i=0;i<btns.length;i++)(function(b){b.addEventListener("click",function(){setView(b.getAttribute("data-gp"));});})(btns[i]);
+  var zb=document.querySelectorAll(".gp-zbtn");
+  for(i=0;i<zb.length;i++)(function(b){b.addEventListener("click",function(){
+    var st=ST[b.getAttribute("data-view")];if(!st)return;
+    var z=b.getAttribute("data-z");
+    if(z==="in")st.zoomBy(1.4);else if(z==="out")st.zoomBy(1/1.4);else if(z==="fit"&&st.bbox)st.fit(st.bbox,true);
+  });})(zb[i]);
+  el("gp-profile-btn").addEventListener("click",function(){if(typeof select==="function")select(GP.focus,true);});
+  el("gp-f1-widen").addEventListener("click",function(){GP.f1Up=Math.min(8,GP.f1Up+1);renderF1(true);});
+  el("gp-f1-narrow").addEventListener("click",function(){GP.f1Up=Math.max(1,GP.f1Up-1);renderF1(true);});
+  el("gp-f2-up").addEventListener("change",function(){GP.f2Up=parseInt(el("gp-f2-up").value,10)||5;renderF2();});
+  el("gp-f2-down").addEventListener("change",function(){GP.f2Down=parseInt(el("gp-f2-down").value,10)||2;renderF2();});
+  el("gp-f2-aunts").addEventListener("change",function(){GP.f2Aunts=!!el("gp-f2-aunts").checked;renderF2();});
+  el("gp-f4-up").addEventListener("input",function(){GP.f4Up=parseInt(el("gp-f4-up").value,10)||0;renderF4();});
+  el("gp-f4-down").addEventListener("input",function(){GP.f4Down=parseInt(el("gp-f4-down").value,10)||0;renderF4();});
+  el("gp-f5-reset").addEventListener("click",function(){GP.f5Up=3;GP.f5Down=2;renderF5();});
+  var strip=el("gp-f3-strip");
+  strip.addEventListener("pointerdown",function(e){
+    var r=strip.getBoundingClientRect();if(!r.width)return;
+    var nx=(e.clientX-r.left)/r.width*canvasW,ny=(e.clientY-r.top)/r.height*canvasH,best=null,bd=1e18;
+    ALLIDS.forEach(function(id){var dx=pos[id].x+CW/2-nx,dy=pos[id].y+CH/2-ny,d=dx*dx+dy*dy;if(d<bd){bd=d;best=id;}});
+    if(best)GP.setFocus(best);
   });
-  document.getElementById("gp-mm-dots").innerHTML=html;
-  mmBuilt=true;
-}
-function drawMinimap(){
-  var rect=document.getElementById("gp-mm-rect");
-  if(!rect||typeof view==="undefined")return;
-  var k=view.k;
-  if(!k)return;
-  var x0=(-view.x)/k,y0=(-view.y)/k,w=viewportEl.clientWidth/k,h=viewportEl.clientHeight/k;
-  rect.style.left=(x0/canvasW*100)+"%";
-  rect.style.top=(y0/canvasH*100)+"%";
-  rect.style.width=(w/canvasW*100)+"%";
-  rect.style.height=(h/canvasH*100)+"%";
-}
-function startMinimap(){
-  if(mmRAF)return;
-  var loop=function(){
-    if(GP.view!=="navigator"){mmRAF=null;return;}
-    drawMinimap();
-    mmRAF=requestAnimationFrame(loop);
-  };
-  mmRAF=requestAnimationFrame(loop);
-}
-function stopMinimap(){
-  if(mmRAF)cancelAnimationFrame(mmRAF);
-  mmRAF=null;
-}
-/* ---------- Prototype 5: Timeline ---------- */
-var TL_Y0=1540,TL_Y1=2028,TL_LABW=118;
-function renderTimeline(){
-  var wrap=document.getElementById("gp-tl-wrap");
-  var inner=document.getElementById("gp-tl-inner");
-  var prevScroll=wrap.scrollLeft,prevW=inner.offsetWidth||0;
-  var rows={};
-  Object.keys(pos).forEach(function(id){
-    var d=depthOf(id);
-    (rows[d]=rows[d]||[]).push(id);
-  });
-  var depths=Object.keys(rows).map(Number).sort(function(a,b){return b-a;});
-  var cw=wrap.clientWidth||320;
-  var scale=GP.tlScale>0?GP.tlScale:Math.max(0.9,(cw-TL_LABW-16)/(TL_Y1-TL_Y0));
-  GP.tlEffScale=scale;
-  var trackW=Math.ceil((TL_Y1-TL_Y0)*scale)+30;
-  function X(year){return (year-TL_Y0)*scale;}
-  var step=scale<1.8?50:scale<3.4?25:scale<7?10:5;
-  var firstTick=Math.ceil(TL_Y0/step)*step;
-  var html='<div class="gp-tlrow"><div class="gp-tllab">Year</div><div class="gp-tlaxis" style="width:'+trackW+'px">';
-  for(var y=firstTick;y<=TL_Y1;y+=step)html+='<span class="gp-tltick" style="left:'+X(y).toFixed(1)+'px">'+y+"</span>";
-  html+="</div></div>";
-  var undated=[];
-  depths.forEach(function(d){
-    var dated=[],list=rows[d];
-    list.forEach(function(id){
-      var yy=yearOf(id);
-      if(yy==null)undated.push(id);else dated.push({id:id,y:yy});
+  var search=el("gp-search"),suggest=el("gp-suggest");
+  search.addEventListener("input",function(){
+    var q=search.value.replace(/^\s+|\s+$/g,"").toLowerCase();
+    if(!q){suggest.hidden=true;suggest.innerHTML="";return;}
+    var hits=ALLIDS.filter(function(id){var p=P(id);return p&&(((p.name||"").toLowerCase().indexOf(q)>=0)||((p.short||"").toLowerCase().indexOf(q)>=0));}).slice(0,8);
+    suggest.innerHTML="";
+    hits.forEach(function(id){
+      var p=P(id),b=document.createElement("button");b.type="button";b.className="gp-sug";
+      b.textContent=p.name+" · "+(p.dates||"");
+      b.addEventListener("click",function(){GP.setFocus(id);search.value="";suggest.hidden=true;});
+      suggest.appendChild(b);
     });
-    dated.sort(function(a,b){return a.y-b.y;});
-    var lanes=[];
-    var placed=dated.map(function(o){
-      var p=P(o.id),dy=deathYearOf(o.id);
-      var startX=X(o.y),barEnd=dy?X(dy):startX;
-      var labelW=16+p.short.length*5.9+16;
-      var end=Math.max(barEnd,startX+10)+4+labelW;
-      var lane=0;
-      while(lane<lanes.length&&lanes[lane]>startX-3)lane++;
-      lanes[lane]=end;
-      return {id:o.id,startX:startX,barW:Math.max(0,barEnd-startX),lane:lane};
-    });
-    var rowH=Math.max(1,lanes.length)*20+8;
-    var lab=d===0?"Spencer's generation":d===-1?"Children":d<0?("Generation "+d):("Generation +"+d);
-    html+='<div class="gp-tlrow"><div class="gp-tllab">'+lab+'<span class="cnt">'+dated.length+" people</span></div>"
-      +'<div class="gp-tltrack" style="width:'+trackW+'px;height:'+rowH+'px">';
-    for(var gy=firstTick;gy<=TL_Y1;gy+=step)html+='<span class="gp-tlgrid" style="left:'+X(gy).toFixed(1)+'px"></span>';
-    placed.forEach(function(o){
-      var p=P(o.id),col=sideColor(o.id,p);
-      var c=(typeof CONF!=="undefined"&&CONF[p.conf])?CONF[p.conf]:{cls:"conf-unk"};
-      html+='<div class="gp-tlitem" style="left:'+o.startX.toFixed(1)+'px;top:'+(4+o.lane*20)+'px">'
-        +(o.barW>2?'<span class="gp-tlbar" style="width:'+o.barW.toFixed(1)+'px;background:'+col+'"></span>':"")
-        +'<span class="gp-tldot" style="background:'+col+'"></span>'
-        +'<button type="button" class="gp-tlname" data-tlid="'+esc(o.id)+'">'+esc(p.short)+"</button>"
-        +'<span class="gp-tlconf '+c.cls+'"><span class="dot"></span></span>'
-        +"</div>";
-    });
-    html+="</div></div>";
+    suggest.hidden=!hits.length;
   });
-  if(undated.length){
-    html+='<div class="gp-tlrow"><div class="gp-tllab">Undated<span class="cnt">'+undated.length+' people</span></div><div class="gp-tltrack" style="width:'+trackW+'px;min-height:30px;padding:5px 0 5px 8px">';
-    undated.forEach(function(id){
-      var p=P(id);
-      html+='<span class="gp-tlitem" style="position:static;display:inline-flex;margin:2px 10px 2px 0"><span class="gp-tldot" style="background:'+sideColor(id,p)+'"></span><button type="button" class="gp-tlname" data-tlid="'+esc(id)+'">'+esc(p.short)+"</button></span>";
-    });
-    html+="</div></div>";
-  }
-  inner.style.width=(TL_LABW+trackW)+"px";
-  inner.innerHTML=html;
-  inner.querySelectorAll("[data-tlid]").forEach(function(b){
-    b.addEventListener("click",function(){if(typeof select==="function")select(b.getAttribute("data-tlid"),true);scrollDetail();});
+  search.addEventListener("keydown",function(e){if(e.key==="Escape"){suggest.hidden=true;}});
+  var rszT=null;
+  window.addEventListener("resize",function(){
+    if(GP.view==="full")return;
+    if(rszT)clearTimeout(rszT);
+    rszT=setTimeout(function(){var st=ST[GP.view];if(st&&st.bbox)st.fit(st.bbox,false);},180);
   });
-  if(prevW>0&&GP.tlScale>0)wrap.scrollLeft=prevScroll*(inner.offsetWidth/prevW);
+  updateFocusUI();
 }
-/* ---------- wiring ---------- */
-document.querySelectorAll(".gp-vbtn").forEach(function(b){
-  b.addEventListener("click",function(){gpSetView(b.getAttribute("data-gpview"));});
-});
-makeCombo(document.getElementById("gp-search"),document.getElementById("gp-results"),function(id){setFocus(id);});
-makeCombo(document.getElementById("gp-nav-search"),document.getElementById("gp-nav-results"),function(id){
-  if(window.__chartFocusPerson)window.__chartFocusPerson(id);
-});
-document.querySelectorAll(".gp-fandepth").forEach(function(b){
-  b.addEventListener("click",function(){
-    GP.fanDepth=parseInt(b.getAttribute("data-fandepth"),10);
-    document.querySelectorAll(".gp-fandepth").forEach(function(x){x.classList.toggle("active",x===b);});
-    if(GP.view==="fan")renderFan();
-  });
-});
-document.querySelectorAll(".gp-outdir").forEach(function(b){
-  b.addEventListener("click",function(){
-    GP.outlineDir=b.getAttribute("data-outdir");
-    GP.outExpanded={"":true};
-    document.querySelectorAll(".gp-outdir").forEach(function(x){x.classList.toggle("active",x===b);});
-    if(GP.view==="outline")renderOutline();
-  });
-});
-document.getElementById("gp-out-expand").addEventListener("click",outlineExpandAll);
-document.getElementById("gp-out-collapse").addEventListener("click",function(){GP.outExpanded={"":true};renderOutline();});
-document.getElementById("gp-focus-profile").addEventListener("click",function(){if(typeof select==="function")select(GP.focus,true);scrollDetail();});
-document.getElementById("gp-fan-profile").addEventListener("click",function(){if(typeof select==="function")select(GP.focus,true);scrollDetail();});
-var stageEl=document.getElementById("gp-focus-stage");
-stageEl.addEventListener("click",function(e){
-  var t=e.target.closest?e.target.closest("[data-gpid]"):null;
-  if(!t)return;
-  var id=t.getAttribute("data-gpid");
-  if(id===GP.focus){if(typeof select==="function")select(id,true);scrollDetail();}
-  else setFocus(id);
-});
-document.getElementById("gp-nav-fit").addEventListener("click",function(){if(typeof fitAll==="function")fitAll();});
-document.getElementById("gp-nav-in").addEventListener("click",function(){if(typeof zoomBy==="function")zoomBy(1.3);});
-document.getElementById("gp-nav-out").addEventListener("click",function(){if(typeof zoomBy==="function")zoomBy(1/1.3);});
-document.getElementById("gp-nav-reset").addEventListener("click",function(){
-  if(typeof fitAll==="function")fitAll();
-  if(typeof clearSelection==="function")clearSelection();
-});
-var mmEl=document.getElementById("gp-minimap");
-function mmJump(e){
-  var r=mmEl.getBoundingClientRect();
-  if(!r.width||!r.height)return;
-  var fx=(e.clientX-r.left)/r.width,fy=(e.clientY-r.top)/r.height;
-  fx=Math.max(0,Math.min(1,fx));fy=Math.max(0,Math.min(1,fy));
-  view.x=viewportEl.clientWidth/2-(fx*canvasW)*view.k;
-  view.y=viewportEl.clientHeight/2-(fy*canvasH)*view.k;
-  apply();
-}
-mmEl.addEventListener("pointerdown",function(e){mmDrag=true;try{mmEl.setPointerCapture(e.pointerId);}catch(err){}mmJump(e);e.preventDefault();});
-mmEl.addEventListener("pointermove",function(e){if(mmDrag)mmJump(e);});
-mmEl.addEventListener("pointerup",function(){mmDrag=false;});
-mmEl.addEventListener("pointercancel",function(){mmDrag=false;});
-document.getElementById("gp-tl-fit").addEventListener("click",function(){GP.tlScale=0;renderTimeline();});
-document.getElementById("gp-tl-in").addEventListener("click",function(){GP.tlScale=Math.min(14,GP.tlEffScale*1.35);renderTimeline();});
-document.getElementById("gp-tl-out").addEventListener("click",function(){GP.tlScale=Math.max(0.6,GP.tlEffScale/1.35);renderTimeline();});
-updateFocusUI();
+init();
+window.__GPTEST={GP:GP,parentsOf:parentsOf,childrenOf:childrenOf,spousesOf:spousesOf,siblingsOf:siblingsOf,depthAbove:depthAbove,depthBelow:depthBelow,ancestorsOf:ancestorsOf,descendantsOf:descendantsOf,relGenOf:relGenOf,layoutHourglass:layoutHourglass,setView:setView,ST:ST};
 })();
 </script>
 
